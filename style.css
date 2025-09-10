@@ -50,3 +50,8 @@ body {
     text-align: right;
     font-size: 2rem;
 }
+
+a {
+  color: white;          /* makes the link text white */
+  text-decoration: none; /* removes the underline */
+}
