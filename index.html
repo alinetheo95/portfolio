@@ -1,41 +1,75 @@
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="style.css" />
-        
-    </head>
-    <body>
-    <main class="container">
-        </section>
-        <header class="title-section">
-        <h1>ALINE THEODORAKIS</h1>
-        </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
 
-        <div class="subtitle-section">
-            <p>Computational & Architectural Designer</p>
+    <title>Aline Theodorakis - Portfolio</title>
+</head>
+
+<body>
+    <!-- Hero Section (Cover Page) -->
+    <section class="hero-section" id="hero">
+        <div class="hero-title">
+            <h1>ALINE<br>THEODORAKIS</h1>
+            <p class="subtitle">COMPUTATIONAL & ARCHITECTURAL DESIGNER</p>
+        </div>
+        <div class="scroll-indicator" onclick="scrollToContent()"></div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="content-section" id="content">
+        <div class="grid-container">
+            <a href="architecture.html" class="grid-item large">
+                <img src="Images - title page/final drawing - transparent.png" alt="Architecture">
+                <div class="overlay">
+                    <span class="overlay-text">ARCHITECTURE</span>
+                </div>
+            </a>
+            
+            <a href="computation.html" class="grid-item">
+                <img src="Images - title page/circuit board-with mycelium.png" alt="Computation">
+                <div class="overlay">
+                    <span class="overlay-text">COMPUTATION</span>
+                </div>
+            </a>
+            
+            <a href="film.html" class="grid-item">
+                <img src="Images - title page/film still.png" alt="Film">
+                <div class="overlay">
+                    <span class="overlay-text">FILM</span>
+                </div>
+            </a>
+            
+            <a href="urban.html" class="grid-item">
+                <img src="Images - title page/Urban Tower-cropped.png" alt="Urban & Landscape Design">
+                <div class="overlay">
+                    <span class="overlay-text">URBAN &<br>LANDSCAPE<br>DESIGN</span>
+                </div>
+            </a>
+            
+            <a href="photography.html" class="grid-item">
+                <img src="Images - title page/photography.jpeg" alt="Photography">
+                <div class="overlay">
+                    <span class="overlay-text">PHOTOGRAPHY</span>
+                </div>
+            </a>
+            
+            <a href="art.html" class="grid-item">
+                <img src="Images - title page/Daylily.png" alt="Art">
+                <div class="overlay">
+                    <span class="overlay-text">ART</span>
+                </div>
+            </a>
         </div>
 
-        <div class="category-1">
-            <a href="computation.html">Computation</a>
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <button class="sidebar-btn">ABOUT</button>
+            <button class="sidebar-btn">CONTACT</button>
         </div>
-
-        <div class="category-2">
-            <a href="architecture.html">Architecture</a>
-        </div>
-
-        <div class="category-1">
-            <a href="urban.html">Urban Design</a>
-        </div>
-
-        <div class="category-2">
-            <a href="landscape.html">Landscape Design</a>
-        </div>
-
-        <div class="category-1">
-            <a href="art.html">Art</a>
-        </div>
-
+    </section>
     
 <!--Link to JS-->
         <script src="main.js"></script>
