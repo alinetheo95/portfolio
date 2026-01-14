@@ -1,0 +1,238 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background-color: #000;
+    color: #fff;
+    padding: 50px;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Section Titles */
+.section-title {
+    margin: 60px 0 30px 0;
+}
+
+.left-title {
+    text-align: left;
+}
+
+.right-title {
+    text-align: right;
+}
+
+.section-title h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 0.2rem;
+    line-height: 1.3;
+}
+
+/* Image Groups */
+.image-group {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.speculative-futures {
+    justify-content: flex-start;
+}
+
+.ecological-tech {
+    justify-content: flex-start;
+}
+
+.residential {
+    justify-content: flex-end;
+}
+
+.sustainable {
+    justify-content: flex-start;
+}
+
+.systems {
+    justify-content: flex-end;
+}
+
+/* Project Items */
+.project-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+    color: #fff;
+    background-color: #000;
+}
+
+.project-item:hover {
+    transform: scale(1.05);
+}
+
+.project-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.project-item:hover img {
+    opacity: 1;
+}
+
+/* Specific sizes based on actual image dimensions */
+
+/* Speculative Futures */
+.speculative-futures .project-item:nth-child(1) {
+    /* ambiguous-cropped.png: 717×1506 - portrait */
+    width: 200px;
+    height: 420px;
+}
+
+.speculative-futures .project-item:nth-child(2) {
+    /* biolume-cropped.png: 1080×1080 - square */
+    width: 280px;
+    height: 280px;
+}
+
+.speculative-futures .project-item:nth-child(3) {
+    /* triptych-cropped.png: 1920×854 - wide landscape */
+    width: 450px;
+    height: 200px;
+}
+
+/* Ecological Technologies */
+.ecological-tech .project-item:nth-child(1) {
+    /* tidal-pools-cropped.png: 600×600 - square */
+    width: 350px;
+    height: 350px;
+}
+
+/* Residential Architecture */
+.residential .project-item:nth-child(1) {
+    /* cloud-9-cropped.png: 1000×1000 - square */
+    width: 220px;
+    height: 220px;
+}
+
+.residential .project-item:nth-child(2) {
+    /* winter-cropped.jpg: 503×503 - square */
+    width: 180px;
+    height: 180px;
+}
+
+.residential .project-item:nth-child(3) {
+    /* garcia-cropped.jpg: 600×219 - landscape */
+    width: 300px;
+    height: 110px;
+}
+
+/* Sustainable Design */
+.sustainable .project-item:nth-child(1) {
+    /* grid-cropped.png: 600×284 - landscape */
+    width: 400px;
+    height: 190px;
+}
+
+/* Architectural Systems */
+.systems .project-item:nth-child(1) {
+    /* tessellation-cropped.png: 1080×1620 - portrait */
+    width: 200px;
+    height: 300px;
+}
+
+.systems .project-item:nth-child(2) {
+    /* final drawing - transparent.png: 1500×1500 - square */
+    width: 280px;
+    height: 280px;
+}
+
+/* Overlay */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-item:hover .overlay {
+    opacity: 1;
+}
+
+.overlay-text {
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Back Button */
+.back-btn {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 10px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    z-index: 1000;
+}
+
+.back-btn:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .image-group {
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+
+    .section-title h2 {
+        font-size: 1.5rem;
+    }
+
+    .project-item {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 400px;
+    }
+
+    .project-item img {
+        object-fit: contain;
+    }
+}
