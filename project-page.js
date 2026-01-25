@@ -1,7 +1,10 @@
-// Slideshow functionality
+// Slideshow functionality - simplified approach
 let currentSlide = 0;
-let autoSlideInterval;
-const autoSlideDelay = 4000; // 4 seconds between auto-transitions
+let autoSlideInterval = null;
+let manualModeTimeout = null;
+
+const AUTO_SLIDE_DELAY = 7000; // 7 seconds
+const MANUAL_PAUSE_DURATION = 5000; // 10 seconds after manual navigation
 
 // Get all slides and navigation elements
 const slides = document.querySelectorAll('.slide');
@@ -13,14 +16,32 @@ const totalSlidesCounter = document.querySelector('.total-slides');
 // Set total slides
 totalSlidesCounter.textContent = slides.length;
 
+// Check if slide is a video
+function isVideoSlide(index) {
+    return slides[index].getAttribute('data-type') === 'video';
+}
+
+// Pause all videos
+function pauseAllVideos() {
+    slides.forEach(slide => {
+        const video = slide.querySelector('video');
+        if (video) {
+            video.pause();
+        }
+    });
+}
+
 // Show specific slide
 function showSlide(index) {
+    // Pause all videos
+    pauseAllVideos();
+    
     // Remove active class from all slides
     slides.forEach(slide => {
         slide.classList.remove('active');
     });
 
-    // Wrap around if index is out of bounds
+    // Wrap around if needed
     if (index >= slides.length) {
         currentSlide = 0;
     } else if (index < 0) {
@@ -34,47 +55,75 @@ function showSlide(index) {
 
     // Update counter
     currentSlideCounter.textContent = currentSlide + 1;
-}
 
-// Next slide
-function nextSlide() {
-    showSlide(currentSlide + 1);
-    resetAutoSlide();
-}
-
-// Previous slide
-function prevSlide() {
-    showSlide(currentSlide - 1);
-    resetAutoSlide();
+    // Auto-play video if current slide is a video
+    if (isVideoSlide(currentSlide)) {
+        const video = slides[currentSlide].querySelector('video');
+        if (video) {
+            video.play().catch(err => console.log('Video autoplay failed:', err));
+        }
+    }
 }
 
 // Start automatic slideshow
 function startAutoSlide() {
+    // Clear any existing interval first
+    if (autoSlideInterval) {
+        clearInterval(autoSlideInterval);
+    }
+    
     autoSlideInterval = setInterval(() => {
-        showSlide(currentSlide + 1);
-    }, autoSlideDelay);
+        currentSlide++;
+        showSlide(currentSlide);
+    }, AUTO_SLIDE_DELAY);
 }
 
-// Reset automatic slideshow (when user manually navigates)
-function resetAutoSlide() {
-    clearInterval(autoSlideInterval);
-    startAutoSlide();
+// Stop automatic slideshow
+function stopAutoSlide() {
+    if (autoSlideInterval) {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = null;
+    }
+}
+
+// Handle manual navigation
+function manualNavigate(direction) {
+    // Stop auto-slide
+    stopAutoSlide();
+    
+    // Clear any existing manual mode timeout
+    if (manualModeTimeout) {
+        clearTimeout(manualModeTimeout);
+    }
+    
+    // Navigate
+    if (direction === 'next') {
+        currentSlide++;
+    } else {
+        currentSlide--;
+    }
+    showSlide(currentSlide);
+    
+    // Set timeout to resume auto-slide
+    manualModeTimeout = setTimeout(() => {
+        startAutoSlide();
+    }, MANUAL_PAUSE_DURATION);
 }
 
 // Event listeners for navigation arrows
-nextBtn.addEventListener('click', nextSlide);
-prevBtn.addEventListener('click', prevSlide);
+prevBtn.addEventListener('click', () => manualNavigate('prev'));
+nextBtn.addEventListener('click', () => manualNavigate('next'));
 
 // Keyboard navigation
 document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') {
-        prevSlide();
+        manualNavigate('prev');
     } else if (e.key === 'ArrowRight') {
-        nextSlide();
+        manualNavigate('next');
     }
 });
 
-// Touch/swipe support for mobile
+// Touch/swipe support
 let touchStartX = 0;
 let touchEndX = 0;
 
@@ -84,32 +133,28 @@ document.addEventListener('touchstart', (e) => {
 
 document.addEventListener('touchend', (e) => {
     touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+            manualNavigate('next');
+        } else {
+            manualNavigate('prev');
+        }
+    }
 });
 
-function handleSwipe() {
-    const swipeThreshold = 50; // Minimum distance for a swipe
-    
-    if (touchEndX < touchStartX - swipeThreshold) {
-        // Swiped left - next slide
-        nextSlide();
-    }
-    
-    if (touchEndX > touchStartX + swipeThreshold) {
-        // Swiped right - previous slide
-        prevSlide();
-    }
-}
-
-// Pause auto-slide when page is not visible
+// Pause when page is hidden
 document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
-        clearInterval(autoSlideInterval);
-    } else {
+        stopAutoSlide();
+        pauseAllVideos();
+    } else if (!manualModeTimeout) {
+        // Only restart if not in manual mode
         startAutoSlide();
     }
 });
 
-// Initialize slideshow
+// Initialize
 showSlide(0);
 startAutoSlide();

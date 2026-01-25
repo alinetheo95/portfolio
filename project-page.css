@@ -13,7 +13,7 @@ body {
 
 /* Project Header */
 .project-header {
-    padding: 60px 80px 30px 80px;
+    padding: 60px 80px 20px 80px;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -22,34 +22,58 @@ body {
     font-size: 2.5rem;
     font-weight: 300;
     letter-spacing: 0.3rem;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .project-subtitle {
     font-size: 1rem;
     font-weight: 300;
     letter-spacing: 0.15rem;
-    margin-bottom: 20px;
+    margin-bottom: 0;
     opacity: 0.8;
 }
 
-.project-description {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    letter-spacing: 0.05rem;
-    max-width: 800px;
-    opacity: 0.9;
+/* Icon Images */
+.icon-images {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 0px;
+    margin-bottom: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.icon-images img {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
 }
 
 /* Slideshow Container */
 .slideshow-container {
     position: relative;
     width: 100%;
-    height: calc(100vh - 200px);
+    height: calc(100vh - 150px);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 10px;
+}
+
+/* Description Container - Below Slideshow */
+.project-description-container {
+    padding: 40px 80px 20px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.project-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    letter-spacing: 0.05rem;
+    opacity: 0.9;
 }
 
 /* Individual Slides */
@@ -69,12 +93,38 @@ body {
     opacity: 1;
 }
 
-.slide img {
+/* Image slides */
+.slide[data-type="image"] img {
     max-width: 100%;
     max-height: 100%;
     width: auto;
     height: auto;
     object-fit: contain;
+}
+
+/* Video slides */
+.slide[data-type="video"] {
+    padding: 0 60px;
+}
+
+.slide[data-type="video"] video {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* PDF slides */
+.slide[data-type="pdf"] {
+    padding: 0 60px;
+}
+
+.slide[data-type="pdf"] embed {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: #fff;
 }
 
 /* Navigation Arrows */
@@ -147,7 +197,7 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
     .project-header {
-        padding: 40px 30px 20px 30px;
+        padding: 40px 30px 15px 30px;
     }
 
     .project-title {
@@ -155,16 +205,30 @@ body {
         letter-spacing: 0.2rem;
     }
 
+    .project-subtitle {
+        font-size: 0.85rem;
+        letter-spacing: 0.1rem;
+    }
+
+    .project-description-container {
+        padding: 30px 30px 50px 30px;
+    }
+
     .project-description {
         font-size: 0.85rem;
     }
 
     .slideshow-container {
-        height: calc(100vh - 180px);
+        height: calc(100vh - 140px);
     }
 
     .slide {
         padding: 0 30px;
+    }
+
+    .slide[data-type="pdf"],
+    .slide[data-type="video"] {
+        padding: 0 20px;
     }
 
     .arrow {

@@ -1,0 +1,267 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background-color: #ffffff;
+    color: #000000;
+    overflow-x: hidden;
+}
+
+/* Project Header */
+.project-header {
+    padding: 60px 80px 20px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.project-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 0.3rem;
+    margin-bottom: 15px;
+}
+
+.project-subtitle {
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.15rem;
+    margin-bottom: 0;
+    opacity: 0.8;
+}
+
+/* Icon Images */
+.icon-images {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 0px;
+    margin-bottom: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.icon-images img {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+}
+
+/* Slideshow Container */
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 150px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* Description Container - Below Slideshow */
+.project-description-container {
+    padding: 40px 80px 20px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.project-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    letter-spacing: 0.05rem;
+    opacity: 0.9;
+}
+
+/* Individual Slides */
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 80px;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+/* Image slides */
+.slide[data-type="image"] img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Video slides */
+.slide[data-type="video"] {
+    padding: 0 60px;
+}
+
+.slide[data-type="video"] video {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* PDF slides */
+.slide[data-type="pdf"] {
+    padding: 0 60px;
+}
+
+.slide[data-type="pdf"] embed {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: #fff;
+}
+
+/* Navigation Arrows */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 4rem;
+    cursor: pointer;
+    padding: 20px;
+    transition: all 0.3s ease;
+    z-index: 10;
+    user-select: none;
+    font-weight: 100;
+    line-height: 1;
+}
+
+.arrow:hover {
+    color: #999;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.arrow.prev {
+    left: 30px;
+}
+
+.arrow.next {
+    right: 30px;
+}
+
+/* Slide Counter */
+.slide-counter {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.85rem;
+    letter-spacing: 0.1rem;
+    opacity: 0.7;
+    z-index: 10;
+}
+
+/* Back Button */
+.back-btn {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 10px 25px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    z-index: 100;
+}
+
+.back-btn:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .project-header {
+        padding: 40px 30px 15px 30px;
+    }
+
+    .project-title {
+        font-size: 1.8rem;
+        letter-spacing: 0.2rem;
+    }
+
+    .project-subtitle {
+        font-size: 0.85rem;
+        letter-spacing: 0.1rem;
+    }
+
+    .project-description-container {
+        padding: 30px 30px 50px 30px;
+    }
+
+    .project-description {
+        font-size: 0.85rem;
+    }
+
+    .slideshow-container {
+        height: calc(100vh - 140px);
+    }
+
+    .slide {
+        padding: 0 30px;
+    }
+
+    .slide[data-type="pdf"],
+    .slide[data-type="video"] {
+        padding: 0 20px;
+    }
+
+    .arrow {
+        font-size: 3rem;
+        padding: 10px;
+    }
+
+    .arrow.prev {
+        left: 10px;
+    }
+
+    .arrow.next {
+        right: 10px;
+    }
+
+    .back-btn {
+        top: 20px;
+        left: 20px;
+        padding: 8px 20px;
+        font-size: 0.75rem;
+    }
+
+    .slide-counter {
+        bottom: 20px;
+        font-size: 0.75rem;
+    }
+}
+
+/* Prevent text selection on arrows */
+.arrow::selection {
+    background: transparent;
+}
+
+.arrow::-moz-selection {
+    background: transparent;
+}
