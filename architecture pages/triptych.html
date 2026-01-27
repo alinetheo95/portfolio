@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRIPTYCH</title>
+    <title>ARCHITECTURAL GLITCH</title>
     <link rel="stylesheet" href="../project-page.css">
     <style>
         /* Hide slideshow controls for single image */
@@ -16,22 +16,43 @@
 <body>
     <!-- Project Header -->
     <div class="project-header">
-        <h1 class="project-title">TRIPTYCH</h1>
-        <h2 class="project-subtitle">Project Subtitle or Location</h2>
-        <p class="project-description">Brief description of the project goes here. This text provides context and overview of the work presented below.</p>
+        <h1 class="project-title">ARCHITECTURAL GLITCH</h1>
+        <h2 class="project-subtitle">M.ARCH: MEDIUMS II | 2018</h2>
     </div>
 
-    <!-- Single Image Container -->
+        <!-- Slideshow Container -->
     <div class="slideshow-container">
-        <!-- Single Slide -->
-        <div class="slide active">
-            <img src="Images - architecture pages/triptych-cropped.png" alt="Triptych Project">
+        <!-- Image Slides -->
+        <div class="slide active" data-type="image">
+            <img src="/page-specific-content-architecture/triptych/Aline Theodorakis - Triptych-new.png" alt="TRIPTYCH">
         </div>
+
+
+        <!-- Navigation Arrows -->
+        <button class="arrow prev" aria-label="Previous image">‹</button>
+        <button class="arrow next" aria-label="Next image">›</button>
+
+        <!-- Slide Counter -->
+        <div class="slide-counter">
+            <span class="current-slide">1</span> / <span class="total-slides">5</span>
+        </div>
+    </div>
+
+
+    <!-- Project Description -->
+    <div class="project-description-container">
+        <p class="project-description">A speculative vision of New York City transformed through digital collapse—where iconic architecture fragments 
+        and reassembles into new hybrid forms. The Flatiron Building serves as the compositional anchor, traced and systematically distorted through 
+        computational workflows, then mirrored and recombined to generate an uncanny trinity of structures. Neon-lit voxelated masses colonize the original 
+        facades like digital parasites, rendered in Maxwell Engine with luminous cyan and magenta geometries that evoke the atmospheric dystopia of Blade Runner. 
+        The title references both the visual aesthetic—pixelated blocks that appear as rendering errors or corrupted data—and the conceptual framework: architecture 
+        caught in a moment of systemic failure, where the built environment glitches between its historical form and an unpredictable digital future. The triptych 
+        format reinforces themes of repetition, mutation, and architectural memory in an era where physical and digital realities have collapsed into one another.</p>
     </div>
 
     <!-- Back Button -->
     <a href="../architecture.html" class="back-btn">← BACK</a>
 
-    <!-- No JavaScript needed for single image -->
+    <script src="../project-page.js"></script>
 </body>
 </html>
