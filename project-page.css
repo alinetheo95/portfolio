@@ -120,12 +120,13 @@ body {
     padding: 0 60px;
 }
 
-.slide[data-type="pdf"] embed {
+.slide[data-type="pdf"] iframe {
     width: 100%;
     height: 100%;
     border: none;
     background-color: #fff;
 }
+
 
 /* Navigation Arrows */
 .arrow {
