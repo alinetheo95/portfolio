@@ -158,3 +158,83 @@ document.addEventListener('visibilitychange', () => {
 // Initialize
 showSlide(0);
 startAutoSlide();
+
+// Magnifying glass effect for standalone images
+document.addEventListener('DOMContentLoaded', function() {
+    const zoomContainers = document.querySelectorAll('.zoom-container');
+    
+    zoomContainers.forEach(container => {
+        const img = container.querySelector('img');
+        
+        // Create magnifying lens element
+        const lens = document.createElement('div');
+        lens.className = 'magnifier-lens';
+        container.appendChild(lens);
+        
+        // Zoom level (3x magnification)
+        const zoomLevel = 3;
+        
+        // Throttle function to improve performance
+        let rafId = null;
+        
+        // Show lens on mouse enter
+        container.addEventListener('mouseenter', function() {
+            lens.style.display = 'block';
+        });
+        
+        // Hide lens on mouse leave
+        container.addEventListener('mouseleave', function() {
+            lens.style.display = 'none';
+            if (rafId) {
+                cancelAnimationFrame(rafId);
+                rafId = null;
+            }
+        });
+        
+        // Move lens with mouse and show zoomed portion - optimized with requestAnimationFrame
+        container.addEventListener('mousemove', function(e) {
+            if (rafId) {
+                return; // Skip if we're already processing
+            }
+            
+            rafId = requestAnimationFrame(() => {
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Get image dimensions
+                const imgRect = img.getBoundingClientRect();
+                const imgX = e.clientX - imgRect.left;
+                const imgY = e.clientY - imgRect.top;
+                
+                // Position the lens centered on cursor
+                const lensSize = 150;
+                const lensX = x - lensSize / 2;
+                const lensY = y - lensSize / 2;
+                
+                // Keep lens within container bounds
+                const maxX = rect.width - lensSize;
+                const maxY = rect.height - lensSize;
+                
+                const boundedX = Math.max(0, Math.min(lensX, maxX));
+                const boundedY = Math.max(0, Math.min(lensY, maxY));
+                
+                lens.style.left = boundedX + 'px';
+                lens.style.top = boundedY + 'px';
+                
+                // Calculate background position to show exact cursor location in center of lens
+                const bgX = imgX * zoomLevel - lensSize / 2;
+                const bgY = imgY * zoomLevel - lensSize / 2;
+                
+                // Set the background image and position
+                lens.style.backgroundImage = `url('${img.src}')`;
+                lens.style.backgroundSize = `${imgRect.width * zoomLevel}px ${imgRect.height * zoomLevel}px`;
+                lens.style.backgroundPosition = `-${bgX}px -${bgY}px`;
+                
+                rafId = null;
+            });
+        });
+    });
+});
+
+

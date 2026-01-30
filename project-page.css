@@ -76,6 +76,55 @@ body {
     opacity: 0.9;
 }
 
+/* Standalone Zoomable Images */
+.standalone-images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 160px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.zoom-container {
+    position: relative;
+    overflow: hidden;
+    background-color: #000;
+    cursor: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.zoom-container img {
+    width: 90%;
+    height: auto;
+    display: block;
+}
+
+.zoom-container:first-child {
+    width: 80%;
+}
+
+.zoom-container:first-child img {
+    width: 80%;
+}
+
+/* Magnifying glass lens */
+.magnifier-lens {
+    position: absolute;
+    border-radius: 50%;
+    width: 300px;
+    height: 300px;
+    pointer-events: none;
+    display: none;
+    background-color: #000;
+    background-repeat: no-repeat;
+    z-index: 10;
+}
+
+
 /* Individual Slides */
 .slide {
     position: absolute;
@@ -177,7 +226,6 @@ body {
     top: 30px;
     left: 30px;
     background: transparent;
-    border: 1px solid #fff;
     color: #fff;
     padding: 10px 25px;
     font-family: 'Courier New', monospace;
