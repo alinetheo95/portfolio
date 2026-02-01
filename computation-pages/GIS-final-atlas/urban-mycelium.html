@@ -1,0 +1,180 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+        <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet">
+        <script src='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css' rel='stylesheet' />
+        <script src="https://unpkg.com/georaster@1.6.0/dist/georaster.browser.bundle.min.js"></script>
+        <script src="https://unpkg.com/georaster-layer-for-maplibre@0.1.0/dist/georaster-layer-for-maplibre.min.js"></script>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        
+    </head>
+    <body>
+    <div id="map"></div>
+    
+    <div class="story-container">
+        
+        <!-- INTRO -->
+        <section class="step" data-step="intro">
+            <div class="intro-image-container">
+                <img src="urban-mycelium.png" alt="Urban Mycelium" class="intro-image">
+            </div>
+            <div class="text-box">
+                <h2>URBAN MYCELIUM</h2>
+                <p>What would the New York City grid look like if it was more organic? A study of naturally occurring movement and growth through ecological history and morphogenesis growth algorithms.</p>
+            </div>
+        </section>
+        
+        <!-- HISTORICAL GRID - Feature 1 -->
+        <section class="step" data-step="urban-density">
+            <div class="text-box">
+                <h2>URBAN DENSITY</h2>
+                <p>In New York City, urban density can be defined by many factors. This study will address urban density in terms of impervious surface coverage and the history of the origination of the grid.</p>
+            </div>
+        </section>
+        
+        <!-- HISTORICAL GRID - Feature 2 -->
+        <section class="step" data-step="british-1782">
+            <div class="text-box">
+                <h2>HISTORICAL GRID 1782</h2>
+                <p>The British Headquarters's Map of 1782 is one of the first maps with record of early grid development in lower Manhattan. At this time, New York City was mostly natural vegetation.</p>
+            </div>
+        </section>
+        
+        <!-- HISTORICAL GRID - Feature 3 -->
+        <section class="step" data-step="grid-1811">
+            <div class="text-box">
+                <h2>HISTORICAL GRID 1811</h2>
+                <p>The New York City grid originated from the Commissioner's Plan of 1811, which put in place the rectilinear grid plan. This was cheaper and more efficient for development and expansion, maximizing sellable rectangular lots.</p>
+            </div>
+        </section>
+        
+        <!-- HISTORICAL GRID - Feature 4 -->
+        <section class="step" data-step="grid-1840">
+            <div class="text-box">
+                <h2>HISTORICAL GRID 1840</h2>
+                <p>This map showed a masterplan for the entire city, but it took years for this to actually be built. The grid was built in phases, working from the South to the North.</p>
+            </div>
+        </section>
+        
+        <!-- HISTORICAL GRID - Feature 5 -->
+        <section class="step" data-step="grid-1870">
+            <div class="text-box">
+                <h2>HISTORICAL GRID 1870</h2>
+                <p>Although the grid may have been easier to navigate back then, it is not designed for shortest distance travels, natural movement patterns, or the pedestrian experience.</p>
+            </div>
+        </section>
+        
+        <!-- HISTORICAL GRID - Feature 6 -->
+        <section class="step" data-step="grid-1900">
+            <div class="text-box">
+                <h2>HISTORICAL GRID 1900</h2>
+                <p>By the turn of the century, the grid's rigid structure had largely displaced Manhattan's natural contours and ecosystems. What was once a landscape shaped by hills, streams, and forests was now dominated by straight lines prioritizing commerce over ecology.</p>
+            </div>
+        </section>
+        
+        <!-- HISTORICAL GRID - Feature 7 -->
+        <section class="step" data-step="complete-grid">
+            <div class="text-box">
+                <h2>CURRENT DAY</h2>
+                <p>Today's culmination of the grid plan is a rigid structure that prioritizes automobile traffic and private land speculation over pedestrian experience and green space.</p>
+            </div>
+        </section>
+        
+        <!-- IMPERVIOUS SURFACES - Feature 1 -->
+        <section class="step" data-step="impervious-surfaces">
+            <div class="text-box">
+                <h2>IMPERVIOUS SURFACES</h2>
+                <p>Today, New York City's land coverage is approximately 72% impervious. Not only does this restrict organic pathways and desire lines, it also restricts movement and growth of ecological habitats. Lack of permeable surfaces is also causing harsh conditions due to climate change, such as urban heat island effect and increased flooding.</p>
+            </div>
+        </section>
+        
+        <!-- ECOLOGICAL HISTORY - Feature 1 -->
+        <section class="step" data-step="natural-vegetation">
+            <div class="text-box">
+                <h2>NATURAL VEGETATION</h2>
+                <p>New York City wasn't always a concrete jungle. The British Headquarter's Map mentioned earlier also showed the amount of dense naturally occurring vegetation in the 1700s.</p>
+            </div>
+        </section>
+        
+        <!-- ECOLOGICAL HISTORY - Feature 2 -->
+        <section class="step" data-step="wetlands">
+            <div class="text-box">
+                <h2>WETLANDS</h2>
+                <p>Among this natural vegetation, there were also numerous wetlands. These vital ecosystems act as natural water filters, flood buffers, and biodiversity hotspots—supporting countless species while protecting communities from storm surges and absorbing excess rainfall.</p>
+            </div>
+        </section>
+        
+        <!-- ECOLOGICAL HISTORY - Feature 3 -->
+        <section class="step" data-step="streams">
+            <div class="text-box">
+                <h2>STREAMS</h2>
+                <p>Manhattan was once crisscrossed by dozens of freshwater streams and creeks that flowed from central hills to both rivers. While most were buried during development and now exist as underground storm sewers, many still flow beneath city streets—occasionally making their presence known during heavy rains when they flood basements and subway tunnels.</p>
+            </div>
+        </section>
+        
+        <!-- MYCELIUM - Feature 1 -->
+        <section class="step" data-step="hidden-network">
+            <div class="text-box">
+                <h2>DISCONNECTED ECOLOGIES</h2>
+                <p>Unfortunately due to New York City's urban density, we've lost a lot of the ecological corridors and interconnectivity of natural elements. Although we have street trees and parks scattered throughout the city, the high impervious surface coverage inhibits the development of the vast root network system that exists in forests. Known as the mycorrhizal network, this root system is beneficial in facilitating the exchange of resources between plants, improving soil health, and enhancing plant protection and communication.</p>
+            </div>
+        </section>
+
+        <!-- MYCELIUM - Feature 2: Manhattan Detail -->
+        <section class="step" data-step="manhattan-sans-grid">
+            <div class="text-box">
+                <h2>MANHATTAN SANS GRID</h2>
+                <p>What might Manhattan look like if the grid was never developed? Would there be more ecological diversity? Would more species be able to thrive here? From the human perspective, it is hard to disconnect from the overwhelmingly dense and rigid infrastructure. On a fundamental level, nature improves physical and mental health in many ways, and humans need more connection to nature than New York City currently provides.</p>
+            </div>
+        </section>
+
+        <!-- MYCELIUM - Feature 3: Growth Simulation -->
+        <section class="step" data-step="hidden-network-growth">
+            <div class="text-box">
+                <h2>THE HIDDEN NETWORK</h2>
+                <p>What if Manhattan did have the vast underground network that exists in forests? What if the city experienced areas of not only natural growth, but overgrowth. These would be moments in which the dense urban environment becomes unrecognizable. This is the starting point in which the city becomes natural again. </p>
+            </div>
+        </section>
+
+        <!-- CREDITS -->
+        <section class="step step-credits" data-step="credits">
+            <div class="text-box credits-box">
+                <p>Aline Theodorakis</p>
+                <p>GIS for Design Practices</p>
+                <p>Columbia GSAPP</p>
+                <p>Fall 2026</p>
+                
+                <h3>DATA</h3>
+                <p>NYC Forestry Tree Points<br> via <a href="https://data.cityofnewyork.us/Environment/Forestry-Tree-Points/hn5i-inap/about_data" target="_blank">NYC Open Data</a></p>
+
+                <p>NYC Parks Properties<br> via <a href="https://data.cityofnewyork.us/resource/ghu2-eden.geojson" target="_blank">NYC Open Data</a></p>
+
+                <p>Impervious Surface Coverage<br> via <a href="https://coast.noaa.gov/" target="_blank">NOAA Office for Coastal Management</a></p>
+
+                <p>Street Center Lines<br> via <a href="https://data.cityofnewyork.us/City-Government/DCM_StreetCenterLine/g6zj-tzgn/about_data" target="_blank">NYC Open Data</a></p>
+
+                <p>NYC Borough Boundaries<br> via <a href="https://data.cityofnewyork.us/" target="_blank">NYC Open Data</a></p>
+
+                <p>British Headquarters Map of 1782<br> via <a href="https://www.davidrumsey.com/" target="_blank">David Rumsey Map Collection</a></p>
+    
+                <p>Viele Waterway Map of New York City (1874)<br> via <a href="https://www.davidrumsey.com/" target="_blank">David Rumsey Map Collection</a></p>
+                
+                
+                <p class="credits-footer">© 2025 - All Rights Reserved</p>
+            </div>
+        </section>
+        
+    </div> <!-- End of story-container -->
+        
+    </div>
+    
+    <script src="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js"></script>
+    <script src="combined-map.js"></script>
+    <script src="scrollytelling.js"></script>
+    <script src="mycelium.js"></script>
+
+    </body>
