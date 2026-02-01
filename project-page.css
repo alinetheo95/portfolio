@@ -111,6 +111,21 @@ body {
     width: 80%;
 }
 
+/* Single Image Below Description */
+.single-image {
+    margin-top: 60px;
+    margin-left: 300px;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+}
+
+.single-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 /* Magnifying glass lens */
 .magnifier-lens {
     position: absolute;
