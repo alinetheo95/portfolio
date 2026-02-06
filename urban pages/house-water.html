@@ -3,32 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOUSE ON THE WATER</title>
-    <link rel="stylesheet" href="../project-page.css">
+    <title>LANDSCAPE STUDY 001</title>
+    <link rel="stylesheet" href="../project-page-white.css">
+    <style>
+        /* Hide slideshow controls for single image */
+        .arrow,
+        .slide-counter {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <!-- Project Header -->
+        <!-- Project Header -->
     <div class="project-header">
-        <h1 class="project-title">HOUSE ON THE WATER</h1>
-        <h2 class="project-subtitle">Project Subtitle or Location</h2>
-        <p class="project-description">Brief description of the project goes here. This text provides context and overview of the work presented below.</p>
+        <h1 class="project-title">LANDSCAPE STUDY 001</h1>
+        <h2 class="project-subtitle">UNDERGRAD: LANDSCAPE ARCHITECTURE | 2014</h2>
     </div>
 
-    <!-- Slideshow Container -->
+        <!-- Slideshow Container -->
     <div class="slideshow-container">
-        <!-- Slides -->
-        <div class="slide active">
-            <img src="images/project1/image1.jpg" alt="Project Image 1">
+        <!-- Image Slides -->
+        <div class="slide active" data-type="image">
+            <img src="/page-specific-content-urban/house-water/sketch.png" alt="image">
         </div>
-        <div class="slide">
-            <img src="images/project1/image2.jpg" alt="Project Image 2">
-        </div>
-        <div class="slide">
-            <img src="images/project1/image3.jpg" alt="Project Image 3">
-        </div>
-        <div class="slide">
-            <img src="images/project1/image4.jpg" alt="Project Image 4">
-        </div>
+
 
         <!-- Navigation Arrows -->
         <button class="arrow prev" aria-label="Previous image">‹</button>
@@ -36,13 +34,23 @@
 
         <!-- Slide Counter -->
         <div class="slide-counter">
-            <span class="current-slide">1</span> / <span class="total-slides">4</span>
+            <span class="current-slide">1</span> / <span class="total-slides">5</span>
         </div>
     </div>
+
+
+    <!-- Project Description -->
+    <div class="project-description-container">
+        <p class="project-description">An ink study of a reflective pond framed by dense vegetation.
+            Created as a drawing exercise for Landscape Design I, this sketch explores varied hatching techniques to 
+            differentiate textures. The composition emphasizes spatial depth through layered vegetation from foreground 
+            grasses to middleground shrubs and background tree canopy.</p>
+    </div>
+
 
     <!-- Back Button -->
     <a href="../urban.html" class="back-btn">← BACK</a>
 
-    <script src="project-page.js"></script>
+    <script src="../project-page.js"></script>
 </body>
 </html>

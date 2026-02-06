@@ -78,6 +78,10 @@ body {
     opacity: 0.9;
 }
 
+.project-description-container p {
+    margin-bottom: 1.5em;
+}
+
 /* Individual Slides */
 .slide {
     position: absolute;
