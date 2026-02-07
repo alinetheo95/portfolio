@@ -35,7 +35,7 @@ html {
 
 .hero-text {
     position: absolute;
-    top: 50px;
+    top: 100px;
     left: 50px;
     z-index: 10;
     max-width: 900px;
@@ -52,6 +52,7 @@ html {
 .hero-text .subtitle {
     font-size: 0.85rem;
     letter-spacing: 0.3rem;
+    text-align: right;
     max-width: 900px;
 }
 
