@@ -6,15 +6,15 @@
 
 body {
     font-family: 'Courier New', monospace;
-    background-color: #000;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
     overflow-x: hidden;
 }
 
 .container {
     min-height: 100vh;
     padding: 80px 200px 50px 200px;
-    background-color: #000;
+    background-color: #fff;
 }
 
 /* Back Button */
@@ -23,7 +23,7 @@ body {
     top: 30px;
     left: 30px;
     background: transparent;
-    color: #fff;
+    color: #000;
     padding: 10px 20px;
     font-family: 'Courier New', monospace;
     font-size: 0.9rem;
@@ -33,12 +33,11 @@ body {
     text-decoration: none;
     display: inline-block;
     z-index: 1000;
-    border: 1px solid #fff;
 }
 
 .back-btn:hover {
-    background: #fff;
-    color: #000;
+    background: #000;
+    color: #fff;
 }
 
 /* Project Header */
@@ -64,31 +63,23 @@ body {
     opacity: 0.8;
 }
 
-/* Masonry Grid - Pinterest Style */
-.masonry-grid {
+/* Art Grid - Pinterest Style */
+.art-grid {
     column-count: 3;
     column-gap: 20px;
 }
 
-.masonry-item {
+.art-item {
     break-inside: avoid;
     margin-bottom: 20px;
     position: relative;
     overflow: hidden;
-    cursor: pointer;
 }
 
-.masonry-item img {
+.art-item img {
     width: 100%;
     height: auto;
     display: block;
-    opacity: 0.85;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.masonry-item:hover img {
-    opacity: 1;
-    transform: scale(1.02);
 }
 
 /* Responsive Design */
@@ -97,7 +88,7 @@ body {
         padding: 80px 100px 50px 100px;
     }
     
-    .masonry-grid {
+    .art-grid {
         column-count: 2;
     }
 }
@@ -107,7 +98,7 @@ body {
         padding: 80px 20px 50px 20px;
     }
     
-    .masonry-grid {
+    .art-grid {
         column-count: 1;
     }
     
