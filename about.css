@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background-color: #000;
+    color: #fff;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.container {
+    min-height: 100vh;
+    padding: 100px 50px 50px 50px;
+    background-color: #000;
+}
+
+/* Back Button */
+.back-btn {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    background: transparent;
+    color: #fff;
+    padding: 10px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    z-index: 1000;
+}
+
+.back-btn:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* About Content Layout */
+.about-content {
+    display: flex;
+    gap: 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+/* Text Section */
+.text-section {
+    flex: 1.5;
+    min-width: 0;
+}
+
+.text-section h1 {
+    font-size: 2rem;
+    letter-spacing: 0.2rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+
+.bio p {
+    font-size: 1rem;
+    line-height: 1.8;
+    letter-spacing: 0.05rem;
+    margin-bottom: 25px;
+    font-weight: 300;
+}
+
+.bio p:last-child {
+    margin-bottom: 0;
+}
+
+/* Image Section */
+.image-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.image-section img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .about-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .image-section {
+        order: -1;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 80px 30px 30px 30px;
+    }
+    
+    .text-section h1 {
+        font-size: 1.5rem;
+    }
+    
+    .bio p {
+        font-size: 0.95rem;
+    }
+    
+    .image-section {
+        max-width: 100%;
+    }
+}
