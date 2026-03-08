@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPECIES: SPIDER PLANT</title>
+<script>
+function scaleToFit() {
+  const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080) * 0.955;
+  document.body.style.transform = 'scale(' + scale + ')';
+  document.body.style.marginLeft = ((window.innerWidth  - 1920 * scale) / 2) + 'px';
+  document.body.style.marginTop  = ((window.innerHeight - 1080 * scale) / 2) + 'px';
+}
+document.addEventListener('DOMContentLoaded', scaleToFit);
+</script>
+<style>
+  :root {
+    --bg: #000000;
+    --fg: #e8e8e0;
+    --dim: #888880;
+    --box-border: rgba(232,232,224,0.35);
+    --green: #77c049;
+    --green-dim: rgba(119,192,73,0.12);
+    --warn: #e8a020;
+    --warn-dim: rgba(232,160,32,0.12);
+    --light: #f0d060;
+    --light-dim: rgba(240,208,96,0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { width: 100%; height: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 400;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    transform-origin: top left;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── HEADER ── */
+  .header { padding: 16px 30px 10px; height: 72px; flex-shrink: 0; }
+
+  .header-title {
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .header-block { display: inline-block; vertical-align: top; }
+
+  .header-subtitle {
+    display: block;
+    font-size: 15px;
+    font-style: italic;
+    letter-spacing: 0.1em;
+    color: var(--dim);
+    margin-top: 5px;
+    text-transform: none;
+  }
+
+  /* ── GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: 480px 1fr 520px;
+    height: calc(1080px - 72px);
+    flex: 1;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  /* ── LEFT ── */
+  .col-left {
+    padding: 30px 30px;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    position: relative;
+    z-index: 1;
+  }
+
+  .interaction-type {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.25;
+    margin-bottom: 14px;
+    width: 100%;
+  }
+
+  .interaction-desc {
+    font-size: 13px;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    line-height: 1.7;
+    color: var(--dim);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    width: 100%;
+  }
+
+  .sensor-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg);
+    line-height: 1.7;
+    width: 100%;
+  }
+
+  .stat-boxes {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-top: 24px;
+  }
+
+  .stat-box {
+    border: 1px solid var(--box-border);
+    margin-bottom: -1px;
+    padding: 20px 18px 22px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .stat-box-label {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .stat-box-value {
+    font-size: 26px;
+    font-style: italic;
+    color: var(--green);
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .stat-box-sub {
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.06em;
+    line-height: 1.7;
+  }
+
+  /* ── CENTER ── */
+  .col-center {
+    position: relative;
+    overflow: visible;
+    z-index: 3;
+  }
+
+  .plant-img {
+    position: absolute;
+    width: 140%;
+    height: 110%;
+    object-fit: contain;
+    object-position: center center;
+    display: block;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0.75;
+  }
+
+  /* ── RIGHT ── */
+  .col-right {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .data-panel {
+    flex: 1;
+    border: 1px solid var(--box-border);
+    padding: 12px 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .data-panel:last-child { border-bottom: 1px solid var(--box-border); }
+
+  .panel-label {
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--dim);
+    flex-shrink: 0;
+  }
+
+  .panel-title {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg);
+    flex-shrink: 0;
+    line-height: 1.3;
+  }
+
+  /* ── LIGHT STATE BADGE ── */
+  .light-state {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 8px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    flex-shrink: 0;
+    width: fit-content;
+  }
+
+  .light-state.on  { border: 1px solid rgba(240,208,96,0.5); background: rgba(240,208,96,0.08); color: var(--light); }
+  .light-state.off { border: 1px solid rgba(136,136,128,0.4); background: rgba(136,136,128,0.06); color: var(--dim); }
+
+  .light-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .light-state.on  .light-dot { background: var(--light); box-shadow: 0 0 5px var(--light); }
+  .light-state.off .light-dot { background: var(--dim); }
+
+  /* ── RANGE EVENT ── */
+  .range-event {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 8px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border: 1px solid rgba(232,160,32,0.4);
+    background: var(--warn-dim);
+    color: var(--warn);
+    opacity: 0;
+    transition: opacity 0.3s;
+    flex-shrink: 0;
+  }
+
+  .range-event.visible { opacity: 1; }
+
+  .range-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--warn);
+    box-shadow: 0 0 4px var(--warn);
+    flex-shrink: 0;
+  }
+
+  /* ── GRAPH ROW ── */
+  .graph-row {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .graph-readings {
+    width: 140px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+    font-size: 10px;
+    letter-spacing: 0.03em;
+    line-height: 1.6;
+    color: var(--dim);
+  }
+
+  .reading-line { display: flex; gap: 8px; }
+  .reading-line.ok    { color: var(--green); }
+  .reading-line.warn  { color: var(--warn); }
+  .reading-line.light { color: var(--light); }
+  .reading-time { min-width: 68px; color: var(--dim); }
+  .reading-val  { min-width: 48px; }
+
+  .graph-svg-wrap {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+  }
+
+  .graph-svg-wrap svg { width: 100%; height: 100%; display: block; }
+
+  /* ── LEGEND ── */
+  .range-legend {
+    display: flex;
+    gap: 12px;
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
+    flex-shrink: 0;
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-line { width: 16px; height: 1px; background: var(--green); display: inline-block; }
+  .legend-line.warn  { background: var(--warn); }
+  .legend-line.light { background: var(--light); }
+  .legend-line.dashed { background: none; border-top: 1px dashed rgba(232,232,224,0.3); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-title">SPECIES: <span class="header-block">SPIDER PLANT<br><span class="header-subtitle">Chlorophytum comosum</span></span></div>
+</div>
+
+<div class="grid">
+
+  <!-- LEFT -->
+  <div class="col-left">
+    <div class="interaction-type">INTERACTION TYPE: SPIDER PLANT REACTING TO LIGHT</div>
+    <div class="interaction-desc">Measuring the plant's reaction to having a grow light on and off — predicted bioelectrical and photoreceptor response</div>
+    <div class="sensor-label">SENSOR: APDS9960 — PROXIMITY / AMBIENT LIGHT / RGB / GESTURE SENSOR</div>
+
+    <div class="stat-boxes">
+      <div class="stat-box">
+        <div class="stat-box-label">IDEAL LIGHT INTENSITY</div>
+        <div class="stat-box-value">10,000 lux</div>
+        <div class="stat-box-sub">Bright indirect: 5,000 – 15,000 lux<br>Tolerates: 1,000 – 20,000 lux<br>Avoid direct sun above 25,000 lux</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-label">IDEAL TEMPERATURE</div>
+        <div class="stat-box-value">20 °C</div>
+        <div class="stat-box-sub">Optimal range: 13 – 27 °C<br>Sensitive to frost below 2 °C</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-label">NATIVE REGION</div>
+        <div class="stat-box-value">Tropical Africa</div>
+        <div class="stat-box-sub">Coastal & forest margins · South Africa origin<br>Naturalized globally as houseplant<br>Thrives in dappled forest-floor light</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CENTER -->
+  <div class="col-center">
+    <img class="plant-img" src="images/spider-plant.png" alt="Spider Plant">
+  </div>
+
+  <!-- RIGHT: 3 PANELS -->
+  <div class="col-right">
+
+    <!-- PANEL 1: LIVE DATA STREAM -->
+    <div class="data-panel">
+      <div class="panel-label">APDS9960 — Predicted Data Readings</div>
+      <div class="panel-title">PLANT LIGHT REACTION — LIVE READINGS</div>
+
+      <div class="light-state on" id="live-light-badge">
+        <div class="light-dot"></div>
+        <span id="live-light-text">GROW LIGHT ON</span>
+      </div>
+
+      <div class="range-event" id="live-event">
+        <div class="range-dot"></div>
+        <span id="live-event-text">OUT OF IDEAL RANGE</span>
+      </div>
+
+      <div class="range-legend">
+        <div class="legend-item"><span class="legend-line light"></span> Light on</div>
+        <div class="legend-item"><span class="legend-line"></span> In range</div>
+        <div class="legend-item"><span class="legend-line warn"></span> Out of range</div>
+      </div>
+
+      <div class="graph-readings" id="live-stream"></div>
+    </div>
+
+    <!-- PANEL 2: WITH LIGHT -->
+    <div class="data-panel">
+      <div class="panel-label">APDS9960 — Predicted Readings · Grow Light Active</div>
+      <div class="panel-title">PHOTORECEPTOR RESPONSE — WITH LIGHT</div>
+
+      <div class="range-event" id="on-event">
+        <div class="range-dot"></div>
+        <span id="on-event-text">OUT OF IDEAL RANGE</span>
+      </div>
+
+      <div class="range-legend">
+        <div class="legend-item"><span class="legend-line light"></span> Light response</div>
+        <div class="legend-item"><span class="legend-line warn"></span> Out of range</div>
+        <div class="legend-item"><span class="legend-line dashed"></span> Ideal bounds</div>
+      </div>
+
+      <div class="graph-row">
+        <div class="graph-readings" id="on-stream"></div>
+        <div class="graph-svg-wrap">
+          <svg id="on-svg" viewBox="0 0 300 80" preserveAspectRatio="none">
+            <defs>
+              <filter id="glow-l"><feGaussianBlur stdDeviation="1.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <filter id="glow-w"><feGaussianBlur stdDeviation="1.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <!-- ideal range: lux 5000-15000, mapped to y -->
+            <line x1="0" y1="10" x2="300" y2="10" stroke="rgba(232,232,224,0.18)" stroke-width="0.6" stroke-dasharray="4,5"/>
+            <line x1="0" y1="60" x2="300" y2="60" stroke="rgba(232,232,224,0.18)" stroke-width="0.6" stroke-dasharray="4,5"/>
+            <path id="on-fill"      fill="rgba(240,208,96,0.07)" stroke="none"/>
+            <path id="on-path-ok"   fill="none" stroke="rgba(240,208,96,0.85)"  stroke-width="1.3" filter="url(#glow-l)" stroke-linejoin="round"/>
+            <path id="on-path-warn" fill="none" stroke="rgba(232,160,32,0.85)" stroke-width="1.3" filter="url(#glow-w)" stroke-linejoin="round"/>
+            <text x="2" y="8"  fill="rgba(232,232,224,0.22)" font-size="5" font-family="Courier New">20k lux</text>
+            <text x="2" y="42" fill="rgba(232,232,224,0.22)" font-size="5" font-family="Courier New">10k lux</text>
+            <text x="2" y="76" fill="rgba(232,232,224,0.22)" font-size="5" font-family="Courier New">0 lux</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 3: WITHOUT LIGHT -->
+    <div class="data-panel">
+      <div class="panel-label">APDS9960 — Predicted Readings · Grow Light Off</div>
+      <div class="panel-title">PHOTORECEPTOR RESPONSE — WITHOUT LIGHT</div>
+
+      <div class="range-event" id="off-event">
+        <div class="range-dot"></div>
+        <span id="off-event-text">OUT OF IDEAL RANGE</span>
+      </div>
+
+      <div class="range-legend">
+        <div class="legend-item"><span class="legend-line"></span> Ambient response</div>
+        <div class="legend-item"><span class="legend-line warn"></span> Out of range</div>
+        <div class="legend-item"><span class="legend-line dashed"></span> Ideal bounds</div>
+      </div>
+
+      <div class="graph-row">
+        <div class="graph-readings" id="off-stream"></div>
+        <div class="graph-svg-wrap">
+          <svg id="off-svg" viewBox="0 0 300 80" preserveAspectRatio="none">
+            <defs>
+              <filter id="glow-g"><feGaussianBlur stdDeviation="1.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <filter id="glow-w2"><feGaussianBlur stdDeviation="1.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <!-- without light: ideal ambient 200-800 lux -->
+            <line x1="0" y1="15" x2="300" y2="15" stroke="rgba(232,232,224,0.18)" stroke-width="0.6" stroke-dasharray="4,5"/>
+            <line x1="0" y1="62" x2="300" y2="62" stroke="rgba(232,232,224,0.18)" stroke-width="0.6" stroke-dasharray="4,5"/>
+            <path id="off-fill"      fill="rgba(119,192,73,0.07)" stroke="none"/>
+            <path id="off-path-ok"   fill="none" stroke="rgba(119,192,73,0.85)"  stroke-width="1.3" filter="url(#glow-g)"  stroke-linejoin="round"/>
+            <path id="off-path-warn" fill="none" stroke="rgba(232,160,32,0.85)" stroke-width="1.3" filter="url(#glow-w2)" stroke-linejoin="round"/>
+            <text x="2" y="8"  fill="rgba(232,232,224,0.22)" font-size="5" font-family="Courier New">1000lx</text>
+            <text x="2" y="42" fill="rgba(232,232,224,0.22)" font-size="5" font-family="Courier New">500lx</text>
+            <text x="2" y="76" fill="rgba(232,232,224,0.22)" font-size="5" font-family="Courier New">0lx</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── SENSOR CONFIG ────────────────────────────────────────────────
+// With light: APDS9960 lux reading under grow light, ideal 5000–15000
+const CFG_ON  = { min:0, max:20000, lo:5000, hi:15000 };
+// Without light: ambient only, ideal 200–800 lux (bright indirect)
+const CFG_OFF = { min:0, max:1000,  lo:200,  hi:800 };
+
+const TICK_MS = 120;
+const MAX_PTS = 60;
+const MAX_LINES = 10;
+
+// ── SIMULATED STATE ──────────────────────────────────────────────
+// Light cycles: grow light turns on/off every ~15 seconds
+let lightOn    = true;
+let lightTimer = 0;
+let lightCycleLen = 125; // ticks (~15s at 120ms)
+
+// With-light lux: wanders 8000–13000, spikes out occasionally
+let onVal  = 10000, onDir  = 20;
+// Without-light lux: wanders 300–600, dips below/above occasionally
+let offVal = 450,   offDir = 0.8;
+
+// Live reading (reflects whichever state is active)
+let liveVal = 10000;
+
+let startTime = Date.now();
+const onPts = [], offPts = [], livePts = [];
+
+// ── DOM ──────────────────────────────────────────────────────────
+const liveStream  = document.getElementById('live-stream');
+const onStream    = document.getElementById('on-stream');
+const offStream   = document.getElementById('off-stream');
+const liveEvent   = document.getElementById('live-event');
+const onEvent     = document.getElementById('on-event');
+const offEvent    = document.getElementById('off-event');
+const lightBadge  = document.getElementById('live-light-badge');
+const lightText   = document.getElementById('live-light-text');
+
+// ── CACHED GRAPH ELEMENTS ────────────────────────────────────────
+const GRAPHS = {
+  on:  { ok: document.getElementById('on-path-ok'),  warn: document.getElementById('on-path-warn'),  fill: document.getElementById('on-fill') },
+  off: { ok: document.getElementById('off-path-ok'), warn: document.getElementById('off-path-warn'), fill: document.getElementById('off-fill') },
+};
+
+// ── PRESEED ──────────────────────────────────────────────────────
+for (let i = 0; i < MAX_PTS; i++) {
+  onPts.push(clamp(onVal  + (Math.random()-0.5)*2000, CFG_ON.min,  CFG_ON.max));
+  offPts.push(clamp(offVal + (Math.random()-0.5)*120, CFG_OFF.min, CFG_OFF.max));
+}
+
+// ── GRAPH DRAW ───────────────────────────────────────────────────
+function drawGraph(key, pts, cfg) {
+  if (pts.length < 2) return;
+  const els = GRAPHS[key];
+  const W = 300, H = 80, PAD = 4;
+  const usable = H - PAD * 2;
+
+  function toY(v) {
+    return PAD + usable - ((v - cfg.min) / (cfg.max - cfg.min)) * usable;
+  }
+
+  const coords = pts.map((v, i) => ({
+    x: (i / (MAX_PTS - 1)) * W,
+    y: toY(v),
+    v: v
+  }));
+
+  let fillD = '';
+  coords.forEach((pt, i) => {
+    fillD += (i === 0 ? 'M' : 'L') + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ' ';
+  });
+  const bot = PAD + usable;
+  const last = coords[coords.length - 1];
+  fillD += 'L' + last.x.toFixed(1) + ',' + bot + ' L' + coords[0].x.toFixed(1) + ',' + bot + ' Z';
+  els.fill.setAttribute('d', fillD);
+
+  let okD = '', warnD = '', okOpen = false, warnOpen = false;
+  coords.forEach((pt) => {
+    const inRange = pt.v >= cfg.lo && pt.v <= cfg.hi;
+    const px = pt.x.toFixed(1) + ',' + pt.y.toFixed(1);
+    if (inRange) {
+      if (!okOpen) { okD += 'M' + px + ' '; okOpen = true; warnOpen = false; }
+      else          { okD += 'L' + px + ' '; }
+    } else {
+      if (!warnOpen) { warnD += 'M' + px + ' '; warnOpen = true; okOpen = false; }
+      else            { warnD += 'L' + px + ' '; }
+    }
+  });
+
+  els.ok.setAttribute('d',   okD.trim()   || 'M0,0');
+  els.warn.setAttribute('d', warnD.trim() || 'M0,0');
+}
+
+// Draw initial state
+drawGraph('on',  onPts,  CFG_ON);
+drawGraph('off', offPts, CFG_OFF);
+
+// ── TICK ─────────────────────────────────────────────────────────
+setInterval(tick, TICK_MS);
+
+function tick() {
+  lightTimer++;
+
+  // Cycle grow light on/off
+  if (lightTimer >= lightCycleLen) {
+    lightOn = !lightOn;
+    lightTimer = 0;
+    lightCycleLen = lightOn ? rand(100, 150) : rand(60, 100);
+    // Update badge
+    lightBadge.className = 'light-state ' + (lightOn ? 'on' : 'off');
+    lightText.textContent = lightOn ? 'GROW LIGHT ON' : 'GROW LIGHT OFF';
+  }
+
+  const ts = formatTs(Date.now() - startTime);
+
+  // ── WITH LIGHT simulation ──
+  // Stays high while light is on, drops sharply when light off
+  const onTarget = lightOn ? rand(8000, 13000) : rand(200, 600);
+  onDir = (onTarget - onVal) * 0.08 + (Math.random()-0.5)*300;
+  onVal = clamp(onVal + onDir, CFG_ON.min + 10, CFG_ON.max - 10);
+
+  // ── WITHOUT LIGHT simulation ──
+  // Inverse — stays low while light on, rises when off (reflected ambient)
+  const offTarget = lightOn ? rand(80, 200) : rand(350, 700);
+  offDir = (offTarget - offVal) * 0.06 + (Math.random()-0.5)*30;
+  offVal = clamp(offVal + offDir, CFG_OFF.min + 5, CFG_OFF.max - 5);
+
+  // Live reading reflects active state
+  liveVal = lightOn ? onVal : offVal;
+  const liveCfg = lightOn ? CFG_ON : CFG_OFF;
+
+  // Push histories
+  onPts.push(onVal);   if (onPts.length  > MAX_PTS) onPts.shift();
+  offPts.push(offVal); if (offPts.length > MAX_PTS) offPts.shift();
+
+  // Stream updates
+  addLine(liveStream, ts, Math.round(liveVal), liveCfg, 'lux',
+    liveEvent, 'live-event-text', lightOn ? 'light' : 'ok');
+  addLine(onStream,  ts, Math.round(onVal),  CFG_ON,  'lux', onEvent,  'on-event-text',  'light');
+  addLine(offStream, ts, Math.round(offVal), CFG_OFF, 'lux', offEvent, 'off-event-text', 'ok');
+
+  // Draw graphs
+  drawGraph('on',  onPts,  CFG_ON);
+  drawGraph('off', offPts, CFG_OFF);
+}
+
+// ── STREAM LINE ──────────────────────────────────────────────────
+function addLine(container, ts, val, cfg, unit, eventEl, eventTextId, inRangeClass) {
+  const inRange = val >= cfg.lo && val <= cfg.hi;
+
+  const line = document.createElement('div');
+  line.className = 'reading-line ' + (inRange ? inRangeClass : 'warn');
+  line.innerHTML =
+    `<span class="reading-time">${ts}</span>` +
+    `<span style="color:var(--dim)">→</span>` +
+    `<span class="reading-val">${val} ${unit}</span>`;
+
+  container.insertBefore(line, container.firstChild);
+  while (container.children.length > MAX_LINES) container.removeChild(container.lastChild);
+
+  if (!inRange) {
+    eventEl.classList.add('visible');
+    const dir = val < cfg.lo ? 'BELOW' : 'ABOVE';
+    document.getElementById(eventTextId).textContent =
+      dir + ' IDEAL RANGE — ' + val + ' ' + unit;
+  } else {
+    eventEl.classList.remove('visible');
+  }
+}
+
+// ── HELPERS ──────────────────────────────────────────────────────
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+function rand(a, b) { return Math.floor(Math.random() * (b - a + 1)) + a; }
+
+function formatTs(ms) {
+  const d = new Date(ms);
+  return [d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds()]
+    .map(n => String(n).padStart(2,'0')).join(':')
+    + '.' + String(d.getUTCMilliseconds()).padStart(3,'0');
+}
+</script>
+</body>
+</html>

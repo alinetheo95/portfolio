@@ -1,0 +1,356 @@
+{
+  "name": "Total U.S. GHG Emissions (2022)",
+  "note": "Total includes CO2, CH4, N2O, and F-gases in MMT CO2e",
+  "source": "EPA 2024 Inventory of U.S. Greenhouse Gas Emissions and Sinks",
+  "children": [
+    {
+      "name": "Carbon Dioxide (CO\u2082)",
+      "formula": "CO\u2082",
+      "gwp": 1,
+      "color": "#2E7D32",
+      "percent_of_total": 77,
+      "children": [
+        {
+          "name": "Transportation",
+          "color": "#43A047",
+          "percent_of_sector": 38,
+          "note": "From Table A-90",
+          "children": [
+            {
+              "name": "On-Road Vehicles",
+              "color": "#4CAF50",
+              "children": [
+                {
+                  "name": "Light-Duty Trucks",
+                  "value": 660.2,
+                  "color": "#66BB6A"
+                },
+                {
+                  "name": "Medium/Heavy-Duty Trucks",
+                  "value": 413.1,
+                  "color": "#81C784"
+                },
+                {
+                  "name": "Passenger Cars",
+                  "value": 369.5,
+                  "color": "#A5D6A7"
+                },
+                {
+                  "name": "Buses",
+                  "value": 26.3,
+                  "color": "#C8E6C9"
+                },
+                {
+                  "name": "Motorcycles",
+                  "value": 7.6,
+                  "color": "#E8F5E9"
+                }
+              ]
+            },
+            {
+              "name": "Aircraft",
+              "value": 170.4,
+              "color": "#66BB6A"
+            },
+            {
+              "name": "Pipeline Natural Gas",
+              "value": 69.3,
+              "color": "#81C784"
+            },
+            {
+              "name": "Ships & Boats",
+              "value": 49.9,
+              "color": "#A5D6A7"
+            },
+            {
+              "name": "Rail",
+              "value": 35.8,
+              "color": "#C8E6C9"
+            },
+            {
+              "name": "Other",
+              "value": 8.4,
+              "color": "#E8F5E9"
+            }
+          ]
+        },
+        {
+          "name": "Electric Power",
+          "color": "#388E3C",
+          "percent_of_sector": 32,
+          "note": "From Table A-5. Data centers = ~1.8% of electricity = ~27.6 MMT CO2",
+          "children": [
+            {
+              "name": "Coal",
+              "value": 851.5,
+              "color": "#424242",
+              "percent_of_elec": 56
+            },
+            {
+              "name": "Natural Gas",
+              "value": 659.3,
+              "color": "#05999e",
+              "percent_of_elec": 43
+            },
+            {
+              "name": "Petroleum",
+              "value": 20.5,
+              "color": "#25baed",
+              "percent_of_elec": 1
+            },
+            {
+              "name": "Geothermal",
+              "value": 0.4,
+              "color": "#ec2c2c"
+            }
+          ]
+        },
+        {
+          "name": "Industrial",
+          "color": "#4CAF50",
+          "percent_of_sector": 17,
+          "note": "From Table A-5",
+          "children": [
+            {
+              "name": "Natural Gas",
+              "value": 510.4,
+              "color": "#05999e"
+            },
+            {
+              "name": "Petroleum",
+              "value": 247.6,
+              "color": "#25baed"
+            },
+            {
+              "name": "Coal",
+              "value": 43.0,
+              "color": "#424242"
+            }
+          ]
+        },
+        {
+          "name": "Residential",
+          "color": "#66BB6A",
+          "percent_of_sector": 7,
+          "children": [
+            {
+              "name": "Natural Gas",
+              "value": 272.0,
+              "color": "#05999e"
+            },
+            {
+              "name": "Petroleum",
+              "value": 62.1,
+              "color": "#25baed"
+            }
+          ]
+        },
+        {
+          "name": "Commercial",
+          "color": "#81C784",
+          "percent_of_sector": 5,
+          "children": [
+            {
+              "name": "Natural Gas",
+              "value": 192.3,
+              "color": "#05999e"
+            },
+            {
+              "name": "Petroleum",
+              "value": 65.1,
+              "color": "#25baed"
+            },
+            {
+              "name": "Coal",
+              "value": 1.4,
+              "color": "#424242"
+            }
+          ]
+        },
+        {
+          "name": "Non-Transportation Mobile",
+          "color": "#A5D6A7",
+          "percent_of_sector": 5,
+          "note": "From Table A-90",
+          "children": [
+            {
+              "name": "Other Equipment",
+              "value": 104.1,
+              "color": "#A5D6A7"
+            },
+            {
+              "name": "Construction/Mining",
+              "value": 74.6,
+              "color": "#66BB6A"
+            },
+            {
+              "name": "Agricultural Equipment",
+              "value": 40.5,
+              "color": "#81C784"
+            }
+          ]
+        },
+        {
+          "name": "U.S. Territories",
+          "value": 22.6,
+          "color": "#C8E6C9"
+        }
+      ]
+    },
+    {
+      "name": "Methane (CH\u2084)",
+      "formula": "CH\u2084",
+      "gwp": 28,
+      "color": "#f15f31",
+      "percent_of_total": 13,
+      "note": "Estimated - needs ES tables for exact values",
+      "children": [
+        {
+          "name": "Agriculture",
+          "color": "#f17731",
+          "children": [
+            {
+              "name": "Enteric Fermentation",
+              "value": 200,
+              "color": "#f19e31"
+            },
+            {
+              "name": "Manure Management",
+              "value": 150,
+              "color": "#f19e31"
+            },
+            {
+              "name": "Rice Cultivation",
+              "value": 100,
+              "color": "#f19e31"
+            }
+          ]
+        },
+        {
+          "name": "Energy",
+          "color":  "#f17731",
+          "children": [
+            {
+              "name": "Natural Gas Systems",
+              "value": 150,
+              "color": "#f19e31"
+            },
+            {
+              "name": "Petroleum Systems",
+              "value": 60,
+              "color": "#f19e31"
+            },
+            {
+              "name": "Coal Mining",
+              "value": 40,
+              "color": "#f19e31"
+            }
+          ]
+        },
+        {
+          "name": "Waste",
+          "color": "#f17731",
+          "children": [
+            {
+              "name": "Landfills",
+              "value": 80,
+              "color": "#f19e31"
+            },
+            {
+              "name": "Wastewater",
+              "value": 20,
+              "color": "#f19e31"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Nitrous Oxide (N\u2082O)",
+      "formula": "N\u2082O",
+      "gwp": 265,
+      "color": "#ec2c3d",
+      "percent_of_total": 6,
+      "note": "Estimated - needs ES tables for exact values",
+      "children": [
+        {
+          "name": "Agriculture",
+          "color": "#ec2c2c",
+          "children": [
+            {
+              "name": "Soil Management",
+              "value": 250,
+              "color": "#c72230"
+            },
+            {
+              "name": "Manure Management",
+              "value": 30,
+              "color": "#c72230"
+            }
+          ]
+        },
+        {
+          "name": "Stationary Combustion",
+          "value": 40,
+          "color": "#d15252"
+        },
+        {
+          "name": "Mobile Combustion",
+          "value": 20,
+          "color": "#c96363"
+        },
+        {
+          "name": "Industrial Processes",
+          "value": 10,
+          "color": "#c26d6d"
+        }
+      ]
+    },
+    {
+      "name": "Fluorinated Gases",
+      "formula": "HFCs, PFCs, SF\u2086, NF\u2083",
+      "gwp": "677-12,400",
+      "color": "#9c459a",
+      "percent_of_total": 3,
+      "note": "Estimated - needs ES tables for exact values",
+      "children": [
+        {
+          "name": "HFCs",
+          "color": "#8f459c",
+          "children": [
+            {
+              "name": "Refrigeration & AC",
+              "value": 100,
+              "color": "#773982"
+            },
+            {
+              "name": "Foam Blowing",
+              "value": 30,
+              "color": "#71459c"
+            },
+            {
+              "name": "Aerosols",
+              "value": 20,
+              "color": "#773982"
+            }
+          ]
+        },
+        {
+          "name": "PFCs",
+          "value": 30,
+          "color": "#87349e"
+        },
+        {
+          "name": "SF\u2086",
+          "value": 15,
+          "color": "#8c42a1"
+        },
+        {
+          "name": "NF\u2083",
+          "value": 5,
+          "color": "#8e609c"
+        }
+      ]
+    }
+  ]
+}

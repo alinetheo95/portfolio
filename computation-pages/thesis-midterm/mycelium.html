@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPECIES: MYCELIUM SUBSTRATE</title>
+<script>
+function scaleToFit() {
+  const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080) * 0.955;
+  document.body.style.transform = 'scale(' + scale + ')';
+  document.body.style.marginLeft = ((window.innerWidth  - 1920 * scale) / 2) + 'px';
+  document.body.style.marginTop  = ((window.innerHeight - 1080 * scale) / 2) + 'px';
+}
+document.addEventListener('DOMContentLoaded', scaleToFit);
+</script>
+<style>
+  :root {
+    --bg: #000000;
+    --fg: #e8e8e0;
+    --dim: #888880;
+    --box-border: rgba(232,232,224,0.35);
+    --green: #77c049;
+    --green-dim: rgba(119,192,73,0.12);
+    --warn: #e8a020;
+    --warn-dim: rgba(232,160,32,0.12);
+    --spike: #a8e0ff;
+    --spike-dim: rgba(168,224,255,0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { width: 100%; height: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 400;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    transform-origin: top left;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── HEADER ── */
+  .header { padding: 16px 30px 10px; height: 72px; flex-shrink: 0; }
+
+  .header-title {
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .header-block { display: inline-block; vertical-align: top; }
+
+  .header-subtitle {
+    display: block;
+    font-size: 15px;
+    font-style: italic;
+    letter-spacing: 0.1em;
+    color: var(--dim);
+    margin-top: 5px;
+    text-transform: none;
+  }
+
+  /* ── GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: 480px 1fr 520px;
+    height: calc(1080px - 72px);
+    flex: 1;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  /* ── LEFT ── */
+  .col-left {
+    padding: 30px 30px;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    position: relative;
+    z-index: 1;
+  }
+
+  .interaction-type {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.25;
+    margin-bottom: 14px;
+    width: 100%;
+  }
+
+  .interaction-desc {
+    font-size: 13px;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    line-height: 1.7;
+    color: var(--dim);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    width: 100%;
+  }
+
+  .sensor-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg);
+    line-height: 1.7;
+    width: 100%;
+  }
+
+  .stat-boxes { display: flex; flex-direction: column; flex: 1; margin-top: 24px; }
+
+  .stat-box {
+    border: 1px solid var(--box-border);
+    margin-bottom: -1px;
+    padding: 20px 18px 22px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .stat-box-label {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .stat-box-value {
+    font-size: 26px;
+    font-style: italic;
+    color: var(--green);
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .stat-box-sub {
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.06em;
+    line-height: 1.7;
+  }
+
+  /* ── CENTER ── */
+  .col-center {
+    position: relative;
+    overflow: visible;
+    z-index: 3;
+  }
+
+  .specimen-img {
+    position: absolute;
+    width: 140%;
+    height: 110%;
+    object-fit: contain;
+    object-position: center center;
+    display: block;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0.88;
+  }
+
+  /* ── RIGHT ── */
+  .col-right {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .data-panel {
+    flex: 1;
+    border: 1px solid var(--box-border);
+    padding: 12px 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .data-panel:last-child { border-bottom: 1px solid var(--box-border); }
+
+  .panel-label {
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--dim);
+    flex-shrink: 0;
+  }
+
+  .panel-title {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg);
+    flex-shrink: 0;
+    line-height: 1.3;
+  }
+
+  /* ── STATE BADGE ── */
+  .state-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 8px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    flex-shrink: 0;
+    width: fit-content;
+    transition: all 0.3s;
+  }
+
+  .state-badge.neutral  { border: 1px solid rgba(119,192,73,0.45);  background: rgba(119,192,73,0.07);  color: var(--green); }
+  .state-badge.response { border: 1px solid rgba(168,224,255,0.5);  background: rgba(168,224,255,0.08); color: var(--spike); }
+
+  .badge-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .state-badge.neutral  .badge-dot { background: var(--green); box-shadow: 0 0 4px var(--green); }
+  .state-badge.response .badge-dot { background: var(--spike);  box-shadow: 0 0 6px var(--spike); animation: pulse-dot 0.8s ease-in-out infinite; }
+
+  @keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 4px var(--spike); }
+    50%       { box-shadow: 0 0 10px var(--spike); }
+  }
+
+  /* ── EVENT BAR ── */
+  .event-bar {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 8px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    opacity: 0;
+    transition: opacity 0.25s;
+    flex-shrink: 0;
+  }
+
+  .event-bar.spike-bar  { border: 1px solid rgba(168,224,255,0.4); background: rgba(168,224,255,0.08); color: var(--spike); }
+  .event-bar.warn-bar   { border: 1px solid rgba(232,160,32,0.4);  background: var(--warn-dim);         color: var(--warn); }
+  .event-bar.visible    { opacity: 1; }
+
+  .event-dot-blue { width:5px; height:5px; border-radius:50%; background:var(--spike); box-shadow:0 0 5px var(--spike); flex-shrink:0; }
+  .event-dot-warn { width:5px; height:5px; border-radius:50%; background:var(--warn);  box-shadow:0 0 4px var(--warn);  flex-shrink:0; }
+
+  /* ── GRAPH ROW ── */
+  .graph-row {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .graph-readings {
+    width: 148px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+    font-size: 10px;
+    letter-spacing: 0.03em;
+    line-height: 1.6;
+  }
+
+  .reading-line          { display: flex; gap: 8px; color: var(--dim); }
+  .reading-line.baseline { color: var(--green); }
+  .reading-line.active   { color: var(--spike); }
+  .reading-line.warn     { color: var(--warn); }
+  .reading-time { min-width: 68px; color: var(--dim); }
+  .reading-val  { min-width: 52px; }
+  .reading-tag  { font-size: 8px; opacity: 0.65; }
+
+  .waveform-container { flex: 1; min-height: 0; }
+  .waveform-container svg { width: 100%; height: 100%; display: block; }
+
+  /* ── LEGEND ── */
+  .range-legend {
+    display: flex;
+    gap: 12px;
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
+    flex-shrink: 0;
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-line         { width: 16px; height: 1px; background: var(--green); display: inline-block; }
+  .legend-line.spike   { background: var(--spike); }
+  .legend-line.warn    { background: var(--warn); }
+  .legend-line.dashed  { background: none; border-top: 1px dashed rgba(232,232,224,0.3); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-title">SPECIES: <span class="header-block">MYCELIUM SUBSTRATE<br><span class="header-subtitle">Pleurotus ostreatus mycelial network</span></span></div>
+</div>
+
+<div class="grid">
+
+  <!-- LEFT -->
+  <div class="col-left">
+    <div class="interaction-type">INTERACTION TYPE: ELECTRICAL CONDUCTIVITY THROUGHOUT</div>
+    <div class="interaction-desc">Measuring the natural electrical currency occurring in mycelial networks — baseline conductivity and response to introduced stimuli</div>
+    <div class="sensor-label">SENSOR: SIMPLE CIRCUIT WITH ELECTRODES AND ARDUINO LEONARDO</div>
+
+    <div class="stat-boxes">
+      <div class="stat-box">
+        <div class="stat-box-label">IDEAL TEMPERATURE</div>
+        <div class="stat-box-value">24 °C</div>
+        <div class="stat-box-sub">Active growth: 21 – 27 °C<br>Peak conductivity during colonization phase<br>Signal degrades above 32 °C</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-label">IDEAL HUMIDITY</div>
+        <div class="stat-box-value">88 %RH</div>
+        <div class="stat-box-sub">Colonization: 80 – 95 %RH<br>Conductivity correlated with moisture content<br>Desiccation disrupts signal pathway</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-label">NATIVE REGION</div>
+        <div class="stat-box-value">Ubiquitous</div>
+        <div class="stat-box-sub">Dead hardwood · Forest floor substrate<br>Cosmopolitan distribution worldwide<br>Saprophytic decomposer · Hyphal networks</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CENTER -->
+  <div class="col-center">
+    <img class="specimen-img" src="images/mycelium.png" alt="Mycelium Substrate">
+  </div>
+
+  <!-- RIGHT: 3 PANELS -->
+  <div class="col-right">
+
+    <!-- PANEL 1: NEUTRAL BASELINE — data stream + waveform -->
+    <div class="data-panel">
+      <div class="panel-label">Arduino Electrode — Conductivity Readings · Baseline State</div>
+      <div class="panel-title">ELECTRICAL CONDUCTIVITY — NEUTRAL</div>
+
+      <div class="state-badge neutral" id="state-badge">
+        <div class="badge-dot"></div>
+        <span id="state-text">BASELINE — NO STIMULI</span>
+      </div>
+
+      <div class="range-legend">
+        <div class="legend-item"><span class="legend-line"></span> Baseline signal</div>
+        <div class="legend-item"><span class="legend-line spike"></span> Stimuli response</div>
+      </div>
+
+      <div class="graph-row">
+        <div class="graph-readings" id="neutral-stream"></div>
+        <div class="waveform-container">
+          <svg id="neutral-wave" viewBox="0 0 280 90" preserveAspectRatio="none">
+            <defs>
+              <filter id="glow-g"><feGaussianBlur stdDeviation="1.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <filter id="glow-s"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <linearGradient id="fill-g" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(119,192,73,0.18)"/>
+                <stop offset="100%" stop-color="rgba(119,192,73,0)"/>
+              </linearGradient>
+              <linearGradient id="fill-s" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(168,224,255,0.18)"/>
+                <stop offset="100%" stop-color="rgba(168,224,255,0)"/>
+              </linearGradient>
+            </defs>
+            <line x1="0" y1="5"  x2="280" y2="5"  stroke="rgba(232,232,224,0.06)" stroke-width="0.5" stroke-dasharray="3,6"/>
+            <line x1="0" y1="45" x2="280" y2="45" stroke="rgba(232,232,224,0.06)" stroke-width="0.5" stroke-dasharray="3,6"/>
+            <line x1="0" y1="85" x2="280" y2="85" stroke="rgba(232,232,224,0.06)" stroke-width="0.5"/>
+            <path id="nw-fill-g" fill="url(#fill-g)" stroke="none"/>
+            <path id="nw-fill-s" fill="url(#fill-s)" stroke="none"/>
+            <path id="nw-path-g" fill="none" stroke="rgba(119,192,73,0.80)"  stroke-width="1.3" filter="url(#glow-g)" stroke-linejoin="round" stroke-linecap="round"/>
+            <path id="nw-path-s" fill="none" stroke="rgba(168,224,255,0.90)" stroke-width="1.5" filter="url(#glow-s)" stroke-linejoin="round" stroke-linecap="round"/>
+            <g id="nw-ticks"></g>
+            <text x="2" y="9"  fill="rgba(232,232,224,0.25)" font-size="5" font-family="Courier New">600</text>
+            <text x="2" y="47" fill="rgba(232,232,224,0.25)" font-size="5" font-family="Courier New">300</text>
+            <text x="2" y="89" fill="rgba(232,232,224,0.25)" font-size="5" font-family="Courier New">0</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 2: STIMULI RESPONSE — spike stream -->
+    <div class="data-panel">
+      <div class="panel-label">Arduino Electrode — Stimuli Response Events</div>
+      <div class="panel-title">SIGNAL RESPONSE — INTRODUCED STIMULI</div>
+
+      <div class="event-bar spike-bar" id="spike-event">
+        <div class="event-dot-blue"></div>
+        <span id="spike-event-text">RESPONSE DETECTED</span>
+      </div>
+
+      <div class="range-legend">
+        <div class="legend-item"><span class="legend-line spike"></span> Response spike</div>
+        <div class="legend-item"><span class="legend-line"></span> Recovery</div>
+        <div class="legend-item"><span class="legend-line dashed"></span> Baseline</div>
+      </div>
+
+      <div class="graph-row">
+        <div class="graph-readings" id="spike-stream"></div>
+        <div class="waveform-container">
+          <svg id="spike-wave" viewBox="0 0 280 90" preserveAspectRatio="none">
+            <defs>
+              <filter id="glow-s2"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <linearGradient id="fill-s2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(168,224,255,0.2)"/>
+                <stop offset="100%" stop-color="rgba(168,224,255,0)"/>
+              </linearGradient>
+            </defs>
+            <!-- baseline reference -->
+            <line x1="0" y1="78" x2="280" y2="78" stroke="rgba(232,232,224,0.12)" stroke-width="0.6" stroke-dasharray="3,5"/>
+            <line x1="0" y1="5"  x2="280" y2="5"  stroke="rgba(232,232,224,0.06)" stroke-width="0.5" stroke-dasharray="3,6"/>
+            <line x1="0" y1="85" x2="280" y2="85" stroke="rgba(232,232,224,0.06)" stroke-width="0.5"/>
+            <path id="sw-fill" fill="url(#fill-s2)" stroke="none"/>
+            <path id="sw-path" fill="none" stroke="rgba(168,224,255,0.88)" stroke-width="1.5" filter="url(#glow-s2)" stroke-linejoin="round" stroke-linecap="round"/>
+            <g id="sw-ticks"></g>
+            <text x="2" y="9"  fill="rgba(232,232,224,0.25)" font-size="5" font-family="Courier New">600</text>
+            <text x="2" y="47" fill="rgba(232,232,224,0.25)" font-size="5" font-family="Courier New">300</text>
+            <text x="2" y="89" fill="rgba(232,232,224,0.25)" font-size="5" font-family="Courier New">0</text>
+            <text x="210" y="76" fill="rgba(232,232,224,0.28)" font-size="4.5" font-family="Courier New">BASELINE</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 3: OUT OF IDEAL RANGE GRAPH -->
+    <div class="data-panel">
+      <div class="panel-label">Arduino Electrode — Conductivity Range Monitor</div>
+      <div class="panel-title">CONDUCTIVITY — OUT OF IDEAL RANGE</div>
+
+      <div class="event-bar warn-bar" id="range-event">
+        <div class="event-dot-warn"></div>
+        <span id="range-event-text">OUT OF IDEAL RANGE</span>
+      </div>
+
+      <div class="range-legend">
+        <div class="legend-item"><span class="legend-line"></span> Ideal range</div>
+        <div class="legend-item"><span class="legend-line warn"></span> Out of range</div>
+        <div class="legend-item"><span class="legend-line dashed"></span> Ideal bounds</div>
+      </div>
+
+      <div class="graph-row">
+        <div class="graph-readings" id="range-stream"></div>
+        <div class="waveform-container">
+          <svg id="range-wave" viewBox="0 0 280 90" preserveAspectRatio="none">
+            <defs>
+              <filter id="glow-g3"><feGaussianBlur stdDeviation="1.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <filter id="glow-w3"><feGaussianBlur stdDeviation="1.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <!-- ideal range band: 80–280 µS/cm -->
+            <line x1="0" y1="14" x2="280" y2="14" stroke="rgba(232,232,224,0.18)" stroke-width="0.6" stroke-dasharray="4,5"/>
+            <line x1="0" y1="68" x2="280" y2="68" stroke="rgba(232,232,224,0.18)" stroke-width="0.6" stroke-dasharray="4,5"/>
+            <path id="rw-fill"      fill="rgba(119,192,73,0.07)" stroke="none"/>
+            <path id="rw-path-ok"   fill="none" stroke="rgba(119,192,73,0.85)"  stroke-width="1.3" filter="url(#glow-g3)" stroke-linejoin="round"/>
+            <path id="rw-path-warn" fill="none" stroke="rgba(232,160,32,0.85)" stroke-width="1.3" filter="url(#glow-w3)" stroke-linejoin="round"/>
+            <text x="2" y="9"  fill="rgba(232,232,224,0.22)" font-size="5" font-family="Courier New">400µS</text>
+            <text x="2" y="47" fill="rgba(232,232,224,0.22)" font-size="5" font-family="Courier New">200µS</text>
+            <text x="2" y="87" fill="rgba(232,232,224,0.22)" font-size="5" font-family="Courier New">0µS</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── CONFIG ────────────────────────────────────────────────────────
+// Mycelium baseline conductivity: 80–280 µS/cm (ideal), 0–420 total range
+// Stimuli responses: sharp spikes to 350–580 µS/cm, decay over ~8 ticks
+const CFG_RANGE = { min:0, max:420, lo:80, hi:280 };
+
+// Arduino analog read (0–1023) mapped from µS/cm for waveforms
+const MAX_ADC = 600; // display ceiling
+const MAX_PTS_WAVE = 80;
+const MAX_PTS_GRAPH = 60;
+const TICK_MS = 110;
+const MAX_LINES = 11;
+
+// ── STATE ─────────────────────────────────────────────────────────
+let baselineVal = 140; // µS/cm resting
+let baselineDir = 0.08;
+
+// Stimuli events
+const STIMULI_TYPES = [
+  { label:'CHEMICAL',   peak:520, duration:9,  decay:0.55 },
+  { label:'MECHANICAL', peak:480, duration:7,  decay:0.60 },
+  { label:'THERMAL',    peak:390, duration:11, decay:0.45 },
+  { label:'ELECTRICAL', peak:570, duration:6,  decay:0.65 },
+];
+
+let currentStimulus  = null;
+let stimulusCountdown = 0;
+let nextStimulusIn   = rand(30, 60);
+
+// Waveform data
+const neutralData = [];
+const spikeData   = [];
+const rangeData   = [];
+
+// Pre-fill all three
+for (let i = 0; i < MAX_PTS_WAVE; i++) {
+  const b = clamp(baselineVal + (Math.random()-0.5)*20, 60, 200);
+  neutralData.push(b);
+  spikeData.push(clamp(b * 0.6 + (Math.random()-0.5)*15, 0, MAX_ADC));
+  rangeData.push(clamp(b + (Math.random()-0.5)*40, CFG_RANGE.min, CFG_RANGE.max));
+}
+
+let startTime = Date.now();
+
+// ── DOM ───────────────────────────────────────────────────────────
+const neutralStream = document.getElementById('neutral-stream');
+const spikeStream   = document.getElementById('spike-stream');
+const rangeStream   = document.getElementById('range-stream');
+
+const stateBadge    = document.getElementById('state-badge');
+const stateText     = document.getElementById('state-text');
+const spikeEvent    = document.getElementById('spike-event');
+const spikeEventTxt = document.getElementById('spike-event-text');
+const rangeEvent    = document.getElementById('range-event');
+const rangeEventTxt = document.getElementById('range-event-text');
+
+// Waveform paths
+const nwPathG  = document.getElementById('nw-path-g');
+const nwPathS  = document.getElementById('nw-path-s');
+const nwFillG  = document.getElementById('nw-fill-g');
+const nwFillS  = document.getElementById('nw-fill-s');
+const nwTicks  = document.getElementById('nw-ticks');
+
+const swPath   = document.getElementById('sw-path');
+const swFill   = document.getElementById('sw-fill');
+const swTicks  = document.getElementById('sw-ticks');
+
+// Range graph
+const GRAPHS = {
+  range: {
+    ok:   document.getElementById('rw-path-ok'),
+    warn: document.getElementById('rw-path-warn'),
+    fill: document.getElementById('rw-fill'),
+  }
+};
+
+// ── DRAW FUNCTIONS ────────────────────────────────────────────────
+function drawNeutralWave() {
+  if (neutralData.length < 2) return;
+  const W = 280, H = 90, PAD_T = 5, PAD_B = 5;
+  const range = H - PAD_T - PAD_B;
+
+  function toY(v) { return PAD_T + range - (v / MAX_ADC) * range; }
+
+  const pts = neutralData.map((v, i) => ({
+    x: (i / (MAX_PTS_WAVE - 1)) * W,
+    y: toY(v),
+    v: v
+  }));
+
+  const bot = PAD_T + range;
+
+  // Green path (baseline segments)
+  let gD = '', sD = '', gFD = '', sFD = '';
+  let gOpen = false, sOpen = false;
+
+  pts.forEach((pt) => {
+    const isSpike = pt.v > 250;
+    const px = pt.x.toFixed(1) + ',' + pt.y.toFixed(1);
+    if (!isSpike) {
+      if (!gOpen) { gD += 'M' + px + ' '; gOpen = true; sOpen = false; }
+      else         { gD += 'L' + px + ' '; }
+    } else {
+      if (!sOpen) { sD += 'M' + px + ' '; sOpen = true; gOpen = false; }
+      else         { sD += 'L' + px + ' '; }
+    }
+  });
+
+  // Fill (full shape, green tinted)
+  pts.forEach((pt, i) => { gFD += (i === 0 ? 'M' : 'L') + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ' '; });
+  gFD += 'L' + pts[pts.length-1].x.toFixed(1) + ',' + bot + ' L' + pts[0].x.toFixed(1) + ',' + bot + ' Z';
+
+  // Spike fill
+  const spikePts = pts.filter(p => p.v > 250);
+  if (spikePts.length > 1) {
+    spikePts.forEach((pt, i) => { sFD += (i===0?'M':'L') + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ' '; });
+    sFD += 'L' + spikePts[spikePts.length-1].x.toFixed(1) + ',' + bot + ' L' + spikePts[0].x.toFixed(1) + ',' + bot + ' Z';
+  }
+
+  nwPathG.setAttribute('d', gD.trim() || 'M0,0');
+  nwPathS.setAttribute('d', sD.trim() || 'M0,0');
+  nwFillG.setAttribute('d', gFD);
+  nwFillS.setAttribute('d', sFD || 'M0,0');
+
+  // Tick marks on spikes
+  nwTicks.innerHTML = '';
+  pts.forEach(({ x, y, v }) => {
+    if (v > 300) {
+      const mk = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      mk.setAttribute('x1', x); mk.setAttribute('y1', y - 5);
+      mk.setAttribute('x2', x); mk.setAttribute('y2', y + 5);
+      mk.setAttribute('stroke', 'rgba(168,224,255,0.6)');
+      mk.setAttribute('stroke-width', '0.8');
+      nwTicks.appendChild(mk);
+    }
+  });
+}
+
+function drawSpikeWave() {
+  if (spikeData.length < 2) return;
+  const W = 280, H = 90, PAD_T = 5, PAD_B = 5;
+  const range = H - PAD_T - PAD_B;
+  const bot = PAD_T + range;
+
+  function toY(v) { return PAD_T + range - (v / MAX_ADC) * range; }
+
+  const pts = spikeData.map((v, i) => ({
+    x: (i / (MAX_PTS_WAVE - 1)) * W,
+    y: toY(v)
+  }));
+
+  let d = '', fD = '';
+  pts.forEach((pt, i) => {
+    const cmd = i === 0 ? 'M' : 'L';
+    d  += cmd + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ' ';
+    fD += cmd + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ' ';
+  });
+  fD += 'L' + pts[pts.length-1].x.toFixed(1) + ',' + bot + ' L' + pts[0].x.toFixed(1) + ',' + bot + ' Z';
+
+  swPath.setAttribute('d', d.trim());
+  swFill.setAttribute('d', fD);
+
+  // Tick marks at peaks
+  swTicks.innerHTML = '';
+  pts.forEach(({ x, y }, i) => {
+    if (spikeData[i] > 380) {
+      const mk = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      mk.setAttribute('x1', x); mk.setAttribute('y1', y - 5);
+      mk.setAttribute('x2', x); mk.setAttribute('y2', y + 5);
+      mk.setAttribute('stroke', 'rgba(168,224,255,0.7)');
+      mk.setAttribute('stroke-width', '0.8');
+      swTicks.appendChild(mk);
+    }
+  });
+}
+
+function drawRangeGraph() {
+  if (rangeData.length < 2) return;
+  const els = GRAPHS.range;
+  const W = 280, H = 90, PAD = 4;
+  const usable = H - PAD * 2;
+  const cfg = CFG_RANGE;
+
+  function toY(v) { return PAD + usable - ((v - cfg.min) / (cfg.max - cfg.min)) * usable; }
+
+  const coords = rangeData.map((v, i) => ({
+    x: (i / (MAX_PTS_GRAPH - 1)) * W,
+    y: toY(v),
+    v: v
+  }));
+
+  let fillD = '';
+  coords.forEach((pt, i) => { fillD += (i===0?'M':'L') + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ' '; });
+  const bot = PAD + usable;
+  fillD += 'L' + coords[coords.length-1].x.toFixed(1) + ',' + bot + ' L' + coords[0].x.toFixed(1) + ',' + bot + ' Z';
+  els.fill.setAttribute('d', fillD);
+
+  let okD = '', warnD = '', okOpen = false, warnOpen = false;
+  coords.forEach((pt) => {
+    const inRange = pt.v >= cfg.lo && pt.v <= cfg.hi;
+    const px = pt.x.toFixed(1) + ',' + pt.y.toFixed(1);
+    if (inRange) {
+      if (!okOpen) { okD += 'M' + px + ' '; okOpen = true; warnOpen = false; }
+      else          { okD += 'L' + px + ' '; }
+    } else {
+      if (!warnOpen) { warnD += 'M' + px + ' '; warnOpen = true; okOpen = false; }
+      else            { warnD += 'L' + px + ' '; }
+    }
+  });
+
+  els.ok.setAttribute('d',   okD.trim()   || 'M0,0');
+  els.warn.setAttribute('d', warnD.trim() || 'M0,0');
+}
+
+// Draw initial state
+drawNeutralWave();
+drawSpikeWave();
+drawRangeGraph();
+
+// ── TICK ──────────────────────────────────────────────────────────
+setInterval(tick, TICK_MS);
+
+function tick() {
+  nextStimulusIn--;
+
+  let conductivity = 0;
+  let isResponse = false;
+
+  // Stimuli event logic
+  if (stimulusCountdown > 0) {
+    stimulusCountdown--;
+    const elapsed  = currentStimulus.duration - stimulusCountdown;
+    const progress = elapsed / currentStimulus.duration;
+    const shape    = Math.exp(-Math.pow((progress - 0.25) * 4.5, 2));
+    const noise    = (Math.random()-0.5)*30;
+    conductivity   = Math.max(0, Math.round(currentStimulus.peak * shape + noise));
+    isResponse     = conductivity > 200;
+  } else if (nextStimulusIn <= 0) {
+    currentStimulus    = STIMULI_TYPES[Math.floor(Math.random() * STIMULI_TYPES.length)];
+    stimulusCountdown  = currentStimulus.duration;
+    nextStimulusIn     = rand(35, 80);
+    fireStimulusUI(currentStimulus);
+  } else {
+    // Baseline wander: 80–200 µS/cm, slow drift
+    if (baselineVal < 90)  baselineDir = Math.abs(baselineDir);
+    if (baselineVal > 200) baselineDir = -Math.abs(baselineDir);
+    baselineDir += (Math.random()-0.5)*0.03;
+    baselineDir = Math.max(-0.25, Math.min(0.25, baselineDir));
+    baselineVal = clamp(baselineVal + baselineDir + (Math.random()-0.5)*3, 60, 220);
+    conductivity = Math.round(baselineVal);
+  }
+
+  const ts = formatTs(Date.now() - startTime);
+
+  // Push waveform data
+  const adcVal = Math.round((conductivity / 600) * MAX_ADC);
+  neutralData.push(adcVal);
+  if (neutralData.length > MAX_PTS_WAVE) neutralData.shift();
+
+  spikeData.push(adcVal);
+  if (spikeData.length > MAX_PTS_WAVE) spikeData.shift();
+
+  rangeData.push(conductivity);
+  if (rangeData.length > MAX_PTS_GRAPH) rangeData.shift();
+
+  // Update streams
+  addNeutralLine(ts, conductivity, isResponse);
+  addSpikeLine(ts, conductivity, isResponse);
+  addRangeLine(ts, conductivity);
+
+  // Update state badge
+  if (isResponse) {
+    stateBadge.className = 'state-badge response';
+    stateText.textContent = currentStimulus.label + ' RESPONSE — ACTIVE';
+  } else if (stimulusCountdown === 0) {
+    stateBadge.className = 'state-badge neutral';
+    stateText.textContent = 'BASELINE — NO STIMULI';
+  }
+
+  drawNeutralWave();
+  drawSpikeWave();
+  drawRangeGraph();
+}
+
+function fireStimulusUI(s) {
+  spikeEvent.classList.add('visible');
+  spikeEventTxt.textContent = s.label + ' STIMULUS DETECTED — ' + s.peak + ' µS/cm';
+  setTimeout(() => spikeEvent.classList.remove('visible'), s.duration * TICK_MS + 600);
+}
+
+// ── STREAM LINES ──────────────────────────────────────────────────
+function addNeutralLine(ts, val, isSpike) {
+  const line = document.createElement('div');
+  line.className = 'reading-line ' + (isSpike ? 'active' : 'baseline');
+  line.innerHTML =
+    `<span class="reading-time">${ts}</span>` +
+    `<span style="color:var(--dim)">→</span>` +
+    `<span class="reading-val">${val} µS</span>` +
+    (isSpike ? `<span class="reading-tag">[RSP]</span>` : '');
+  neutralStream.insertBefore(line, neutralStream.firstChild);
+  while (neutralStream.children.length > MAX_LINES) neutralStream.removeChild(neutralStream.lastChild);
+}
+
+function addSpikeLine(ts, val, isSpike) {
+  const line = document.createElement('div');
+  line.className = 'reading-line ' + (isSpike ? 'active' : '');
+  line.innerHTML =
+    `<span class="reading-time">${ts}</span>` +
+    `<span style="color:var(--dim)">→</span>` +
+    `<span class="reading-val">${val} µS</span>` +
+    (currentStimulus && isSpike
+      ? `<span class="reading-tag" style="color:var(--spike)">[${currentStimulus.label.slice(0,4)}]</span>`
+      : '');
+  spikeStream.insertBefore(line, spikeStream.firstChild);
+  while (spikeStream.children.length > MAX_LINES) spikeStream.removeChild(spikeStream.lastChild);
+}
+
+function addRangeLine(ts, val) {
+  const inRange = val >= CFG_RANGE.lo && val <= CFG_RANGE.hi;
+  const line = document.createElement('div');
+  line.className = 'reading-line ' + (inRange ? 'baseline' : 'warn');
+  line.innerHTML =
+    `<span class="reading-time">${ts}</span>` +
+    `<span style="color:var(--dim)">→</span>` +
+    `<span class="reading-val">${val} µS</span>`;
+  rangeStream.insertBefore(line, rangeStream.firstChild);
+  while (rangeStream.children.length > MAX_LINES) rangeStream.removeChild(rangeStream.lastChild);
+
+  if (!inRange) {
+    rangeEvent.classList.add('visible');
+    const dir = val < CFG_RANGE.lo ? 'BELOW' : 'ABOVE';
+    rangeEventTxt.textContent = dir + ' IDEAL RANGE — ' + val + ' µS/cm';
+  } else {
+    rangeEvent.classList.remove('visible');
+  }
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+function rand(a, b) { return Math.floor(Math.random() * (b - a + 1)) + a; }
+
+function formatTs(ms) {
+  const d = new Date(ms);
+  return [d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds()]
+    .map(n => String(n).padStart(2,'0')).join(':')
+    + '.' + String(d.getUTCMilliseconds()).padStart(3,'0');
+}
+</script>
+</body>
+</html>

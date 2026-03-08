@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPECIES: MONSTERA PLANT</title>
+<script>
+function scaleToFit() {
+  const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080) * 0.955;
+  document.body.style.transform = 'scale(' + scale + ')';
+  document.body.style.marginLeft = ((window.innerWidth  - 1920 * scale) / 2) + 'px';
+  document.body.style.marginTop  = ((window.innerHeight - 1080 * scale) / 2) + 'px';
+}
+document.addEventListener('DOMContentLoaded', scaleToFit);
+</script>
+<style>
+  :root {
+    --bg: #000000;
+    --fg: #e8e8e0;
+    --dim: #888880;
+    --box-border: rgba(232,232,224,0.35);
+    --green: #77c049;
+    --green-dim: rgba(119,192,73,0.12);
+    --heat: #e05530;
+    --heat-dim: rgba(224,85,48,0.10);
+    --distress: #e8a020;
+    --distress-dim: rgba(232,160,32,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { width: 100%; height: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 400;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    transform-origin: top left;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── HEADER ── */
+  .header { padding: 16px 30px 10px; height: 72px; flex-shrink: 0; }
+
+  .header-title {
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .header-block { display: inline-block; vertical-align: top; }
+
+  .header-subtitle {
+    display: block;
+    font-size: 15px;
+    font-style: italic;
+    letter-spacing: 0.1em;
+    color: var(--dim);
+    margin-top: 5px;
+    text-transform: none;
+  }
+
+  /* ── GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: 480px 1fr 520px;
+    height: calc(1080px - 72px);
+    flex: 1;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  /* ── LEFT ── */
+  .col-left {
+    padding: 30px 30px;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    position: relative;
+    z-index: 1;
+  }
+
+  .interaction-type {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.25;
+    margin-bottom: 14px;
+    width: 100%;
+  }
+
+  .interaction-desc {
+    font-size: 13px;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    line-height: 1.7;
+    color: var(--dim);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    width: 100%;
+  }
+
+  .sensor-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg);
+    line-height: 1.7;
+    width: 100%;
+  }
+
+  .stat-boxes { display: flex; flex-direction: column; flex: 1; margin-top: 24px; }
+
+  .stat-box {
+    border: 1px solid var(--box-border);
+    margin-bottom: -1px;
+    padding: 20px 18px 22px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .stat-box-label {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .stat-box-value {
+    font-size: 26px;
+    font-style: italic;
+    color: var(--green);
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .stat-box-sub {
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.06em;
+    line-height: 1.7;
+  }
+
+  /* ── CENTER ── */
+  .col-center {
+    position: relative;
+    overflow: visible;
+    z-index: 3;
+  }
+
+  .plant-img {
+    position: absolute;
+    width: 140%;
+    height: 110%;
+    object-fit: contain;
+    object-position: center center;
+    display: block;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0.85;
+  }
+
+  /* ── RIGHT ── */
+  .col-right {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .data-panel {
+    flex: 1;
+    border: 1px solid var(--box-border);
+    padding: 12px 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .data-panel:last-child { border-bottom: 1px solid var(--box-border); }
+
+  .panel-label {
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--dim);
+    flex-shrink: 0;
+  }
+
+  .panel-title {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg);
+    flex-shrink: 0;
+    line-height: 1.3;
+  }
+
+  /* ── HEAT STATE BADGE ── */
+  .heat-state {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 8px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    flex-shrink: 0;
+    width: fit-content;
+  }
+
+  .heat-state.on  { border: 1px solid rgba(224,85,48,0.5);   background: rgba(224,85,48,0.08);  color: var(--heat); }
+  .heat-state.off { border: 1px solid rgba(136,136,128,0.4); background: rgba(136,136,128,0.06); color: var(--dim); }
+
+  .heat-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .heat-state.on  .heat-dot { background: var(--heat); box-shadow: 0 0 6px var(--heat); }
+  .heat-state.off .heat-dot { background: var(--dim); }
+
+  /* ── DISTRESS EVENT ── */
+  .distress-event {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 8px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border: 1px solid rgba(232,160,32,0.45);
+    background: var(--distress-dim);
+    color: var(--distress);
+    opacity: 0;
+    transition: opacity 0.3s;
+    flex-shrink: 0;
+  }
+
+  .distress-event.visible { opacity: 1; }
+
+  .distress-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--distress);
+    box-shadow: 0 0 4px var(--distress);
+    flex-shrink: 0;
+  }
+
+  /* ── GRAPH ROW ── */
+  .graph-row {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .graph-readings {
+    width: 148px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+    font-size: 10px;
+    letter-spacing: 0.03em;
+    line-height: 1.6;
+    color: var(--dim);
+  }
+
+  .reading-line          { display: flex; gap: 8px; }
+  .reading-line.ok       { color: var(--green); }
+  .reading-line.hot      { color: var(--heat); }
+  .reading-line.distress { color: var(--distress); }
+  .reading-time { min-width: 68px; color: var(--dim); }
+  .reading-val  { min-width: 52px; }
+
+  .graph-svg-wrap { flex: 1; min-width: 0; }
+  .graph-svg-wrap svg { width: 100%; height: 100%; display: block; }
+
+  /* ── LEGEND ── */
+  .range-legend {
+    display: flex;
+    gap: 12px;
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
+    flex-shrink: 0;
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-line         { width: 16px; height: 1px; background: var(--green);   display: inline-block; }
+  .legend-line.hot     { background: var(--heat); }
+  .legend-line.distress{ background: var(--distress); }
+  .legend-line.dashed  { background: none; border-top: 1px dashed rgba(232,232,224,0.3); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-title">SPECIES: <span class="header-block">MONSTERA PLANT<br><span class="header-subtitle">Monstera deliciosa</span></span></div>
+</div>
+
+<div class="grid">
+
+  <!-- LEFT -->
+  <div class="col-left">
+    <div class="interaction-type">INTERACTION TYPE: MONSTERA PLANT ABSORBING HEAT</div>
+    <div class="interaction-desc">Measuring the plant's ability to absorb external forced heat — predicted thermoregulatory and stress response</div>
+    <div class="sensor-label">SENSOR: ADAFRUIT SHT41 — I2C TEMPERATURE + HUMIDITY SENSOR</div>
+
+    <div class="stat-boxes">
+      <div class="stat-box">
+        <div class="stat-box-label">IDEAL TEMPERATURE</div>
+        <div class="stat-box-value">22 °C</div>
+        <div class="stat-box-sub">Optimal range: 18 – 27 °C<br>Distress above 32 °C · Damage below 10 °C<br>Forced heat stress threshold: 30 °C</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-label">IDEAL HUMIDITY</div>
+        <div class="stat-box-value">65 %RH</div>
+        <div class="stat-box-sub">Preferred: 60 – 80 %RH<br>Heat causes rapid transpiration loss<br>Below 40 %RH triggers stress response</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-label">NATIVE REGION</div>
+        <div class="stat-box-value">Southern Mexico</div>
+        <div class="stat-box-sub">Tropical rainforest · Humid understory<br>Central America origin · Pantropical distribution<br>Epiphytic climber, shade-adapted</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CENTER -->
+  <div class="col-center">
+    <img class="plant-img" src="images/monstera.png" alt="Monstera Plant">
+  </div>
+
+  <!-- RIGHT: 3 PANELS -->
+  <div class="col-right">
+
+    <!-- PANEL 1: LIVE DATA STREAM -->
+    <div class="data-panel">
+      <div class="panel-label">Adafruit SHT41 — Predicted Data Readings</div>
+      <div class="panel-title">HEAT REACTION — LIVE TEMPERATURE READINGS</div>
+
+      <div class="heat-state off" id="live-heat-badge">
+        <div class="heat-dot"></div>
+        <span id="live-heat-text">NO FORCED HEAT</span>
+      </div>
+
+      <div class="distress-event" id="live-event">
+        <div class="distress-dot"></div>
+        <span id="live-event-text">PLANT IN DISTRESS</span>
+      </div>
+
+      <div class="range-legend">
+        <div class="legend-item"><span class="legend-line"></span> Ideal range</div>
+        <div class="legend-item"><span class="legend-line hot"></span> Heat applied</div>
+        <div class="legend-item"><span class="legend-line distress"></span> Distress</div>
+      </div>
+
+      <div class="graph-readings" id="live-stream"></div>
+    </div>
+
+    <!-- PANEL 2: WITH HEAT -->
+    <div class="data-panel">
+      <div class="panel-label">Adafruit SHT41 — Predicted Readings · Forced Heat Applied</div>
+      <div class="panel-title">TEMPERATURE RESPONSE — WITH FORCED HEAT</div>
+
+      <div class="distress-event" id="hot-event">
+        <div class="distress-dot"></div>
+        <span id="hot-event-text">PLANT IN DISTRESS</span>
+      </div>
+
+      <div class="range-legend">
+        <div class="legend-item"><span class="legend-line hot"></span> Heat response</div>
+        <div class="legend-item"><span class="legend-line distress"></span> Distress zone</div>
+        <div class="legend-item"><span class="legend-line dashed"></span> Ideal bounds</div>
+      </div>
+
+      <div class="graph-row">
+        <div class="graph-readings" id="hot-stream"></div>
+        <div class="graph-svg-wrap">
+          <svg id="hot-svg" viewBox="0 0 300 80" preserveAspectRatio="none">
+            <defs>
+              <filter id="glow-h"><feGaussianBlur stdDeviation="1.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <filter id="glow-d"><feGaussianBlur stdDeviation="1.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <!-- ideal zone: 18–27°C in a 10–40°C range -->
+            <line x1="0" y1="13" x2="300" y2="13" stroke="rgba(232,232,224,0.18)" stroke-width="0.6" stroke-dasharray="4,5"/>
+            <line x1="0" y1="57" x2="300" y2="57" stroke="rgba(232,232,224,0.18)" stroke-width="0.6" stroke-dasharray="4,5"/>
+            <!-- distress threshold line at 32°C -->
+            <line x1="0" y1="27" x2="300" y2="27" stroke="rgba(232,160,32,0.25)" stroke-width="0.6" stroke-dasharray="2,4"/>
+            <path id="hot-fill"      fill="rgba(224,85,48,0.07)"  stroke="none"/>
+            <path id="hot-path-ok"   fill="none" stroke="rgba(224,85,48,0.85)"   stroke-width="1.3" filter="url(#glow-h)" stroke-linejoin="round"/>
+            <path id="hot-path-warn" fill="none" stroke="rgba(232,160,32,0.85)"  stroke-width="1.3" filter="url(#glow-d)" stroke-linejoin="round"/>
+            <text x="2" y="7"  fill="rgba(232,232,224,0.22)" font-size="5" font-family="Courier New">40°C</text>
+            <text x="2" y="42" fill="rgba(232,232,224,0.22)" font-size="5" font-family="Courier New">25°C</text>
+            <text x="2" y="76" fill="rgba(232,232,224,0.22)" font-size="5" font-family="Courier New">10°C</text>
+            <text x="240" y="25" fill="rgba(232,160,32,0.45)" font-size="4.5" font-family="Courier New">DISTRESS &gt;32°C</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 3: WITHOUT HEAT -->
+    <div class="data-panel">
+      <div class="panel-label">Adafruit SHT41 — Predicted Readings · No Forced Heat</div>
+      <div class="panel-title">TEMPERATURE RESPONSE — NO FORCED HEAT</div>
+
+      <div class="distress-event" id="cool-event">
+        <div class="distress-dot"></div>
+        <span id="cool-event-text">PLANT IN DISTRESS</span>
+      </div>
+
+      <div class="range-legend">
+        <div class="legend-item"><span class="legend-line"></span> Ideal range</div>
+        <div class="legend-item"><span class="legend-line distress"></span> Out of range</div>
+        <div class="legend-item"><span class="legend-line dashed"></span> Ideal bounds</div>
+      </div>
+
+      <div class="graph-row">
+        <div class="graph-readings" id="cool-stream"></div>
+        <div class="graph-svg-wrap">
+          <svg id="cool-svg" viewBox="0 0 300 80" preserveAspectRatio="none">
+            <defs>
+              <filter id="glow-g"><feGaussianBlur stdDeviation="1.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <filter id="glow-d2"><feGaussianBlur stdDeviation="1.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <!-- ambient only: range 14–28°C, ideal 18–27°C -->
+            <line x1="0" y1="12" x2="300" y2="12" stroke="rgba(232,232,224,0.18)" stroke-width="0.6" stroke-dasharray="4,5"/>
+            <line x1="0" y1="60" x2="300" y2="60" stroke="rgba(232,232,224,0.18)" stroke-width="0.6" stroke-dasharray="4,5"/>
+            <path id="cool-fill"      fill="rgba(119,192,73,0.07)" stroke="none"/>
+            <path id="cool-path-ok"   fill="none" stroke="rgba(119,192,73,0.85)"  stroke-width="1.3" filter="url(#glow-g)"  stroke-linejoin="round"/>
+            <path id="cool-path-warn" fill="none" stroke="rgba(232,160,32,0.85)"  stroke-width="1.3" filter="url(#glow-d2)" stroke-linejoin="round"/>
+            <text x="2" y="7"  fill="rgba(232,232,224,0.22)" font-size="5" font-family="Courier New">28°C</text>
+            <text x="2" y="42" fill="rgba(232,232,224,0.22)" font-size="5" font-family="Courier New">21°C</text>
+            <text x="2" y="76" fill="rgba(232,232,224,0.22)" font-size="5" font-family="Courier New">14°C</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── SENSOR CONFIG ─────────────────────────────────────────────────
+// With heat: SHT41 temp under forced heat lamp, ideal 18–27°C, distress >32°C, range 10–40°C
+const CFG_HOT  = { min:10,  max:40, lo:18, hi:27, distress:32 };
+// Without heat: ambient only, ideal 18–27°C, range 14–28°C
+const CFG_COOL = { min:14,  max:28, lo:18, hi:27, distress:27.5 };
+
+const TICK_MS  = 120;
+const MAX_PTS  = 60;
+const MAX_LINES = 10;
+
+// ── SIMULATED STATE ───────────────────────────────────────────────
+// Heat lamp cycles on for ~18s, off for ~12s
+let heatOn     = false;
+let heatTimer  = 0;
+let heatCycleLen = 80;
+
+// With-heat temp: rises to 30–38°C under lamp, falls when off
+let hotVal  = 22.0, hotDir  = 0.05;
+// Without-heat temp: gentle ambient wander 19–25°C, dips below 18 occasionally
+let coolVal = 21.0, coolDir = 0.03;
+
+// Live reading (follows whichever state is active)
+let liveVal = 21.0;
+
+let startTime = Date.now();
+const hotPts = [], coolPts = [];
+
+// ── DOM ───────────────────────────────────────────────────────────
+const liveStream  = document.getElementById('live-stream');
+const hotStream   = document.getElementById('hot-stream');
+const coolStream  = document.getElementById('cool-stream');
+const liveEvent   = document.getElementById('live-event');
+const hotEvent    = document.getElementById('hot-event');
+const coolEvent   = document.getElementById('cool-event');
+const heatBadge   = document.getElementById('live-heat-badge');
+const heatText    = document.getElementById('live-heat-text');
+
+// ── CACHED GRAPH ELEMENTS ─────────────────────────────────────────
+const GRAPHS = {
+  hot:  { ok: document.getElementById('hot-path-ok'),  warn: document.getElementById('hot-path-warn'),  fill: document.getElementById('hot-fill') },
+  cool: { ok: document.getElementById('cool-path-ok'), warn: document.getElementById('cool-path-warn'), fill: document.getElementById('cool-fill') },
+};
+
+// ── PRESEED ───────────────────────────────────────────────────────
+for (let i = 0; i < MAX_PTS; i++) {
+  hotPts.push(clamp(hotVal  + (Math.random()-0.5)*3, CFG_HOT.min,  CFG_HOT.max));
+  coolPts.push(clamp(coolVal + (Math.random()-0.5)*1.5, CFG_COOL.min, CFG_COOL.max));
+}
+
+// ── GRAPH DRAW ────────────────────────────────────────────────────
+function drawGraph(key, pts, cfg) {
+  if (pts.length < 2) return;
+  const els = GRAPHS[key];
+  const W = 300, H = 80, PAD = 4;
+  const usable = H - PAD * 2;
+
+  function toY(v) {
+    return PAD + usable - ((v - cfg.min) / (cfg.max - cfg.min)) * usable;
+  }
+
+  const coords = pts.map((v, i) => ({
+    x: (i / (MAX_PTS - 1)) * W,
+    y: toY(v),
+    v: v
+  }));
+
+  // Fill path
+  let fillD = '';
+  coords.forEach((pt, i) => {
+    fillD += (i === 0 ? 'M' : 'L') + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ' ';
+  });
+  const bot = PAD + usable;
+  const last = coords[coords.length - 1];
+  fillD += 'L' + last.x.toFixed(1) + ',' + bot + ' L' + coords[0].x.toFixed(1) + ',' + bot + ' Z';
+  els.fill.setAttribute('d', fillD);
+
+  // Ok / warn segments — distress threshold overrides ideal hi
+  let okD = '', warnD = '', okOpen = false, warnOpen = false;
+  coords.forEach((pt) => {
+    const inRange = pt.v >= cfg.lo && pt.v <= cfg.hi;
+    const px = pt.x.toFixed(1) + ',' + pt.y.toFixed(1);
+    if (inRange) {
+      if (!okOpen) { okD += 'M' + px + ' '; okOpen = true; warnOpen = false; }
+      else          { okD += 'L' + px + ' '; }
+    } else {
+      if (!warnOpen) { warnD += 'M' + px + ' '; warnOpen = true; okOpen = false; }
+      else            { warnD += 'L' + px + ' '; }
+    }
+  });
+
+  els.ok.setAttribute('d',   okD.trim()   || 'M0,0');
+  els.warn.setAttribute('d', warnD.trim() || 'M0,0');
+}
+
+// Draw initial state
+drawGraph('hot',  hotPts,  CFG_HOT);
+drawGraph('cool', coolPts, CFG_COOL);
+
+// ── TICK ──────────────────────────────────────────────────────────
+setInterval(tick, TICK_MS);
+
+function tick() {
+  heatTimer++;
+
+  // Cycle heat lamp
+  if (heatTimer >= heatCycleLen) {
+    heatOn = !heatOn;
+    heatTimer = 0;
+    heatCycleLen = heatOn ? rand(120, 160) : rand(70, 100);
+    heatBadge.className = 'heat-state ' + (heatOn ? 'on' : 'off');
+    heatText.textContent = heatOn ? 'FORCED HEAT APPLIED' : 'NO FORCED HEAT';
+  }
+
+  const ts = formatTs(Date.now() - startTime);
+
+  // ── WITH HEAT ──
+  // Rises toward 30–37°C when heat on, drops to ambient when off
+  const hotTarget = heatOn ? (27 + Math.random() * 10) : (20 + Math.random() * 3);
+  hotDir = (hotTarget - hotVal) * 0.05 + (Math.random()-0.5) * 0.4;
+  hotVal = clamp(hotVal + hotDir, CFG_HOT.min + 0.5, CFG_HOT.max - 0.5);
+
+  // ── WITHOUT HEAT ──
+  // Gentle ambient wander; occasional dip below 18 or nudge above 27
+  const coolTarget = 21 + Math.sin(Date.now() / 18000) * 3 + (Math.random()-0.5) * 1.5;
+  coolDir = (coolTarget - coolVal) * 0.04 + (Math.random()-0.5) * 0.15;
+  coolVal = clamp(coolVal + coolDir, CFG_COOL.min + 0.2, CFG_COOL.max - 0.2);
+
+  // Live follows active state
+  liveVal = heatOn ? hotVal : coolVal;
+  const liveCfg = heatOn ? CFG_HOT : CFG_COOL;
+
+  hotPts.push(hotVal);   if (hotPts.length  > MAX_PTS) hotPts.shift();
+  coolPts.push(coolVal); if (coolPts.length > MAX_PTS) coolPts.shift();
+
+  // Determine line classes
+  const hotInRange  = hotVal  >= CFG_HOT.lo  && hotVal  <= CFG_HOT.hi;
+  const coolInRange = coolVal >= CFG_COOL.lo  && coolVal <= CFG_COOL.hi;
+  const liveInRange = liveVal >= liveCfg.lo   && liveVal <= liveCfg.hi;
+
+  const hotClass  = hotInRange  ? 'hot'  : (hotVal  > CFG_HOT.distress  ? 'distress' : 'distress');
+  const coolClass = coolInRange ? 'ok'   : 'distress';
+  const liveClass = liveInRange ? (heatOn ? 'hot' : 'ok') : 'distress';
+
+  addLine(liveStream, ts, hotVal.toFixed(1) + '°C', liveCfg, liveEvent, 'live-event-text', liveClass, liveInRange);
+  addLine(hotStream,  ts, hotVal.toFixed(1) + '°C', CFG_HOT, hotEvent,  'hot-event-text',  hotClass,  hotInRange);
+  addLine(coolStream, ts, coolVal.toFixed(1)+ '°C', CFG_COOL,coolEvent, 'cool-event-text', coolClass, coolInRange);
+
+  drawGraph('hot',  hotPts,  CFG_HOT);
+  drawGraph('cool', coolPts, CFG_COOL);
+}
+
+// ── STREAM LINE ───────────────────────────────────────────────────
+function addLine(container, ts, valStr, cfg, eventEl, eventTextId, cls, inRange) {
+  const line = document.createElement('div');
+  line.className = 'reading-line ' + cls;
+  line.innerHTML =
+    `<span class="reading-time">${ts}</span>` +
+    `<span style="color:var(--dim)">→</span>` +
+    `<span class="reading-val">${valStr}</span>`;
+
+  container.insertBefore(line, container.firstChild);
+  while (container.children.length > MAX_LINES) container.removeChild(container.lastChild);
+
+  const v = parseFloat(valStr);
+  if (!inRange) {
+    eventEl.classList.add('visible');
+    const label = v > cfg.distress
+      ? 'DISTRESS — TEMP ' + valStr
+      : (v > cfg.hi ? 'ABOVE IDEAL — ' + valStr : 'BELOW IDEAL — ' + valStr);
+    document.getElementById(eventTextId).textContent = label;
+  } else {
+    eventEl.classList.remove('visible');
+  }
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+function rand(a, b) { return Math.floor(Math.random() * (b - a + 1)) + a; }
+
+function formatTs(ms) {
+  const d = new Date(ms);
+  return [d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds()]
+    .map(n => String(n).padStart(2,'0')).join(':')
+    + '.' + String(d.getUTCMilliseconds()).padStart(3,'0');
+}
+</script>
+</body>
+</html>

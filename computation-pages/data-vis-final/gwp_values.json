@@ -1,0 +1,89 @@
+{
+  "title": "Global Warming Potentials (100-year timeframe)",
+  "source": "EPA 2024 Inventory, Annex 6, Table A-233 (IPCC AR5 values)",
+  "gases": [
+    {
+      "name": "Carbon Dioxide",
+      "formula": "CO₂",
+      "gwp_100": 1,
+      "gwp_20": 1,
+      "lifetime_years": "Variable",
+      "color": "#77c049"
+    },
+    {
+      "name": "Methane",
+      "formula": "CH₄",
+      "gwp_100": 28,
+      "gwp_20": 84,
+      "lifetime_years": 12.4,
+      "color": "#f15f31",
+      "note": "Includes climate-carbon feedbacks"
+    },
+    {
+      "name": "Nitrous Oxide",
+      "formula": "N₂O",
+      "gwp_100": 265,
+      "gwp_20": 264,
+      "lifetime_years": 121,
+      "color": "#ec2c3d"
+    },
+    {
+      "name": "HFC-23",
+      "formula": "CHF₃",
+      "gwp_100": 12400,
+      "gwp_20": 10800,
+      "lifetime_years": 222,
+      "color": "#9c459a"
+    },
+    {
+      "name": "HFC-32",
+      "formula": "CH₂F₂",
+      "gwp_100": 677,
+      "gwp_20": 2430,
+      "lifetime_years": 5.2,
+      "color": "#7B1FA2"
+    },
+    {
+      "name": "HFC-125",
+      "formula": "CHF₂CF₃",
+      "gwp_100": 3170,
+      "gwp_20": 6090,
+      "lifetime_years": 28.2,
+      "color": "#8E24AA"
+    },
+    {
+      "name": "HFC-134a",
+      "formula": "CH₂FCF₃",
+      "gwp_100": 1300,
+      "gwp_20": 3710,
+      "lifetime_years": 13.4,
+      "color": "#9C27B0",
+      "note": "Common refrigerant"
+    },
+    {
+      "name": "HFC-143a",
+      "formula": "CH₃CF₃",
+      "gwp_100": 4800,
+      "gwp_20": 6940,
+      "lifetime_years": 47.1,
+      "color": "#AB47BC"
+    },
+    {
+      "name": "PFC: CF₄",
+      "formula": "CF₄",
+      "gwp_100": 6630,
+      "gwp_20": 4880,
+      "lifetime_years": 50000,
+      "color": "#BA68C8",
+      "note": "Perfluoromethane"
+    },
+    {
+      "name": "PFC: C₂F₆",
+      "formula": "C₂F₆",
+      "gwp_100": 11100,
+      "gwp_20": 8210,
+      "lifetime_years": 10000,
+      "color": "#CE93D8"
+    }
+  ]
+}

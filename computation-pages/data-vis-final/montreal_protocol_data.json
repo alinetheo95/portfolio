@@ -1,0 +1,57 @@
+{
+  "title": "Montreal Protocol Success: Ozone Depleting Substance Emissions (kt)",
+  "source": "EPA 2024 Inventory, Annex 6, Table A-241",
+  "milestones": {
+    "montreal_protocol_signed": 1987,
+    "us_ratification": 1988,
+    "london_amendment": 1990,
+    "copenhagen_amendment": 1992,
+    "montreal_amendment": 1997,
+    "beijing_amendment": 1999,
+    "kigali_amendment": 2016
+  },
+  "class_i_substances": {
+    "name": "Class I (Severe Ozone Depleters - CFCs, Halons)",
+    "color": "#ec2c3d",
+    "data": [
+      {"year": 1990, "cfc11": 29, "cfc12": 136, "cfc113": 59, "cfc114": 4, "cfc115": 8, "carbon_tet": 4, "methyl_chloroform": 223, "halon1211": 2, "halon1301": 2, "total": 467},
+      {"year": 1991, "cfc11": 29, "cfc12": 136, "cfc113": 61, "cfc114": 3, "cfc115": 7, "carbon_tet": 4, "methyl_chloroform": 227, "halon1211": 2, "halon1301": 2, "total": 471},
+      {"year": 1992, "cfc11": 15, "cfc12": 136, "cfc113": 60, "cfc114": 3, "cfc115": 7, "carbon_tet": 4, "methyl_chloroform": 209, "halon1211": 2, "halon1301": 2, "total": 438},
+      {"year": 1995, "cfc11": 13, "cfc12": 83, "cfc113": 32, "cfc114": 2, "cfc115": 6, "carbon_tet": 1, "methyl_chloroform": 72, "halon1211": 1, "halon1301": 0, "total": 210},
+      {"year": 2000, "cfc11": 13, "cfc12": 49, "cfc113": 25, "cfc114": 2, "cfc115": 4, "carbon_tet": 0, "methyl_chloroform": 0, "halon1211": 1, "halon1301": 1, "total": 95},
+      {"year": 2005, "cfc11": 12, "cfc12": 23, "cfc113": 17, "cfc114": 1, "cfc115": 2, "carbon_tet": 0, "methyl_chloroform": 0, "halon1211": 1, "halon1301": 0, "total": 56},
+      {"year": 2010, "cfc11": 9, "cfc12": 6, "cfc113": 7, "cfc114": 0, "cfc115": 0, "carbon_tet": 0, "methyl_chloroform": 0, "halon1211": 1, "halon1301": 0, "total": 23},
+      {"year": 2015, "cfc11": 6, "cfc12": 4, "cfc113": 0, "cfc114": 0, "cfc115": 0, "carbon_tet": 0, "methyl_chloroform": 0, "halon1211": 0, "halon1301": 0, "total": 10},
+      {"year": 2020, "cfc11": 6, "cfc12": 0, "cfc113": 0, "cfc114": 0, "cfc115": 0, "carbon_tet": 0, "methyl_chloroform": 0, "halon1211": 0, "halon1301": 0, "total": 6},
+      {"year": 2022, "cfc11": 5, "cfc12": 0, "cfc113": 0, "cfc114": 0, "cfc115": 0, "carbon_tet": 0, "methyl_chloroform": 0, "halon1211": 0, "halon1301": 0, "total": 5}
+    ]
+  },
+  "class_ii_substances": {
+    "name": "Class II (Moderate Ozone Depleters - HCFCs)",
+    "color": "#f15f31",
+    "note": "HCFCs were transitional substitutes, now being phased out under Kigali Amendment",
+    "data": [
+      {"year": 1990, "hcfc22": 31, "hcfc123": 0, "hcfc124": 0, "hcfc141b": 1, "hcfc142b": 1, "hcfc225": 0, "total": 33},
+      {"year": 1995, "hcfc22": 43, "hcfc123": 0, "hcfc124": 1, "hcfc141b": 3, "hcfc142b": 3, "hcfc225": 0, "total": 50},
+      {"year": 2000, "hcfc22": 62, "hcfc123": 1, "hcfc124": 2, "hcfc141b": 5, "hcfc142b": 4, "hcfc225": 0, "total": 74},
+      {"year": 2005, "hcfc22": 74, "hcfc123": 1, "hcfc124": 2, "hcfc141b": 4, "hcfc142b": 4, "hcfc225": 0, "total": 85},
+      {"year": 2010, "hcfc22": 72, "hcfc123": 1, "hcfc124": 1, "hcfc141b": 8, "hcfc142b": 2, "hcfc225": 0, "total": 84},
+      {"year": 2015, "hcfc22": 58, "hcfc123": 1, "hcfc124": 0, "hcfc141b": 9, "hcfc142b": 2, "hcfc225": 0, "total": 70},
+      {"year": 2020, "hcfc22": 40, "hcfc123": 1, "hcfc124": 0, "hcfc141b": 7, "hcfc142b": 5, "hcfc225": 0, "total": 53},
+      {"year": 2022, "hcfc22": 28, "hcfc123": 1, "hcfc124": 0, "hcfc141b": 6, "hcfc142b": 5, "hcfc225": 0, "total": 40}
+    ]
+  },
+  "summary": {
+    "class_i_reduction": {
+      "baseline_1990": 467,
+      "current_2022": 5,
+      "percent_reduction": 98.9
+    },
+    "class_ii_trend": {
+      "peak_year": 2005,
+      "peak_value": 85,
+      "current_2022": 40,
+      "percent_reduction_from_peak": 52.9
+    }
+  }
+}

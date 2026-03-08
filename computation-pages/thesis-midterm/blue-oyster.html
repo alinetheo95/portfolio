@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPECIES: BLUE OYSTER MUSHROOM</title>
+<script>
+function scaleToFit() {
+  const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080) * 0.955;
+  document.body.style.transform = 'scale(' + scale + ')';
+  document.body.style.marginLeft = ((window.innerWidth  - 1920 * scale) / 2) + 'px';
+  document.body.style.marginTop  = ((window.innerHeight - 1080 * scale) / 2) + 'px';
+}
+document.addEventListener('DOMContentLoaded', scaleToFit);
+</script>
+<style>
+  :root {
+    --bg: #000000;
+    --fg: #e8e8e0;
+    --dim: #888880;
+    --box-border: rgba(232,232,224,0.35);
+    --green: #77c049;
+    --green-dim: rgba(119,192,73,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 400;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    transform-origin: top left;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header {
+    padding: 16px 30px 10px;
+    height: 72px;
+    flex-shrink: 0;
+  }
+
+  .header-title {
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .header-block {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .header-subtitle {
+    display: block;
+    font-size: 15px;
+    font-style: italic;
+    letter-spacing: 0.1em;
+    color: var(--dim);
+    margin-top: 5px;
+    text-transform: none;
+  }
+
+  /* ── MAIN GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: 480px 1fr 520px;
+    height: calc(1080px - 72px);
+    flex: 1;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  /* ── LEFT COLUMN ── */
+  .col-left {
+    padding: 30px 30px;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    position: relative;
+    z-index: 10;
+  }
+
+  .interaction-type {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.25;
+    margin-bottom: 14px;
+    width: 100%;
+    white-space: normal;
+  }
+
+  .interaction-desc {
+    font-size: 13px;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    line-height: 1.7;
+    color: var(--dim);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    width: 100%;
+  }
+
+  .sensor-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg);
+    line-height: 1.7;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+  }
+
+
+  .stat-boxes {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-top: 24px;
+  }
+
+  .stat-box {
+    border: 1px solid var(--box-border);
+    margin-bottom: -1px;
+    padding: 20px 18px 22px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .stat-box-label {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .stat-box-value {
+    font-size: 26px;
+    font-style: italic;
+    color: var(--green);
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .stat-box-sub {
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.06em;
+    line-height: 1.7;
+  }
+
+  /* ── CENTER ── */
+  .col-center {
+    position: relative;
+    overflow: visible;
+    z-index: 2;
+  }
+
+  .mushroom-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    display: block;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.75;
+    pointer-events: none;
+  }
+
+  .touch-pulse {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(127,255,127,0.28) 0%, transparent 70%);
+    width: 220px;
+    height: 220px;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%) scale(0);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .touch-pulse.firing {
+    animation: pulse-expand 0.9s ease-out forwards;
+  }
+
+  @keyframes pulse-expand {
+    0%   { transform: translate(-50%,-50%) scale(0); opacity: 1; }
+    100% { transform: translate(-50%,-50%) scale(3.5); opacity: 0; }
+  }
+
+  /* ── RIGHT COLUMN ── */
+  .col-right {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .data-panel {
+    flex: 1;
+    border: 1px solid var(--box-border);
+    padding: 14px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .data-panel:last-child { border-bottom: 1px solid var(--box-border); }
+
+  .panel-label {
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--dim);
+    font-weight: 400;
+  }
+
+  /* ── PANEL 1: DATA STREAM ── */
+  .readings-header {
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.6;
+    color: var(--fg);
+    font-weight: 400;
+  }
+
+  .touch-event-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 8px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border: 1px solid rgba(127,255,127,0.3);
+    background: var(--green-dim);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .touch-event-bar.visible { opacity: 1; }
+
+  .touch-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 5px var(--green);
+    flex-shrink: 0;
+  }
+
+  .touch-event-type { color: var(--green); }
+
+  .touch-badges { display: flex; flex-wrap: wrap; gap: 5px; }
+
+  .badge {
+    font-size: 7px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border: 1px solid var(--box-border);
+    color: var(--dim);
+    font-weight: 400;
+  }
+
+  .badge.active {
+    border-color: var(--green);
+    color: var(--green);
+    background: var(--green-dim);
+  }
+
+  .readings-stream {
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    line-height: 1.75;
+    color: var(--dim);
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .reading-line { display: flex; gap: 10px; font-weight: 400; }
+  .reading-line.spike { color: var(--green); text-shadow: 0 0 8px rgba(127,255,127,0.5); }
+  .reading-line.near-spike { color: #c8ffc8; }
+  .reading-time { color: var(--dim); min-width: 82px; }
+  .reading-val  { min-width: 42px; }
+
+  /* ── PANEL 2: WAVEFORM ── */
+  .waveform-container {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  #live-wave {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* ── PANEL 3: VIDEO ── */
+  .video-wrap {
+    flex: 1;
+    background: #050505;
+    border: 1px solid rgba(232,232,224,0.12);
+    position: relative;
+    overflow: hidden;
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .video-wrap video { width: 100%; height: 100%; object-fit: contain; }
+
+  .annotation-overlay { position: absolute; inset: 0; pointer-events: none; }
+
+  .annotation-tag {
+    position: absolute;
+    font-size: 7px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: rgba(119,192,73,0.88);
+    color: #000;
+    padding: 2px 5px;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  .annotation-line {
+    position: absolute;
+    width: 1px;
+    background: rgba(119,192,73,0.55);
+  }
+
+  .video-label {
+    position: absolute;
+    bottom: 7px; right: 9px;
+    font-size: 7px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-title">SPECIES: <span class="header-block">BLUE OYSTER MUSHROOM<br><span class="header-subtitle">Pleurotus ostreatus var. columbinus</span></span></div>
+</div>
+
+<div class="grid">
+
+  <!-- LEFT -->
+  <div class="col-left">
+    <div class="interaction-type">INTERACTION TYPE: HUMAN TOUCH INTERACTION</div>
+    <div class="interaction-desc">Measuring electrical voltage between human interaction and mushroom</div>
+    <div class="sensor-label">SENSOR: SIMPLE CIRCUIT WITH ELECTRODES AND ARDUINO LEONARDO</div>
+
+    <div class="stat-boxes">
+      <div class="stat-box">
+        <div class="stat-box-label">IDEAL TEMPERATURE</div>
+        <div class="stat-box-value">14.2 °C</div>
+        <div class="stat-box-sub">Fruiting body: 10 – 18 °C<br>Mycelium colonization: 20 – 24 °C</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-label">IDEAL HUMIDITY</div>
+        <div class="stat-box-value">90 %RH</div>
+        <div class="stat-box-sub">Fruiting: 85 – 95 %RH<br>Colonization: 70 – 80 %RH</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-label">NATIVE REGION</div>
+        <div class="stat-box-value">East Asia /<br>N. Europe</div>
+        <div class="stat-box-sub">Temperate deciduous forests<br>Dead hardwood substrates<br>Eurasia origin · cosmopolitan distribution</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CENTER -->
+  <div class="col-center">
+    <img class="mushroom-img" src="images/blue-oyster.png" alt="Blue Oyster Mushroom">
+    <div class="touch-pulse" id="touch-pulse"></div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="col-right">
+
+    <div class="data-panel">
+      <div class="panel-label">Data Readings — Arduino Sensor</div>
+      <div class="readings-header">ELECTRICAL CONDUCTIVITY SPIKE<br>WHEN HAND TOUCHES</div>
+
+      <div class="touch-event-bar" id="touch-event-bar">
+        <div class="touch-dot"></div>
+        <span class="touch-event-type" id="touch-event-type">TOUCH DETECTED</span>
+        <span id="touch-event-val"></span>
+      </div>
+
+      <div class="touch-badges">
+        <div class="badge" id="badge-touch">TOUCH</div>
+        <div class="badge" id="badge-brush">BRUSH</div>
+        <div class="badge" id="badge-multi">MULTI</div>
+        <div class="badge" id="badge-indirect">INDIRECT</div>
+      </div>
+
+      <div class="readings-stream" id="readings-stream"></div>
+    </div>
+
+    <div class="data-panel">
+      <div class="panel-label">Live Arduino Graph — Touch Events Annotated</div>
+      <div class="waveform-container">
+        <svg id="live-wave" viewBox="0 0 280 110" preserveAspectRatio="none">
+          <defs>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="1.8" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <linearGradient id="fg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgba(119,192,73,0.2)"/>
+              <stop offset="100%" stop-color="rgba(119,192,73,0)"/>
+            </linearGradient>
+          </defs>
+          <line x1="0" y1="5"   x2="280" y2="5"   stroke="rgba(232,232,224,0.06)" stroke-width="0.5" stroke-dasharray="3,6"/>
+          <line x1="0" y1="55"  x2="280" y2="55"  stroke="rgba(232,232,224,0.06)" stroke-width="0.5" stroke-dasharray="3,6"/>
+          <line x1="0" y1="105" x2="280" y2="105" stroke="rgba(232,232,224,0.06)" stroke-width="0.5"/>
+          <path id="wave-fill" fill="url(#fg)" stroke="none"/>
+          <path id="wave-path" fill="none" stroke="rgba(119,192,73,0.82)" stroke-width="1.4" filter="url(#glow)" stroke-linejoin="round" stroke-linecap="round"/>
+          <g id="wave-annotations"></g>
+          <text x="2" y="9"   fill="rgba(232,232,224,0.25)" font-size="5" font-family="Courier New">1023</text>
+          <text x="2" y="57"  fill="rgba(232,232,224,0.25)" font-size="5" font-family="Courier New">512</text>
+          <text x="2" y="109" fill="rgba(232,232,224,0.25)" font-size="5" font-family="Courier New">0</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="data-panel">
+      <div class="panel-label">Video — Arduino Graph Recording</div>
+      <div class="video-wrap">
+        <video id="arduino-video" autoplay muted loop playsinline>
+          <source src="images/arduino-readings.mp4" type="video/mp4">
+        </video>
+        <div class="annotation-overlay" id="video-annotations"></div>
+        <div class="video-label">REC ●</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<script>
+const TICK_MS  = 97;
+const MAX_VAL  = 1023;
+const MAX_WAVE = 80;
+const MAX_LINES = 18;
+
+const TOUCH_TYPES = [
+  { id:'touch',    label:'TOUCH',         badge:'badge-touch',    peak:820, duration:4 },
+  { id:'brush',    label:'BRUSH',         badge:'badge-brush',    peak:440, duration:2 },
+  { id:'multi',    label:'MULTI-TOUCH',   badge:'badge-multi',    peak:980, duration:6 },
+  { id:'indirect', label:'INDIRECT TOUCH',badge:'badge-indirect', peak:260, duration:2 },
+];
+
+let waveData      = [];
+let currentTouch  = null;
+let touchCountdown = 0;
+let nextTouchIn   = rand(20, 50);
+let startTime     = Date.now();
+
+const stream    = document.getElementById('readings-stream');
+const touchBar  = document.getElementById('touch-event-bar');
+const touchType = document.getElementById('touch-event-type');
+const touchVal  = document.getElementById('touch-event-val');
+const wavePath  = document.getElementById('wave-path');
+const waveFill  = document.getElementById('wave-fill');
+const waveAnnot = document.getElementById('wave-annotations');
+const pulse     = document.getElementById('touch-pulse');
+
+setInterval(tick, TICK_MS);
+
+function tick() {
+  nextTouchIn--;
+  let val = 0, activeTouch = null;
+
+  if (touchCountdown > 0) {
+    touchCountdown--;
+    val = spikeVal(currentTouch, touchCountdown);
+    activeTouch = currentTouch;
+  } else if (nextTouchIn <= 0) {
+    currentTouch   = TOUCH_TYPES[Math.floor(Math.random() * TOUCH_TYPES.length)];
+    touchCountdown = currentTouch.duration;
+    val = spikeVal(currentTouch, touchCountdown);
+    activeTouch = currentTouch;
+    nextTouchIn = rand(25, 70);
+    fireTouchUI(currentTouch, val);
+  } else {
+    // baseline: 0 with rare tiny noise blips
+    val = Math.random() < 0.04 ? rand(0, 15) : 0;
+  }
+
+  waveData.push(val);
+  if (waveData.length > MAX_WAVE) waveData.shift();
+
+  addLine(formatTs(Date.now() - startTime), val, activeTouch);
+  drawWave();
+}
+
+// Gaussian spike shape — sharp rise, sharp fall from 0
+function spikeVal(t, countdown) {
+  const elapsed  = t.duration - countdown;
+  const progress = elapsed / t.duration;
+  const shape    = Math.exp(-Math.pow((progress - 0.3) * 5, 2));
+  const noise    = Math.floor((Math.random() - 0.5) * 35);
+  return Math.max(0, Math.min(MAX_VAL, Math.round(t.peak * shape + noise)));
+}
+
+function addLine(ts, val, touch) {
+  const line = document.createElement('div');
+  line.className = 'reading-line';
+  if (touch && val > 180)     line.classList.add('spike');
+  else if (touch && val > 40) line.classList.add('near-spike');
+
+  line.innerHTML =
+    `<span class="reading-time">${ts}</span>` +
+    `<span style="color:var(--dim)">→</span>` +
+    `<span class="reading-val">${val}</span>` +
+    (touch && val > 25
+      ? `<span style="font-size:8px;letter-spacing:.08em;color:var(--green);opacity:.6">[${touch.label}]</span>`
+      : '');
+
+  stream.insertBefore(line, stream.firstChild);
+  while (stream.children.length > MAX_LINES) stream.removeChild(stream.lastChild);
+}
+
+function fireTouchUI(t, val) {
+  touchBar.classList.add('visible');
+  touchType.textContent = t.label + ' DETECTED';
+  touchVal.textContent  = '→ ' + val;
+
+  document.querySelectorAll('.badge').forEach(b => b.classList.remove('active'));
+  document.getElementById(t.badge).classList.add('active');
+
+  pulse.classList.remove('firing');
+  void pulse.offsetWidth;
+  pulse.classList.add('firing');
+
+  setTimeout(() => {
+    touchBar.classList.remove('visible');
+    document.getElementById(t.badge).classList.remove('active');
+    pulse.classList.remove('firing');
+  }, t.duration * TICK_MS + 800);
+}
+
+function drawWave() {
+  if (waveData.length < 2) return;
+  const W = 280, PAD_T = 5, PAD_B = 5, H = 110;
+  const range = H - PAD_T - PAD_B; // 100px
+
+  const pts = waveData.map((v, i) => {
+    const x = (i / (MAX_WAVE - 1)) * W;
+    // 0 → bottom (PAD_T + range), MAX_VAL → top (PAD_T)
+    const y = PAD_T + range - (v / MAX_VAL) * range;
+    return [x, y];
+  });
+
+  const bot = PAD_T + range;
+  const d = pts.map((p, i) => `${i===0?'M':'L'}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
+  const f = d + ` L${pts[pts.length-1][0].toFixed(1)},${bot} L${pts[0][0].toFixed(1)},${bot} Z`;
+
+  wavePath.setAttribute('d', d);
+  waveFill.setAttribute('d', f);
+
+  // Spike tick marks
+  waveAnnot.innerHTML = '';
+  pts.forEach(([x, y], i) => {
+    if (waveData[i] > 150) {
+      const mk = document.createElementNS('http://www.w3.org/2000/svg','line');
+      mk.setAttribute('x1', x); mk.setAttribute('y1', y - 5);
+      mk.setAttribute('x2', x); mk.setAttribute('y2', y + 5);
+      mk.setAttribute('stroke', 'rgba(119,192,73,0.65)');
+      mk.setAttribute('stroke-width', '0.8');
+      waveAnnot.appendChild(mk);
+    }
+  });
+}
+
+// Video annotations
+const ANNOTS = [
+  { pct:16, label:'BRUSH',       top:'30%' },
+  { pct:33, label:'TOUCH',       top:'18%' },
+  { pct:50, label:'MULTI-TOUCH', top:'24%' },
+  { pct:68, label:'INDIRECT',    top:'34%' },
+  { pct:83, label:'TOUCH',       top:'16%' },
+];
+
+const videoEl    = document.getElementById('arduino-video');
+const annotLayer = document.getElementById('video-annotations');
+
+function buildAnnots() {
+  annotLayer.innerHTML = '';
+  ANNOTS.forEach(a => {
+    const tag = document.createElement('div');
+    tag.className = 'annotation-tag';
+    tag.textContent = '↓ ' + a.label;
+    Object.assign(tag.style, { left:a.pct+'%', top:a.top, transform:'translateX(-50%)', opacity:'0', transition:'opacity 0.35s' });
+    annotLayer.appendChild(tag);
+
+    const ln = document.createElement('div');
+    ln.className = 'annotation-line';
+    Object.assign(ln.style, { left:a.pct+'%', top:`calc(${a.top} + 15px)`, height:'12px', opacity:'0', transition:'opacity 0.35s' });
+    annotLayer.appendChild(ln);
+  });
+}
+
+videoEl.addEventListener('timeupdate', () => {
+  if (!videoEl.duration) return;
+  const pct  = (videoEl.currentTime / videoEl.duration) * 100;
+  const tags  = annotLayer.querySelectorAll('.annotation-tag');
+  const lines = annotLayer.querySelectorAll('.annotation-line');
+  ANNOTS.forEach((a, i) => {
+    const show = pct >= a.pct - 1.5 && pct <= a.pct + 5;
+    if (tags[i])  tags[i].style.opacity  = show ? '1' : '0';
+    if (lines[i]) lines[i].style.opacity = show ? '1' : '0';
+  });
+});
+
+videoEl.addEventListener('loadedmetadata', buildAnnots);
+buildAnnots();
+
+function rand(a, b) { return Math.floor(Math.random() * (b - a + 1)) + a; }
+
+function formatTs(ms) {
+  const d = new Date(ms);
+  return [d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds()]
+    .map(n => String(n).padStart(2,'0')).join(':')
+    + '.' + String(d.getUTCMilliseconds()).padStart(3,'0');
+}
+</script>
+</body>
+</html>

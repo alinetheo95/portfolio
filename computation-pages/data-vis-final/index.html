@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Invisible Layers</title>
+  
+  
+    <!-- D3, Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+    <!-- MapLibre CSS -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+  
+    <link rel="stylesheet" href="style.css" />
+  </head> 
+
+<body>
+  <!--Intro -->  
+  <section class="hero" id="intro">
+    <div class="content">
+      <h1>The Invisible Layers</h1>  
+      <h2>Environmental Impact of the Digital Economy </h2>
+      <p>An examination of data center carbon emissions in the context of proven regulatory frameworks. Through comparative analysis of the Montreal Protocol’s success in reversing ozone depletion 
+    and LEED’s transformation of building performance standards, this research demonstrates how measurement, transparency, and policy intervention can address the rapidly growing environmental 
+    burden of digital infrastructure.</p>
+    </div>
+  </section>
+
+  <!-- PART I-->
+  <section class="section" id="nyc-case">
+    <div class="part-divider" id="part-1">
+      <span class="part-kicker">PART 1</span>
+      <h2 class="part-title">The Built Environment</h2>
+    </div>
+    <p> The built environment–our buildings, infrastructure, and energy systems–accounts for 38% of U.S. carbon dioxide emissions and consumes 72% of our electricity. Despite this enormous footprint, 
+      much of this infrastructure operates without comprehensive environmental oversight. As architects and designers, we have both an opportunity and a responsibility to address this crisis at its source: 
+      through thoughtful design, as well as advocacy for effective policy.</p>
+  </section>
+
+  <section class="section" id="nyc-case">
+    <div class="part-divider" id="part-1">
+      <h2 class="part-title">The Standardization of Greenhouse Gas Emissions</h2>
+    </div>
+    <p> CO2e, or carbon dioxide equivalent, is a standardized metric used to measure and compare the climate impact of various greenhouse gases. This includes, but is not limited to, key greenhouse gases 
+      such as carbon dioxide, methane, nitrous oxide, and fluorinated gases (CFCs, HFCs, HCFCs). Each greenhouse gas is assigned a global warming potential value that represents its warming impact over a 
+      specific period relative to carbon dioxide. The equation below allows for a standardization providing a common unit of measurement so businesses and countries can report total climate change impact as a single, comparable number.</p>
+    <p>
+    CO2e = (Mass of GHG) x (GWP of the gas)
+    <p> The standardization of all greenhouse gases can help governments track and manage emissions and report progression towards shared climate goals, and allow for introduction of policy.</p>
+  </section>
+
+      <!-- Sunburst visualization container -->
+    <div id="sunburst-container" class="viz-block" style="margin-top:28px;">
+      <h3>U.S. Greenhouse Gas Emissions (2022)</h3>
+      <div id="sunburst"></div>
+      <div id="sunburst-tooltip" aria-hidden="true"></div>
+    </div>
+
+  <!-- NYC Map of Data Centers -->
+  <section class="section" id="data-center-map">
+    <div class="part-divider" id="part-1">
+      <h2 class="part-title">The Rise of Data Centers and CO2</h2>
+    </div>
+    <p>Data centers are essential infrastructure in the digital economy, yet their rapidly growing carbon footprint is largely exempt from environmental regulation. The construction of data centers has increased tremendously with the 
+      introduction of LLM’s in recent years. Data centers require copious amounts of energy to operate, accounting for 1.8% of electricity use in the United States. This may not seem like much, but studies have shown that with the 
+      rapid growth developments of AI, this percentage is predicted to increase exponentially over the next decade. With no regulations currently in place for data centers, the energy usage can quickly become damaging to the environment 
+      and will continue to deplete our resources.</p>
+
+    <div id="map" style="width:100%; height:600px; border-radius:12px; margin:0px 0;"></div>
+    <p class="data-source">
+      <strong>Data source:</strong>
+      Geocoded NYC data centers derived from
+      NYC Building Energy and Water Data Disclosure for Local Law 84 (2020–2024).
+    </p>
+    <p>The sources of energy for these data centers also matter. According to a recent study, approximately 56% of the electricity consumed by data centers in the United States came from fossil fuel-burning power plants, and 16% was from 
+      coal power plants. This high dependence on coal is a significant contributor to the carbon footprint of the data center industry.</p>
+
+    <p>Distance compounds the problem. Data centers require massive amounts of water for cooling, and this water is often sourced from far away, requiring additional energy for pumping and transport. About one-fifth of data center servers’ 
+      direct water footprint comes from moderately to highly water-stressed watersheds, meaning facilities are drawing resources from regions that can least afford to spare them. When non-renewable energy sources, long distance resource 
+      transmission, and geographic inefficiency are added together, researchers estimate data centers contribute 0.5% of total carbon emissions.</p>
+  </section>
+
+  <section class="section" id="nyc-case">
+    <div class="part-divider" id="part-1">
+      <h2 class="part-title">The Transparency Gap</h2>
+    </div>
+    <p>0.5% of carbon emissions may not seem like much, but currently these data centers are not required to report energy usage as public information. In our research, we found that publicly available data for data centers is limited or 
+      behind a paywall, making it difficult to determine exactly how damaging data center operations currently are and will become. The lack of mandatory reporting makes it impossible for researchers, policy makers, and the public to 
+      understand the true scale of the problem.</p>
+  </section>
+
+  <!-- Global Scale: Data Centers by Country -->
+  <section class="section" id="part-data-centers-global">
+    <h2>Global Competition for Artificial Intelligence</h2>
+    <p>Data centers are the physical engines behind AI and cloud computing and account for a rapidly growing share of global electricity demand. This infrastructure is largely unregulated, concentrating energy use, water consumption, 
+      and CO2 emissions in the United States.</p>
+    <p>
+      The horizontal bar chart below compares the number of data centers by country.
+    </p>
+
+    <div class="data-center-chart">
+      <h3>Data Centers per Country</h3>
+      <p>
+        The United States hosts the largest share of the world’s data centers,
+        followed by the United Kingdom, Germany, China, and France. This imbalance
+        means that a relatively small number of countries bear a disproportionate
+        share of the energy and emissions burden of the digital economy.
+      </p>
+      <div class="mini-key" aria-label="Legend" style="display:flex;align-items:center;gap:10px;margin:10px 0 8px 0;font-size:0.95rem;opacity:0.95;">
+        <span style="width:10px;height:10px;border-radius:999px;background:rgba(86,189,248,0.90);display:inline-block;"></span>
+        <span>Data center count (facilities)</span>
+      </div>
+      <canvas id="myChart" height="130"></canvas>
+    </div>
+
+<script>
+  (function () {
+    const el = document.getElementById('myChart');
+    if (!el || typeof Chart === 'undefined') return;
+
+    const existing = Chart.getChart(el);
+    if (existing) existing.destroy();
+
+    window.__dcCountryChart = new Chart(el, {
+      type: 'bar',
+      data: {
+        labels: ['US', 'UK', 'GER', 'CHN', 'FRA', 'CAN', 'AUS', 'IND', 'JPN', 'ITL'],
+        datasets: [
+          {
+            label: 'Data Centers Per Country',
+            data: [4165, 499, 487, 381, 321, 293, 274, 271, 242, 209],
+            backgroundColor: 'rgba(86,189,248,0.78)',
+            borderColor: 'rgba(86,189,248,1)',
+            hoverBackgroundColor: 'rgba(86,189,248,0.52)',
+            hoverBorderColor: 'rgba(245,245,247,0.80)',
+            borderWidth: 1.5,
+            barThickness: 15,
+            categoryPercentage: 0.4,
+            barPercentage: 0.9
+          }
+        ]
+      },
+      options: {
+        indexAxis: 'y',
+        plugins: {
+          legend: {
+            labels: {
+              color: 'rgba(245,245,247,0.92)',
+              font: { size: 11 }
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => `${ctx.parsed.x.toLocaleString()} data centers`
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(255,255,255,0.10)', drawBorder: false },
+            ticks: {
+              color: 'rgba(207,214,223,0.85)',
+              callback: function (value) {
+                return value.toLocaleString();
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: { color: 'rgba(255,255,255,0.06)', drawBorder: false },
+            ticks: { color: 'rgba(207,214,223,0.85)' }
+          }
+        }
+      }
+    });
+  })();
+</script>
+
+    <p class="data-source">
+      <strong>Data source:</strong>
+      Country-level data center counts from
+      <a href="https://www.statista.com/statistics/1228433/data-centers-worldwide-by-country/"
+         target="_blank" rel="noopener noreferrer">
+        Statista — “Data centers worldwide by country”
+      </a>.
+    </p>
+  </section>
+
+  <!-- NYC Data Center Energy Line Chart -->
+  <section class="section" id="nyc-linechart-section">
+    <h2>Location Matters: The Geography of Carbon</h2>
+    <p>Not all data centers carry the same carbon footprint. A facility in New York City drawing from the region’s relatively diversified grid, including nuclear, hydroelectric, and natural gas, produces significantly less 
+      CO2 than an identical facility in the Midwest powered primarily by coal. Without policy frameworks that account for grid carbon intensity, the market has no mechanism to discourage construction in high-emission regions.</p>
+
+    <p>While specific energy data for individual data centers in the Midwest was not publicly available at the time of this study, we can infer that coal-dependent areas carry substantially higher carbon footprints than their 
+      New York City counterparts. Additionally, Midwestern data centers tend to be more geographically dispersed and must service population centers located farther away, resulting in greater transmission losses and network 
+      energy consumption, ultimately increasing their total carbon impact even greater. This chart visualizes the energy use trend of data centers in New York City, linking local infrastructure to the broader national and 
+      global carbon-emissions narrative.</p>
+
+    <p class="muted" style="margin-top:6px;">
+       The line chart below summarizes annual <strong>CO₂e</strong> emissions for NYC large buildings that report hosting data centers.
+      Read it as the city-scale signal behind the building-to-building comparisons that follow.
+    </p>
+
+    <div id="nycChartContainer" style="margin-top:20px;">
+      <h3 style="margin-bottom:12px;">
+        NYC Large Buildings with Data Centers — CO₂e Emissions
+      </h3>
+      <div id="energychart">
+        <div id="nyc-linechart"></div>
+      </div>
+    </div>
+
+    <p class="data-source">
+      <strong>Data sources:</strong>
+      NYC Building Energy and Water Data Disclosure for Local Law 84 (2020–2024);
+      EPA Greenhouse Gas Equivalencies Calculator for household-level comparisons.
+    </p>
+  </section>
+  <!-- NYC Scrolly Bar Chart 1: Underestimate / Missing 2024 Reports -->
+  <section class="section" id="nyc-underestimate">
+    <h2>NYC’s Data Center Growth Is Likely Underestimated</h2>
+    <p>
+      This increase is likely an underestimate. More than a hundred office buildings that reported data center floor area in 2023 failed to submit benchmarking data in 2024—
+      largely due to sales, renovations, or partial building closures. Many of these buildings historically contained substantial data center loads.
+      As they re-enter the dataset over the next reporting cycles, NYC’s true data center footprint is likely to appear even larger.
+    </p>
+
+    <div id="underestimateScrolly" class="scrolly">
+      <div class="sticky">
+        <div id="underestimateChart" style="width:100%; height:420px; border-radius:12px;">
+          <div id="par-chart" style="width:100%; height:100%;"></div>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step" data-step="0">
+          <h3>Reporting gaps</h3>
+          <p>
+            Missing benchmarking reports can hide data center loads—so what you see may be a baseline.
+          </p>
+        </div>
+        <div class="step" data-step="1">
+          <h3>Why buildings drop out</h3>
+          <p>
+            Renovations, sales, or partial closures can remove buildings from a reporting year without removing the servers.
+          </p>
+        </div>
+        <div class="step" data-step="2">
+          <h3>What returns reveal</h3>
+          <p>
+            When buildings reappear in later cycles, the footprint can jump—not only from growth, but from visibility.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+
+  <!-- NYC Scrolly Bar Chart 2: EUI comparison -->
+  <section class="section" id="nyc-eui">
+    <h2>Embedded Data Centers Drive Higher Energy Use Intensity</h2>
+
+    <p>
+      We compared the energy use intensity (EUI) of office buildings that dedicate significant floor area to data centers with those that do not. Even when data centers occupy only part of a building, their continuous loads can dominate overall energy use.
+    </p>
+
+<p class="lede">
+  Comparing energy use intensity reveals how strongly data centers reshape building performance.
+</p>
+
+<h3 class="chart-title">
+  Energy Use Intensity: Office Buildings with and without Data Centers
+</h3>
+
+<p class="chart-subtitle">
+  NYC 2024 – Top 3 Highest EUI Offices with Data Centers
+</p>
+
+    <div id="euiScrolly" class="scrolly scrolly-stack">
+      <div class="sticky">
+        <div id="euiChart" style="width:90%; height:auto; border-radius:12px; margin-bottom:100px">
+          <div id="eui-chart" style="width:100%; height:auto;" data-step="0"></div>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step" data-step="1">
+          <h3>Two building groups</h3>
+          <p>
+            We compare offices with significant data center floor area against offices without.
+          </p>
+        </div>
+        <div class="step" data-step="2">
+          <h3>EUI impact</h3>
+          <p>
+            Even partial data center tenancy can dominate EUI, revealing the operational footprint of embedded digital space.
+          </p>
+        </div>
+        <div class="step" data-step="3">
+          <h3>Planning challenge</h3>
+          <p>
+            NYC isn’t just adding more data centers—it’s embedding them inside already energy-dense buildings, amplifying load on an aging grid during rapid AI and cloud growth.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+
+  <!-- NYC Diverging Bars: Floor Area vs Number of Buildings -->
+  <section class="section" id="nyc-diverging">
+    <h2>More Floor Area, Fewer Reporting Buildings</h2>
+    <p>
+      From 2023 to 2024, New York City gained approximately
+      <strong>220,057.8 square feet</strong> of data center gross floor area,
+      even as the <strong>number of buildings</strong> reporting both data centers
+      and energy benchmarking data actually <strong>decreased</strong>.
+    </p>
+    <p>
+      The diverging bar chart contrasts the change in total data center floor area with the change
+      in the number of reporting buildings. The visual split shows that data centers are
+      consolidating into fewer, larger buildings — and that the official benchmark data
+      likely <strong>underestimates</strong> the true growth of digital infrastructure.
+    </p>
+
+    <div id="nycDivergingBars" style="width:100%; height:320px; border-radius:12px;"></div>
+
+    <p>
+      Because many 2023 data-center buildings did not report benchmarking data in 2024, the apparent growth is best read as
+      a conservative baseline rather than a complete inventory.
+    </p>
+  </section>
+
+  <!-- NYC Top 10 Buildings Bar Chart -->
+  <section class="section" id="nyc-top-buildings">
+    <h2>Where Is Expansion Happening?</h2>
+    <p>
+      To understand how this growth concentrates, we rank the top ten buildings with the largest
+      net increase in data center gross floor area between 2023 and 2024.
+    </p>
+
+    <div id="nycTopBuildingsChart" style="width:100%; height:500px; border-radius:12px;"></div>
+
+    <p>
+      One building—<strong>1221 Avenue of the Americas</strong>—stands out, with a roughly <strong>5×</strong> increase in reported
+      data center floor area in a single year. The spike shows how a small number of towers can rapidly become dense,
+      energy-intensive hubs inside an otherwise regulated envelope.
+    </p>
+  </section>
+
+
+  <!-- PART II: DATA CENTERS AT NATIONAL AND GLOBAL SCALE -->
+  <section class="section" id="data-centers-resources">
+    <div class="part-divider" id="part-2">
+      <span class="part-kicker">PART 2</span>
+      <h2 class="part-title">Data Centers Accelerating</h2>
+    </div>
+    <p>
+      The NYC case sits inside a broader shift: data centers are already a major electricity load in the United States, and demand is expected to rise as AI workloads expand and more services move into the cloud.
+    </p>
+    <p>
+      This may not seem like much at first glance, but growth is shaped by multiple coupled factors: cooling systems can drive substantial <strong>water use</strong>, and the emissions impact depends on the <strong>grid mix</strong>.
+      Where electricity remains fossil-heavy, data center expansion translates directly into higher CO₂e.
+    </p>
+    <p>
+      The next charts step outward—from a comparative snapshot to a U.S. projection—to show why rapid growth without sector-specific standards becomes a policy problem that ultimately lands in cities.
+    </p>
+  </section>
+
+
+  <!-- Part II — Chart 2 (one scroll = one chart) -->
+  <section class="section" id="dc-energy-compare-section">
+    <h2>Data Centers and Their Increasing Energy Appetite (2022)</h2>
+    <p class="muted" style="margin-top:6px;">
+      Estimated electricity consumption of data centers compared to selected countries (TWh).
+    </p>
+
+    <div class="viz-block" id="dc-energy-compare" style="margin-top:18px;">
+      <div style="width:100%; height:500px; border-radius:12px;">
+        <canvas id="dcEnergyCompareChart" aria-label="Data center electricity consumption compared to countries"></canvas>
+      </div>
+      <p class="data-source" style="margin-top:12px;">
+        <strong>Sources:</strong> U.S. Energy Information Administration (EIA), International Energy Agency (IEA). (Recreated from Statista-style graphic.)
+      </p>
+    </div>
+
+    <script>
+      (function () {
+        const el = document.getElementById('dcEnergyCompareChart');
+        if (!el || typeof Chart === 'undefined') return;
+
+        // Robust: destroy any existing Chart.js instance bound to this canvas
+        const existing = Chart.getChart(el);
+        if (existing) existing.destroy();
+
+        const labels = [
+          'CN',
+          'US',
+          'IN',
+          'JP',
+          'Data centers\n(2026 median)',
+          'CA',
+          'DE',
+          'FR',
+          'Data centers\n(2022 median)',
+          'GB'
+        ];
+
+        const values = [8540, 4128, 1463, 939, 835, 553, 507, 426, 415, 287];
+
+        const base = 'rgba(86,189,248,0.72)';
+        const baseHover = 'rgba(86,189,248,0.46)';
+        const baseBorder = 'rgba(86,189,248,1)';
+
+        // Keep a handle for debugging (optional)
+        window.__dcEnergyCompareChart = new Chart(el, {
+          type: 'bar',
+          data: {
+            labels,
+            datasets: [
+              {
+                label: 'Electricity consumption (TWh, 2022)',
+                data: values,
+                backgroundColor: labels.map(() => base),
+                hoverBackgroundColor: labels.map(() => baseHover),
+                borderColor: labels.map(() => baseBorder),
+                hoverBorderColor: 'rgba(245,245,247,0.85)',
+                borderWidth: 1.25,
+                borderRadius: 8,
+                barThickness: 18
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                labels: {
+                  color: 'rgba(245,245,247,0.82)',
+                  font: { size: 11 }
+                }
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (ctx) {
+                    const v = ctx.parsed.y;
+                    return `${v.toLocaleString()} TWh`;
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: { color: 'rgba(255,255,255,0.06)', drawBorder: false },
+                ticks: { color: 'rgba(207,214,223,0.85)' }
+              },
+              y: {
+                beginAtZero: true,
+                grid: { color: 'rgba(255,255,255,0.10)', drawBorder: false },
+                ticks: {
+                  color: 'rgba(207,214,223,0.85)',
+                  callback: function (value) {
+                    if (value >= 1000) return (value / 1000).toFixed(1) + 'k';
+                    return value;
+                  }
+                }
+              }
+            }
+          }
+        });
+      })();
+    </script>
+  </section>
+
+  <!-- Part II — Chart 3 (one scroll = one chart) -->
+  <section class="section" id="dc-us-projection-section">
+    <h2>U.S. Data Center Electricity Use — Projected Growth</h2>
+    <p class="muted" style="margin-top:6px;">
+      Total electricity consumption by U.S. data centers (TWh). Solid line = reported; dashed = projected.
+    </p>
+
+    <div class="viz-block" id="dc-us-projection" style="margin-top:18px;">
+      <div style="width:100%; height:500px; border-radius:12px;">
+        <canvas id="dcUSProjectionChart" aria-label="U.S. data center electricity consumption projection"></canvas>
+      </div>
+      <p class="data-source" style="margin-top:12px;">
+        <strong>Source:</strong> Pew Research Center (based on IEA, “Energy and AI”, Apr 2025) — values shown in the figure.
+      </p>
+    </div>
+
+    <script>
+      (function () {
+        const el = document.getElementById('dcUSProjectionChart');
+        if (!el || typeof Chart === 'undefined') return;
+
+        // Robust: destroy any existing Chart.js instance bound to this canvas
+        const existing = Chart.getChart(el);
+        if (existing) existing.destroy();
+
+        // Values reconstructed from the Pew figure (TWh)
+        const labels = ['2020', "'23", "'24", '2030'];
+        const values = [108, 154, 183, 426];
+
+        const line = 'rgba(86,189,248,0.92)';
+        const lineSoft = 'rgba(86,189,248,0.55)';
+        const grid = 'rgba(255,255,255,0.10)';
+        const tick = 'rgba(207,214,223,0.85)';
+
+        window.__dcUSProjectionChart = new Chart(el, {
+          type: 'line',
+          data: {
+            labels,
+            datasets: [
+              {
+                label: 'Electricity consumption (TWh)',
+                data: values,
+                borderColor: line,
+                backgroundColor: lineSoft,
+                pointBackgroundColor: 'rgba(0,0,0,0)',
+                pointBorderColor: line,
+                pointHoverBackgroundColor: 'rgba(245,245,247,0.85)',
+                pointHoverBorderColor: line,
+                pointRadius: 4,
+                pointHoverRadius: 5,
+                tension: 0.25,
+                fill: false,
+                borderWidth: 2.25,
+                segment: {
+                  borderDash: (ctx) => (ctx.p0DataIndex >= 2 ? [6, 6] : undefined),
+                  borderColor: (ctx) => (ctx.p0DataIndex >= 2 ? lineSoft : line)
+                }
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                labels: {
+                  color: 'rgba(245,245,247,0.82)',
+                  font: { size: 11 }
+                }
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (ctx) {
+                    const v = ctx.parsed.y;
+                    return `${v.toLocaleString()} TWh`;
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: { color: 'rgba(255,255,255,0.06)', drawBorder: false },
+                ticks: { color: tick }
+              },
+              y: {
+                beginAtZero: true,
+                suggestedMax: 450,
+                grid: { color: grid, drawBorder: false },
+                ticks: { color: tick }
+              }
+            }
+          }
+        });
+      })();
+    </script>
+
+    <p style="margin-top:18px;">
+      Multiple studies point to a steep near-term rise in U.S. data center electricity demand. According to U.S. Congressional reporting,
+      data centers used roughly <strong>176 TWh</strong> in <strong>2023</strong> (excluding cryptocurrency)—about <strong>4.4% of total U.S. electricity</strong>.
+    </p>
+
+    <p>
+      Many projections expect demand to <strong>double or triple within a few years</strong>, driven by AI workloads and cloud expansion.
+      In practice, this curve can rise faster than grids and clean-energy supply can adapt.
+    </p>
+
+    <p>
+      Crucially, binding, <strong>operations-specific energy standards</strong> for private-sector data centers remain limited.
+      Without sector-specific disclosure and performance requirements, growth can outpace what existing policies are designed to measure.
+    </p>
+
+    <p>
+      These national trajectories do not remain abstract. As demand accelerates, it ultimately materializes inside cities—within buildings,
+      local grids, and emissions caps like those in <strong>New York City</strong>.
+    </p>
+
+    <p class="data-source">
+      <strong>Sources:</strong>
+      Pew Research Center (based on IEA, <em>Energy and AI</em>, Apr 2025);
+      Stax Engineering, <em>The Environmental Impact of Data Centers</em>;
+      Lawrence Berkeley National Laboratory;
+      U.S. Congressional reports on data center energy use.
+    </p>
+  </section>
+
+  <!-- Why Policy Works bottom part isn't working, probably delete-->
+  <section class="section" id="us-emissions">
+    <h2>Why Policy Works: From Measurement to Action</h2>
+    <p>Data centers operate without mandatory emissions reporting, efficiency standards, or accountability for their growing share of national energy demand. Meanwhile, the environmental challenges we have alleviated 
+      share a common pattern: comprehensive policy frameworks built on transparent data, enforceable standards, and international cooperation.</p>
+
+    <p>As we face the exponential growth of AI-driven infrastructure, we don’t need to reinvent the policy playbook. We need to apply the lessons we’ve already learned to the technologies reshaping our energy future.</p>
+
+    <div id="usEmissionsMaps" style="width:100%; height:480px; border-radius:12px;"></div>
+
+  </section>
+
+  <!-- PART III: OZONE AND THE MONTREAL PROTOCOL -->
+  <section class="section" id="part-ozone">
+    <div class="part-divider" id="part-3-1">
+      <span class="part-kicker">PART 3–1</span>
+      <h2 class="part-title">Ozone Recovery and the Montreal Protocol</h2>
+    </div>
+    <p>The Montreal Protocol, signed in 1987, is often described as one of the most successful environmental treaties. It was put into place following decades of scientific warnings about chlorofluorocarbons (CFCs), 
+      chemicals used in refrigerants and aerosols that were found to destroy the ozone layer. Through coordinated global action, nations agreed to phase out these substances, and satellite data now shows a gradual 
+      healing of the ozone layer - clear evidence that science, regulation, and collection action can reverse planetary damage.</p>
+
+    <p>The Montreal Protocol has continued to evolve as science and technology have advanced. Amendments such as those adopted in London and Kigali expanded its scope to include additional substances like 
+      hydrochlorofluorocarbons (HCFCs) and hydrofluorocarbons (HFCs). This living framework shows how international regulation can translate data into environmental recovery - an example for today’s challenge of 
+      governing carbon emissions from energy-intensive infrastructure.</p>
+  </section>
+
+  <!-- Montreal Protocol Timeline -->
+  <section class="section timeline" id="montreal-timeline">
+
+    <div class="timeline-container">
+      <div class="timeline-item">
+        <span class="year">1974</span>
+        <p>Mario Molina and F. Sherwood Rowland <strong>discover that CFCs destroy ozone molecules</strong>,
+          marking the beginning of modern atmospheric chemistry awareness.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">1985</span>
+        <p><strong>Vienna Convention for the Protection of the Ozone Layer</strong> is adopted, establishing
+          a scientific and legal framework for international cooperation.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">1987</span>
+        <p><strong>The Montreal Protocol is signed</strong> by 46 countries, committing to phase out
+          ozone-depleting substances like CFCs and halons.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">1989</span>
+        <p><strong>The Montreal Protocol enters into force</strong>, beginning the legally binding global
+          phaseout of key ozone-depleting chemicals.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">1990</span>
+        <p><strong>London Amendments strengthen phaseout deadlines</strong> and provide funding for
+          developing nations to transition away from harmful chemicals.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">2016</span>
+        <p><strong>Kigali Amendment expands the Protocol</strong> to include HFCs, explicitly linking
+          ozone recovery with climate mitigation.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">2024</span>
+        <p>NASA and WMO confirm <strong>record ozone recovery over Antarctica</strong>, projecting
+          near-complete restoration of pre-1980 ozone levels by mid-century.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Ozone Visualization -->
+  <section class="section" id="ozone-visualization">
+    <h2>Global Ozone Recovery After the Montreal Protocol</h2>
+    <p>The Montreal Protocol (1987) is widely recognized as one of the most effective environmental agreements. By phasing out ozone-depleting substances such as CFCs and HFC’s, it set in motion a measurable recovery 
+      of the ozone layer within just a few decades.</p>
+    
+      <p>The Montreal Protocol shows that collective regulation works: over 190 nations agreed to phase out ozone-depleting chemicals, and the results are visible in the atmosphere today. In contrast, carbon emissions 
+        from digital infrastructure continue to rise without consistent global or national policy frameworks. Our visualizations compare how the presence of strong policy versus its absence shapes the trajectory of 
+        atmospheric change and environmental recovery.</p>
+
+    <div id="ozone-chart-block">
+      <h3 id="title">Global Total Column Ozone — 1979–2024</h3>
+
+      
+
+      <div id="chart"></div>
+      <p style="font-size:0.9rem;margin-top:12px;max-width:none;">
+        <strong>About this data:</strong> The graph shows the global mean total column ozone measured in 
+        <em>Dobson Units (DU)</em>. One DU represents a 0.01 mm-thick layer of pure ozone at standard conditions. 
+        Higher DU values mean stronger protection from ultraviolet radiation, while lower DU values indicate depletion.
+        The decline in the 1980s–1990s corresponds to widespread CFC use, while the stabilization and recovery after 2000
+        reflect the atmospheric impact of the <em>Montreal Protocol</em>.
+      </p>
+      <p class="data-source">
+        <strong>Data source:</strong>
+        NASA Ozone Watch total column ozone products (1979–2024), aggregated into annual global means
+        using processed MOD/OMI datasets.
+      </p>
+    </div>
+  </section>
+
+  <!-- NYC Policy & LEED: When Local Building Rules Work -->
+  <!-- NYC Policy & LEED: When Local Building Rules Work -->
+  <section class="section" id="nyc-leed">
+    <div class="part-divider" id="part-3-2">
+      <span class="part-kicker">PART 3–2</span>
+      <h2 class="part-title">LEED Certification: Translating Building Performance into Market Action</h2>
+    </div>
+
+    <p>
+      The Montreal Protocol worked by turning atmospheric science into enforceable rules.
+      At the city scale, LEED translates a similar logic by converting building performance—energy, water, and emissions—
+      into measurable criteria that influence design, operations, and investment.
+    </p>
+
+    <p>The U.S. Green Building Council’s LEED certification system, launched in 2000, created a voluntary framework that transformed industry practice through transparency and standardization. By requiring
+      buildings to measure and report energy consumption, water use, and material impacts, LEED made environmental performance visible and comparable.</p>
+
+
+    <p class="lede">
+      LEED demonstrates how regulation can shape building performance—but it also reveals where
+      building-scale metrics begin to break down for energy-intensive uses like data centers.
+    </p>
+  </section>
+  <section class="section" id="dc-policy-recommendations">
+    <h2>So how should NYC regulate embedded data centers?</h2>
+    <p>
+      NYC already regulates building performance, but data centers behave like a distinct use: continuous loads, intensive cooling,
+      and rapid expansion inside mixed-use towers. The next step is to complement building-wide policy with
+      <strong>data center–specific requirements</strong>.
+    </p>
+    <div class="callout">
+      <h3>Policy directions (concept)</h3>
+      <ul>
+        <li><strong>Disclosure:</strong> require standardized reporting of data center floor area and IT load within buildings.</li>
+        <li><strong>Performance:</strong> set targets for efficiency (e.g., EUI/IT load) and cooling/water performance where applicable.</li>
+        <li><strong>Grid alignment:</strong> link expansion to clean electricity procurement and demand-response participation.</li>
+        <li><strong>Lifecycle accountability:</strong> track embodied impacts and equipment turnover for rapidly changing infrastructure.</li>
+      </ul>
+    </div>
+  </section>
+  <section class="section" id="nyc-leed-what">
+    <h2>LEED, in one minute</h2>
+    <p>
+      <strong>LEED</strong> (Leadership in Energy and Environmental Design) is a point-based green building rating
+      system developed by the <strong>U.S. Green Building Council (USGBC)</strong>. Projects earn points across
+      categories like <strong>energy</strong>, <strong>water</strong>, and <strong>indoor environmental quality</strong>.
+    </p>
+
+    <div class="lede-grid">
+      <div class="lede-card">
+        <h3>Certification levels</h3>
+        <p class="muted" style="margin-top:6px;">
+          Certification depends on total points achieved.
+        </p>
+        <div class="leed-levels" aria-label="LEED certification levels">
+          <div class="leed-level-card leed-level--certified">
+            <div class="leed-badge">LEED</div>
+            <div class="leed-level-title">Certified</div>
+            <div class="leed-level-points">40–49 points</div>
+          </div>
+
+          <div class="leed-level-card leed-level--silver">
+            <div class="leed-badge">LEED</div>
+            <div class="leed-level-title">Silver</div>
+            <div class="leed-level-points">50–59 points</div>
+          </div>
+
+          <div class="leed-level-card leed-level--gold">
+            <div class="leed-badge">LEED</div>
+            <div class="leed-level-title">Gold</div>
+            <div class="leed-level-points">60–79 points</div>
+          </div>
+
+          <div class="leed-level-card leed-level--platinum">
+            <div class="leed-badge">LEED</div>
+            <div class="leed-level-title">Platinum</div>
+            <div class="leed-level-points">80+ points</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lede-card">
+        <h3>Why it matters for data centers</h3>
+        <p>
+          Data centers are a unique building type: few occupants, but continuous, high-intensity loads.
+          Cooling demand is often the dominant driver, and water use can be significant when water-based
+          cooling is used. LEED rewards strategies like <strong>efficient HVAC</strong>, <strong>on-site renewables</strong>,
+          and <strong>water-saving systems</strong>.
+        </p>
+      </div>
+
+      <div class="lede-card">
+        <h3>Where it fits in NYC policy</h3>
+        <p>
+          LL84 makes performance visible (disclosure). LL97 converts visibility into obligations (caps).
+          LEED shapes design culture (what “good” looks like). Together, they form a feedback loop between
+          <strong>design standards</strong> and <strong>operational data</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="callout">
+      <h3>Key takeaway</h3>
+      <p>
+        <strong>LEED shows that policy can shape performance</strong>—but it also exposes a limitation.
+        Embedded data centers can overwhelm building-level metrics even when they comply formally,
+        raising the question of whether sector-specific rules are needed.
+      </p>
+    </div>
+        <!-- LEED outcomes snapshot (table-to-chart) -->
+        <div class="viz-block" id="leed-outcomes" style="margin-top:22px;">
+          <h3>What changes across LEED levels?</h3>
+          <p class="muted" style="margin-top:6px;">
+            Percent change vs <strong>LEED Certified</strong> baseline (0%). Negative is better for energy and CO₂e.
+          </p>
+    
+          <div class="chart-frame" style="width:100%; height:360px; border-radius:12px;">
+            <canvas id="leedOutcomesChart" aria-label="LEED outcomes by certification level"></canvas>
+          </div>
+    
+          <p class="data-source" style="margin-top:12px;">
+            <strong>Note:</strong> Values reproduced from the table (Certified → Silver → Gold → Platinum) for energy, CO₂e, commuting CO₂e, and occupant satisfaction.
+          </p>
+        </div>
+        <script>
+          (function () {
+            const el = document.getElementById('leedOutcomesChart');
+            if (!el || typeof Chart === 'undefined') return;
+    
+            const existing = Chart.getChart(el);
+            if (existing) existing.destroy();
+    
+            // Percent change vs Certified baseline (0%) from your table
+            const labels = [
+              'Energy use (kBtu/sf/yr)',
+              'CO₂e (mTCO₂e/occupant/yr)',
+              'CO₂e (mTCO₂e/sf/yr)',
+              'Commuting CO₂e (mTCO₂e/commute/yr)',
+              'Occupant satisfaction'
+            ];
+    
+            // Absolute values (for tooltip context)
+            const abs = {
+              certified: [55.0, 2.8, 0.0070, 4.0, 7.1],
+              silver:    [57.3, 2.6, 0.0065, 3.0, 7.5],
+              gold:      [54.4, 2.0, 0.0056, 2.9, 7.5],
+              platinum:  [44.1, 1.2, 0.0038, 2.0, 7.9]
+            };
+    
+            const pct = {
+              certified: [0, 0, 0, 0, 0],
+              silver:    [4, -8, -7, -26, 6],
+              gold:      [-1, -27, -20, -29, 6],
+              platinum:  [-20, -57, -46, -50, 11]
+            };
+    
+            const tick = 'rgba(207,214,223,0.88)';
+            const grid = 'rgba(255,255,255,0.10)';
+    
+            // Your dark UI palette
+            const C_CERT = 'rgba(160,170,186,0.85)'; // light gray
+            const C_SILV = 'rgba(86,189,248,0.90)';  // sky blue
+            const C_GOLD = 'rgba(246,201,74,0.92)';  // yellow
+            const C_PLAT = 'rgba(134,209,87,0.92)';  // green
+    
+            const makeDS = (name, key, color) => ({
+              label: name,
+              data: pct[key],
+              backgroundColor: color,
+              borderColor: 'rgba(255,255,255,0.12)',
+              borderWidth: 1,
+              borderRadius: 8,
+              barThickness: 12
+            });
+    
+            window.__leedOutcomesChart = new Chart(el, {
+              type: 'bar',
+              data: {
+                labels,
+                datasets: [
+                  makeDS('Certified (baseline)', 'certified', C_CERT),
+                  makeDS('Silver', 'silver', C_SILV),
+                  makeDS('Gold', 'gold', C_GOLD),
+                  makeDS('Platinum', 'platinum', C_PLAT)
+                ]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                  legend: {
+                    labels: {
+                      color: 'rgba(245,245,247,0.88)',
+                      boxWidth: 12,
+                      font: { size: 11 }
+                    }
+                  },
+                  tooltip: {
+                    callbacks: {
+                      label: function (ctx) {
+                        const lvl = (ctx.dataset.label || '').toLowerCase();
+                        const i = ctx.dataIndex;
+    
+                        let k = 'certified';
+                        if (lvl.includes('silver')) k = 'silver';
+                        else if (lvl.includes('gold')) k = 'gold';
+                        else if (lvl.includes('platinum')) k = 'platinum';
+    
+                        const vPct = ctx.parsed.x;
+                        const vAbs = abs[k][i];
+    
+                        const unit = (function () {
+                          if (i === 0) return 'kBtu/sf/yr';
+                          if (i === 1) return 'mTCO₂e/occ/yr';
+                          if (i === 2) return 'mTCO₂e/sf/yr';
+                          if (i === 3) return 'mTCO₂e/commute/yr';
+                          return 'score';
+                        })();
+    
+                        const pctStr = (vPct > 0 ? '+' : '') + vPct + '% vs Certified';
+                        const absStr = (i === 2)
+                          ? vAbs.toFixed(4)
+                          : (i === 4)
+                            ? vAbs.toFixed(1)
+                            : vAbs.toFixed(1);
+    
+                        return `${ctx.dataset.label}: ${pctStr} (value: ${absStr} ${unit})`;
+                      }
+                    }
+                  }
+                },
+                scales: {
+                  y: {
+                    grid: { color: 'rgba(255,255,255,0.06)', drawBorder: false },
+                    ticks: { color: tick }
+                  },
+                  x: {
+                    suggestedMin: -60,
+                    suggestedMax: 15,
+                    grid: { color: grid, drawBorder: false },
+                    ticks: {
+                      color: tick,
+                      callback: (v) => (v > 0 ? '+' : '') + v + '%'
+                    }
+                  }
+                }
+              }
+            });
+          })();
+        </script>
+    </section>
+
+  <section class="section" id="nyc-leed-credits">
+    <h2>LEED credit categories</h2>
+    <p class="muted">
+      LEED points are organized into categories that address site impacts, energy and water performance,
+      materials, indoor health, and innovation.
+    </p>
+
+    <div class="leed-credits-grid" aria-label="LEED credit categories">
+      <div class="leed-credit-card">
+        <div class="leed-credit-top">
+          <span class="leed-dot leed-dot--sites"></span>
+          <h4>Sustainable Sites</h4>
+        </div>
+        <p>Reduces site disruption and supports low-impact development (transit, stormwater, heat-island).</p>
+      </div>
+
+      <div class="leed-credit-card">
+        <div class="leed-credit-top">
+          <span class="leed-dot leed-dot--water"></span>
+          <h4>Water Efficiency</h4>
+        </div>
+        <p>Cuts potable water demand and improves cooling-water performance (fixtures, reuse, efficient systems).</p>
+      </div>
+
+      <div class="leed-credit-card">
+        <div class="leed-credit-top">
+          <span class="leed-dot leed-dot--energy"></span>
+          <h4>Energy &amp; Atmosphere</h4>
+        </div>
+        <p>Drives energy efficiency and emissions reductions (EUI, commissioning, renewables, refrigerants).</p>
+      </div>
+
+      <div class="leed-credit-card">
+        <div class="leed-credit-top">
+          <span class="leed-dot leed-dot--materials"></span>
+          <h4>Materials &amp; Resources</h4>
+        </div>
+        <p>Rewards responsible sourcing and waste reduction (low-impact materials, circularity, construction waste).</p>
+      </div>
+
+      <div class="leed-credit-card">
+        <div class="leed-credit-top">
+          <span class="leed-dot leed-dot--ieq"></span>
+          <h4>Indoor Environmental Quality</h4>
+        </div>
+        <p>Improves indoor health and comfort (air quality, ventilation, low-emitting materials, daylight).</p>
+      </div>
+
+      <div class="leed-credit-card">
+        <div class="leed-credit-top">
+          <span class="leed-dot leed-dot--innovation"></span>
+          <h4>Innovation &amp; Regional Priority</h4>
+        </div>
+        <p>Credits novel strategies and local priorities (region-specific impacts, exemplary performance).</p>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="nyc-leed-registration">
+    <h2>LEED project registration over time</h2>
+    <p class="muted" style="margin-top:6px;">
+      Registered LEED projects by certification pathway (2017–2021).
+    </p>
+
+    <div class="viz-block" id="leed-registration" style="margin-top:18px;">
+      <div style="width:100%; height:360px; border-radius:12px;">
+        <canvas id="leedRegistrationChart" aria-label="LEED project type registration over time"></canvas>
+      </div>
+    </div>
+
+    <script>
+    (function () {
+      const el = document.getElementById('leedRegistrationChart');
+      if (!el || typeof Chart === 'undefined') return;
+
+      const existing = Chart.getChart(el);
+      if (existing) existing.destroy();
+
+      const labels = ['2017', '2018', '2019', '2020', '2021'];
+
+      window.__leedRegistrationChart = new Chart(el, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            {
+              label: 'BD+C',
+              data: [1700, 2650, 3000, 2950, 3300],
+              borderColor: 'rgba(86,189,248,0.95)',
+              backgroundColor: 'rgba(86,189,248,0.15)',
+              tension: 0.25,
+              borderWidth: 2,
+              pointRadius: 3
+            },
+            {
+              label: 'ID+C',
+              data: [850, 900, 1100, 1200, 1700],
+              borderColor: 'rgba(241,95,49,0.95)',
+              backgroundColor: 'rgba(241,95,49,0.15)',
+              tension: 0.25,
+              borderWidth: 2,
+              pointRadius: 3
+            },
+            {
+              label: 'O+M',
+              data: [780, 850, 880, 450, 980],
+              borderColor: 'rgba(156,69,154,0.95)',
+              backgroundColor: 'rgba(156,69,154,0.15)',
+              tension: 0.25,
+              borderWidth: 2,
+              pointRadius: 3
+            },
+            {
+              label: 'Homes',
+              data: [1400, 1800, 2600, 3350, 3550],
+              borderColor: 'rgba(246,201,74,0.95)',
+              backgroundColor: 'rgba(246,201,74,0.15)',
+              tension: 0.25,
+              borderWidth: 2,
+              pointRadius: 3
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              labels: {
+                color: 'rgba(245,245,247,0.9)',
+                font: { size: 11 }
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString()} projects`
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255,255,255,0.06)', drawBorder: false },
+              ticks: { color: 'rgba(207,214,223,0.85)' }
+            },
+            y: {
+              beginAtZero: true,
+              grid: { color: 'rgba(255,255,255,0.10)', drawBorder: false },
+              ticks: {
+                color: 'rgba(207,214,223,0.85)',
+                callback: (v) => v >= 1000 ? (v / 1000) + 'k' : v
+              }
+            }
+          }
+        }
+      });
+    })();
+    </script>
+
+    <p class="data-source" style="margin-top:14px;">
+      <strong>Data sources:</strong>
+      USGBC LEED overview and rating system documentation; public LEED data center certification counts;
+      published estimates of data center electricity demand growth (2024–2030).
+    </p>
+  </section>
+
+  <section class="section" id="nyc-leed-stats">
+    <h2>Data centers in the LEED ecosystem</h2>
+
+    <div class="lede-stats">
+      <div class="stat">
+        <div class="stat-num">1,645+</div>
+        <div class="stat-label">LEED-certified &amp; registered data centers (Sep 2025)</div>
+        <div class="stat-bar" aria-hidden="true"><span style="--w: 82%;"></span></div>
+        <div class="stat-note">Scale cue: ~0–2,000+</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-num">490M</div>
+        <div class="stat-label">sq ft represented</div>
+        <div class="stat-bar stat-bar--green" aria-hidden="true"><span style="--w: 82%;"></span></div>
+        <div class="stat-note">Scale cue: ~0–600M</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-num">1–2% → 3–4%</div>
+        <div class="stat-label">possible share of global electricity (end of decade)</div>
+        <div class="stat-range" aria-hidden="true">
+          <div class="stat-range-track">
+            <span class="stat-dot stat-dot--from" style="--x: 30%;"></span>
+            <span class="stat-dot stat-dot--to" style="--x: 70%;"></span>
+          </div>
+          <div class="stat-range-labels">
+            <span>~1–2%</span>
+            <span>~3–4%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lede-subhead" style="margin-top:22px;">
+      <h3>LEED pathways for data centers</h3>
+      <p class="muted">
+        Different certification tracks apply depending on whether the project is a new whole-building data center,
+        a phased core-and-shell project, or an existing facility.
+      </p>
+    </div>
+
+    <div class="lede-pathways">
+      <div class="lede-path-card">
+        <div class="lede-path-title">BD+C</div>
+        <div class="lede-path-kicker">New, whole-building data centers</div>
+        <div class="lede-path-metric">≥ 60% GFA complete</div>
+        <p class="lede-path-body">
+          Used when most of the gross floor area is complete at the time of certification.
+        </p>
+      </div>
+
+      <div class="lede-path-card">
+        <div class="lede-path-title">BD+C: Core &amp; Shell</div>
+        <div class="lede-path-kicker">Phased / partial build-outs</div>
+        <div class="lede-path-metric">≥ 40% GFA complete</div>
+        <p class="lede-path-body">
+          Appropriate when only part of the building is complete—common for phased projects.
+        </p>
+      </div>
+
+      <div class="lede-path-card">
+        <div class="lede-path-title">O+M</div>
+        <div class="lede-path-kicker">Existing operational facilities</div>
+        <div class="lede-path-metric">≥ 1 year in operation</div>
+        <p class="lede-path-body">
+          For data centers that are fully operational and occupied for at least one year.
+        </p>
+      </div>
+
+      <div class="lede-path-card lede-path-card--accent">
+        <div class="lede-path-title">LEED v5</div>
+        <div class="lede-path-kicker">Current version</div>
+        <div class="lede-path-metric">More flexibility</div>
+        <p class="lede-path-body">
+          Keeps core energy/water strategies while allowing more flexibility for different contexts and performance targets.
+        </p>
+      </div>
+    </div>
+
+    
+  </section>
+
+  
+
+  <!-- Final Comparison / Conclusion -->
+  <section class="section conclusion" id="conclusion">
+    <h2>Data Centers Need Regulation</h2>
+    <p>History has shown us that voluntary measures alone cannot address environmental challenges at scale. The success of the Montreal Protocol in healing the ozone layer and LEED certification in transforming building practices demonstrates that policy frameworks can drive measurable change.</p>
+
+    <h3>Policy Works — When it Exists</h3>
+    <p>The Montreal Protocol engaged 197 nations to phase out ozone-depleting substances, proving the international cooperation can reverse planetary damage. LEED demonstrated that transparency and certification can transform entire industries without waiting for government mandates. Both frameworks
+      share a foundation: measurement enables accountability, and accountability drives change.</p>
+
+    <p>As we enter a new era of data-driven and AI-driven growth, the same urgency and cooperation are needed to govern the emissions of the digital age. If coordinated policy has proven to work in multiple scenarios, it can again — but only if it is extended to the infrastructures that are now driving carbon emissions.</p>
+  </section>
+
+  <footer>
+    <p>© 2025 The Green Team — Columbia GSAPP Data Visualization</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+
+  <!-- Maps -->
+  <script defer src="map.js"></script>
+
+  <!-- Ozone (static chart) -->
+  <script defer src="ozone_charts.js"></script>
+
+  <!-- Data centers (NYC) -->
+  <script defer src="linechart.js"></script>
+  <script defer src="underestimated.js"></script>
+  <script defer src="eui.js"></script>
+  <script defer src="sunburst.js"></script>
+
+  <!-- Shared scrolly / page logic -->
+  <script defer src="script.js"></script>
+  <!-- NYC diverging / slope -->
+<script defer src="nyc_diverging.js"></script>
+
+<!-- NYC top 10 expansion -->
+<script defer src="nyc_top10.js"></script>
+
+</body>
+</html>
