@@ -59,7 +59,7 @@ body {
 .arch-headline {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 300;
-    font-size: 5.5rem;
+    font-size: clamp(80px, 12vw, 160px);
     line-height: 0.88;
     letter-spacing: 0.04em;
     color: #fff;
