@@ -1,20 +1,19 @@
+// Smooth scroll to content section
 function scrollToContent() {
-    document.getElementById('content').scrollIntoView({ 
+    document.getElementById('page-2').scrollIntoView({ 
         behavior: 'smooth' 
     });
 }
 
-// Add smooth scroll behavior on page load
-window.addEventListener('load', function() {
-    // Optional: Add any initialization code here
-});
-
-// Hide scroll indicator after scrolling past hero
+// Fade out scroll hint after user starts scrolling
 window.addEventListener('scroll', function() {
-    const scrollIndicator = document.querySelector('.scroll-indicator');
-    if (window.scrollY > 100) {
-        scrollIndicator.style.opacity = '0';
-    } else {
-        scrollIndicator.style.opacity = '1';
+    const scrollHint = document.querySelector('.scroll-hint');
+    if (scrollHint) {
+        if (window.scrollY > 80) {
+            scrollHint.style.opacity = '0';
+            scrollHint.style.transition = 'opacity 0.4s ease';
+        } else {
+            scrollHint.style.opacity = '1';
+        }
     }
 });

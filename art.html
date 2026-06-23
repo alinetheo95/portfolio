@@ -5,53 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Art - Aline Theodorakis</title>
     <link rel="stylesheet" href="art.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <!-- Graphic Design Section -->
-        <div class="section-title top-center">
-            <h2>GRAPHIC DESIGN</h2>
-        </div>
-        
-        <div class="image-group graphic-design">
-            <a href="art pages/graphic-design.html" class="project-item large-right">
-                <img src="Images - art page/graphic-design/BLEND FLYER.jpg" alt="image 1">
-                <div class="overlay">
-                    <span class="overlay-text">GRAPHIC<br>DESIGN</span>
-                </div>
-            </a>
-        </div>
 
-        <!-- Digital Illustration Section -->
-        <div class="section-title left-title">
-            <h2>DIGITAL<br>ILLUSTRATION</h2>
+    <!-- ── HEADER ── -->
+    <div class="arch-header">
+        <div class="arch-meta">
+            <a href="index.html" class="back-link">← BACK</a>
+            <span class="meta-right">Aline Theodorakis</span>
         </div>
-        
-        <div class="image-group digital-illustration">
-            <a href="art pages/digital-illustration.html" class="project-item medium-center">
-                <img src="Images - art page/digital-illustration/Boots_With_Flowers_cropped.png" alt="image 1">
-                <div class="overlay">
-                    <span class="overlay-text">DIGITAL<br>ILLUSTRATION</span>
-                </div>
-            </a>
-        </div>
-
-        <!-- Painting Section -->
-        <div class="section-title right-title">
-            <h2>PAINTING</h2>
-        </div>
-        
-        <div class="image-group painting">
-            <a href="art pages/painting.html" class="project-item medium-right">
-                <img src="Images - art page/painting/san-diego.jpeg" alt="IMAGE 1">
-                <div class="overlay">
-                    <span class="overlay-text">PAINTING</span>
-                </div>
-            </a>
-        </div>
-
-        <!-- Back Button -->
-        <a href="index.html" class="back-btn">← BACK</a>
+        <div class="arch-rule"></div>
+        <h1 class="arch-headline">ART</h1>
+        <div class="arch-rule"></div>
+        <p class="arch-caption">
+            Freelance and independent projects ranging from graphic design,<br>
+            digital illustration, and painting.
+        </p>
     </div>
+
+    <!-- ── PROJECTS GRID ── -->
+    <div class="projects-grid">
+
+        <a href="art pages/graphic-design.html" class="project-item">
+            <div class="project-img-wrap">
+                <img src="Images - art page/graphic-design/BLEND FLYER.jpg" alt="Graphic Design">
+                <div class="project-overlay">VIEW PROJECTS →</div>
+            </div>
+            <div class="project-label">
+                <span class="project-num">01</span>
+                <span class="project-title">GRAPHIC DESIGN</span>
+            </div>
+        </a>
+
+        <a href="art pages/digital-illustration.html" class="project-item">
+            <div class="project-img-wrap">
+                <img src="Images - art page/digital-illustration/Boots_With_Flowers_cropped.png" alt="Digital Illustration">
+                <div class="project-overlay">VIEW PROJECTS →</div>
+            </div>
+            <div class="project-label">
+                <span class="project-num">02</span>
+                <span class="project-title">DIGITAL ILLUSTRATION</span>
+            </div>
+        </a>
+
+        <a href="art pages/painting.html" class="project-item">
+            <div class="project-img-wrap">
+                <img src="Images - art page/painting/san-diego.jpeg" alt="Painting">
+                <div class="project-overlay">VIEW PROJECTS →</div>
+            </div>
+            <div class="project-label">
+                <span class="project-num">03</span>
+                <span class="project-title">PAINTING</span>
+            </div>
+        </a>
+
+    </div>
+
 </body>
 </html>

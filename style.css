@@ -1,7 +1,12 @@
+/* ── RESET & BASE ── */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -11,268 +16,397 @@ body {
     overflow-x: hidden;
 }
 
-/* Smooth scroll behavior */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Hero Section (Cover Page) */
-.hero-section {
-    height: 100vh;
+/* ── SHARED PAGE STRUCTURE ── */
+.page {
+    min-height: 100vh;
+    position: relative;
     display: flex;
     flex-direction: column;
-    position: relative;
-    background-color: #000;
-    padding: 0;
-    margin-bottom: 50vh;
 }
 
-.hero-content {
+/* Extra breathing room between scroll sections */
+#page-2 {
+    margin-top: 15vh;
+}
+
+#page-3 {
+    margin-top: 15vh;
+}
+
+
+/* ════════════════════════════════════════
+   SECTION 1 — PORTFOLIO COVER
+════════════════════════════════════════ */
+
+.page1-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 48px 52px 0;
+}
+
+/* Top metadata row */
+.page1-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: #555;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.meta-right {
+    margin-left: auto;
+}
+
+.page1-rule {
     width: 100%;
-    height: 100%;
-    position: relative;
+    height: 1px;
+    background: #222;
+    margin-bottom: 20px;
 }
 
-.hero-text {
-    position: absolute;
-    top: 100px;
-    left: 50px;
-    z-index: 10;
-    max-width: 900px;
-}
-
-.hero-text h1 {
-    font-size: 7rem;
+/* Big headline */
+.page1-headline {
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 300;
-    letter-spacing: 0.5rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.1;
+    font-size: clamp(80px, 12vw, 160px);
+    line-height: 0.88;
+    letter-spacing: 0.04em;
+    color: #fff;
+    margin-bottom: 20px;
 }
 
-.hero-text .subtitle {
-    font-size: 0.85rem;
-    letter-spacing: 0.3rem;
-    text-align: right;
-    max-width: 900px;
+/* Body text below rule */
+.page1-body {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.8;
+    color: #666;
+    letter-spacing: 0.06em;
+    margin-top: 4px;
 }
 
-.hero-image {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 66.67%; /* 2/3 of the page */
-    height: 100%;
+.page1-top {
+    flex-shrink: 0;
+}
+
+/* Image fills the rest of the viewport height */
+.page1-image-strip {
+    flex: 1;
+    margin-top: 32px;
+    overflow: hidden;
     display: flex;
     align-items: flex-end;
-    justify-content: flex-end;
 }
 
-.hero-image img {
+.page1-image-strip img {
     width: 100%;
-    height: auto;
-    max-height: 100%;
+    height: 100%;
     object-fit: cover;
-    object-position: bottom right;
-    opacity: 0.7;
+    object-position: center top;
+    opacity: 0.75;
+    display: block;
 }
 
-/* Content Section */
-.content-section {
-    min-height: 100vh;
-    padding: 50px;
-    background-color: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+/* Scroll hint */
+.scroll-hint {
+    position: absolute;
+    bottom: 28px;
+    right: 52px;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: #444;
+    text-transform: uppercase;
 }
 
-.grid-container {
+
+/* ════════════════════════════════════════
+   SECTION 2 — ABOUT / NAME
+════════════════════════════════════════ */
+
+#page-2 {
+    justify-content: space-between;
+    padding: 80px 100px 0;
+}
+
+.page2-inner {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 250px);
-    gap: 30px;
-    max-width: 1200px;
-    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    flex: 1;
 }
 
-.grid-item {
-    position: relative;
-    background-color: #000;
+/* Left: bio */
+.page2-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 8px;
+}
+
+.page2-bio {
+    font-size: 13px;
+    line-height: 2;
+    color: #888;
+    letter-spacing: 0.04em;
+    max-width: 650px;
+}
+
+/* Right: headshot */
+.page2-right {
+    height: 55vh;
     overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+}
+
+.page2-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    opacity: 0.85;
+    display: block;
+}
+
+/* Giant name — break out of page-2 side padding to align with page-3 */
+.page2-name {
+    width: calc(100% + 200px);
+    margin-left: -100px;
+    overflow: hidden;
+    line-height: 0.88;
+    margin-top: 48px;
+    padding-left: 100px;
+}
+
+.name-line {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 300;
+    font-size: clamp(80px, 12vw, 160px);
+    letter-spacing: 0.04em;
+    color: #fff;
+    white-space: nowrap;
+    display: block;
+    line-height: 0.92;
+}
+
+/* Buttons: break out of padding to align with name */
+.page2-buttons {
+    display: flex;
+    gap: 0;
+    width: calc(100% + 200px);
+    margin-left: -100px;
+    padding: 16px 100px 60px;
+}
+
+.action-btn-contact {
+    display: inline-block;
+    border: none;
+    color: #666;
+    padding: 16px 40px 16px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.action-btn-contact:hover {
+    color: #fff;
+}
+
+.action-btn-cv {
+    display: inline-block;
+    border: none;
+    color: #666;
+    padding: 16px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+    text-align: center;
+    width: 50%;
+}
+
+.action-btn-cv:hover {
+    color: #fff;
+}
+
+
+/* ════════════════════════════════════════
+   SECTION 3 — PROJECTS
+════════════════════════════════════════ */
+
+#page-3 {
+    padding: 80px 100px 80px;
+}
+
+.page3-header {
+    margin-bottom: 40px;
+}
+
+.page3-headline {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 300;
+    font-size: clamp(80px, 12vw, 160px);
+    line-height: 0.88;
+    letter-spacing: 0.04em;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.page3-rule {
+    width: 100%;
+    height: 1px;
+    background: #222;
+}
+
+/* 5-column uniform grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+.project-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     text-decoration: none;
     color: #fff;
 }
 
-.grid-item:hover {
-    transform: scale(1.05);
+.project-img-wrap {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: #111;
 }
 
-.grid-item img {
+.project-img-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
+    opacity: 0.75;
+    transition: opacity 0.3s ease, transform 0.4s ease;
+    display: block;
 }
 
-.grid-item:hover img {
+.project-item:hover .project-img-wrap img {
     opacity: 1;
+    transform: scale(1.03);
 }
 
-.grid-item .overlay {
+.project-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    inset: 0;
+    background: rgba(0,0,0,0.55);
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: #fff;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-.grid-item:hover .overlay {
+.project-item:hover .project-overlay {
     opacity: 1;
 }
 
-.overlay-text {
-    font-size: 1.2rem;
-    text-align: center;
-    padding: 20px;
-    color: #fff;
-    font-weight: bold;
-}
-
-/* Specific grid positioning */
-.grid-item:nth-child(1) {
-    /* Architecture - spans 2 columns, 2 rows */
-    grid-column: 1 / 3;
-    grid-row: 1 / 3;
-}
-
-.grid-item:nth-child(2) {
-    /* Computation - top right */
-    grid-column: 3 / 4;
-    grid-row: 1 / 2;
-}
-
-.grid-item:nth-child(3) {
-    /* Urban & Landscape - middle right, spans 2 rows */
-    grid-column: 3 / 4;
-    grid-row: 2 / 4;
-}
-
-.grid-item:nth-child(4) {
-    /* Photography - bottom left */
-    grid-column: 1 / 2;
-    grid-row: 3 / 4;
-}
-
-.grid-item:nth-child(5) {
-    /* Art - bottom middle */
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
-}
-
-/* Bottom Navigation */
-.bottom-nav {
-    position: absolute;
-    left: 50px;
-    bottom: 50px;
+.project-label {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    align-items: baseline;
+    gap: 12px;
+    border-top: 1px solid #222;
+    padding-top: 10px;
 }
 
-.nav-btn {
-    background: transparent;
-    border: 1px solid #fff;
-    color: #fff;
-    padding: 15px 30px;
+.project-num {
     font-family: 'Courier New', monospace;
-    font-size: 0.9rem;
-    letter-spacing: 0.1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    text-align: center;
-    display: inline-block;
+    font-size: 9px;
+    color: #444;
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
 }
 
-.nav-btn:hover {
-    background: #fff;
-    color: #000;
+.project-title {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: #ccc;
+    text-transform: uppercase;
+    line-height: 1.5;
 }
 
-@media (max-width: 1200px) {
-    .hero-section {
-        margin-bottom: 30vh;
-    }
 
-    .hero-text h1 {
-        font-size: 4rem;
-    }
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
 
-    .hero-image {
-        width: 80%;
-    }
-
-    .grid-container {
-        max-width: 900px;
-        grid-template-rows: repeat(3, 200px);
+@media (max-width: 1100px) {
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media (max-width: 768px) {
-    .hero-section {
-        margin-bottom: 20vh;
+    .page1-inner {
+        padding: 32px 24px 0;
     }
 
-    .hero-text {
-        top: 30px;
-        left: 30px;
+    #page-2 {
+        padding: 48px 36px 0;
+        margin-top: 10vh;
     }
 
-    .hero-text h1 {
-        font-size: 3rem;
+    #page-3 {
+        padding: 48px 36px 48px;
+        margin-top: 10vh;
     }
 
-    .hero-image {
-        width: 100%;
+    .page1-meta {
+        display: none;
     }
 
-    .grid-container {
+    .page2-inner {
         grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        padding: 20px;
-        gap: 20px;
+        gap: 32px;
     }
 
-    .grid-item:nth-child(1),
-    .grid-item:nth-child(2),
-    .grid-item:nth-child(3),
-    .grid-item:nth-child(4),
-    .grid-item:nth-child(5) {
-        grid-column: 1;
-        grid-row: auto;
+    .page2-right {
+        height: 40vh;
     }
 
-    .bottom-nav {
-        position: relative;
-        left: 0;
-        bottom: 0;
-        flex-direction: row;
-        justify-content: center;
-        width: 100%;
-        margin-top: 30px;
+    .page2-name span {
+        font-size: clamp(36px, 10vw, 72px);
+        padding-left: 36px;
     }
 
-    .nav-btn {
-        flex: 1;
+    .page2-buttons {
+        padding: 20px 36px 40px;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .scroll-hint {
+        right: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
     }
 }

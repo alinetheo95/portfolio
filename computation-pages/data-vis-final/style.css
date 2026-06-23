@@ -44,7 +44,7 @@ body {
     font-family: 'Courier New', monospace;
     background-color: #000;
     color: #fff;
-    padding: 40px;
+    padding: 0;
     line-height: 1.6;
     overflow-x: hidden;
 }
@@ -73,9 +73,11 @@ section {
 
 /* ===== TYPOGRAPHY ===== */
 h1, h2 {
+  font-family: 'Space Grotesk', sans-serif;
   margin-bottom: 20px;
   font-weight: 300;
   letter-spacing: 0.3rem;
+  text-transform: uppercase;
 }
 
 h1 {
@@ -195,11 +197,53 @@ p {
   width: 100%;
 }
 
+.arch-header {
+    padding: 48px 12% 0;
+}
+
+.arch-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.back-link {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: var(--white);
+}
+
+.meta-right {
+    color: var(--text-dim);
+}
+
+.arch-rule {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.12);
+    margin-bottom: 20px;
+}
+
 .hero h1 {
-  font-size: 2.5rem;
-  font-weight: 300;
-  letter-spacing: 0.3rem;
+  font-size: clamp(80px, 12vw, 160px);
+  line-height: 0.88;
+  letter-spacing: 0.04em;
+  font-size: 5.5rem;
   text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 20px;
 }
 
 .hero h2 {

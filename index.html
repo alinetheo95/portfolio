@@ -4,71 +4,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
     <title>Aline Theodorakis - Portfolio</title>
 </head>
 
 <body>
-    <!-- Hero Section (Cover Page) -->
-    <section class="hero-section" id="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>ALINE<br>THEODORAKIS</h1>
-                <p class="subtitle">COMPUTATIONAL & ARCHITECTURAL DESIGNER</p>
+
+    <!-- ── SECTION 1: PORTFOLIO COVER ── -->
+    <section class="page" id="page-1">
+        <div class="page1-inner">
+
+            <div class="page1-top">
+                <div class="page1-meta">
+                    <span>Aline Theodorakis</span>
+                    <span class="meta-right">Computational & Architectural Designer</span>
+                </div>
+                <div class="page1-rule"></div>
+                <h1 class="page1-headline">PORTFOLIO</h1>
+                <div class="page1-rule"></div>
+                <p class="page1-body">
+                    Computational designer working at the intersection of biodesign, living materials, architectural research, and creative technology.
+                </p>
             </div>
-            <div class="hero-image">
-                <img src="mycelium-2.png" alt="Portfolio Image">
+
+            <div class="page1-image-strip">
+                <img src="../header image/header-image-ai-8.png" alt="Portfolio visual">
             </div>
+
         </div>
-        <div class="scroll-indicator" onclick="scrollToContent()"></div>
+        <div class="scroll-hint">SCROLL ↓</div>
     </section>
 
-    <!-- Content Section -->
-    <section class="content-section" id="content">
-        <div class="left-section">
-            <div class="grid-container">
-                <a href="architecture.html" class="grid-item large">
-                    <img src="Images - title page/final drawing - transparent.png" alt="Architecture">
-                    <div class="overlay">
-                        <span class="overlay-text">ARCHITECTURE</span>
-                    </div>
-                </a>
-                
-                <a href="computation.html" class="grid-item">
-                    <img src="Images - title page/circuit board-with mycelium.png" alt="Computation">
-                    <div class="overlay">
-                        <span class="overlay-text">COMPUTATION</span>
-                    </div>
-                </a>
-                
-                <a href="urban.html" class="grid-item">
-                    <img src="Images - title page/Urban Tower-cropped.png" alt="Urban & Landscape Design">
-                    <div class="overlay">
-                        <span class="overlay-text">URBAN &<br>LANDSCAPE<br>DESIGN</span>
-                    </div>
-                </a>
-                
-                <a href="photography.html" class="grid-item">
-                    <img src="Images - title page/photography.jpeg" alt="Photography">
-                    <div class="overlay">
-                        <span class="overlay-text">PHOTOGRAPHY</span>
-                    </div>
-                </a>
-                
-                <a href="art.html" class="grid-item">
-                    <img src="Images - title page/Daylily.png" alt="Art">
-                    <div class="overlay">
-                        <span class="overlay-text">ART</span>
-                    </div>
-                </a>
+    <!-- ── SECTION 2: ABOUT / NAME ── -->
+    <section class="page" id="page-2">
+        <div class="page2-inner">
+
+            <div class="page2-left">
+                <p class="page2-bio">
+                    
+As an architectural and computational designer, I'm interested in exploring the intersection of ecological systems, speculative futures, and the built environment — working at the intersection of biodesign, living materials research, architectural systems, and creative technology. My practice is grounded in a systems thinking approach, using design technology workflows to bridge the gap between biological processes and architectural form.
+<br><br>
+I hold a Master of Science in Computational Design Practices from Columbia University, with a focus on biocomputational design methods and the integration of living systems into architectural frameworks. My thesis investigates how microbial networks and organic growth patterns can inform adaptive building systems through environmental sensing, treating fabrication and material research as extensions of regenerative design — and positioning architecture as a tool for communicating science through design. My recent work explores building information systems, spatial user experience design, urban mapping technologies, and data-driven approaches to sustainable architecture, alongside a more-than-human approach to architecture that considers non-human life as active participants in the design process.
+<br><br>
+I have a professional background in residential design as well as construction management. I hold an M.Arch from Pratt Institute as well as a B.S. in Urban Planning + Design from Rutgers University. In order to develop within this industry and commit to promoting sustainability, I achieved a LEED Green Associate accreditation and am on the path to becoming a licensed Architect. I advocate for environmentally conscious design practices to shape a more sustainable future.
+                </p>
             </div>
 
-    <!-- About and Contact Buttons -->
-    <div class="bottom-nav">
-        <a href="about.html" class="nav-btn">ABOUT</a>
-        <a href="contact.html" class="nav-btn">CONTACT</a>
-    </div>
-    
-    <!--Link to JS-->
+            <div class="page2-right">
+                <img src="headshot-bw.jpg" alt="Aline Theodorakis">
+            </div>
+
+        </div>
+
+        <div class="page2-name">
+            <div class="name-line">ALINE</div>
+            <div class="name-line">THEODORAKIS</div>
+        </div>
+
+        <div class="page2-buttons">
+            <a href="mailto:alinetheodorakis@gmail.com" class="action-btn-contact">CONTACT</a>
+            <a href="Aline Theodorakis Resume 2026.pdf" target="_blank" class="action-btn-cv">CV</a>
+        </div>
+    </section>
+
+    <!-- ── SECTION 3: PROJECTS ── -->
+    <section class="page" id="page-3">
+        <div class="page3-inner">
+
+            <div class="page3-header">
+                <h2 class="page3-headline">PROJECTS</h2>
+                <div class="page3-rule"></div>
+            </div>
+
+            <div class="projects-grid">
+
+                <a href="computation.html" class="project-item">
+                    <div class="project-img-wrap">
+                        <img src="Images - title page/circuit board-with mycelium.png" alt="Computation">
+                        <div class="project-overlay">VIEW PROJECTS →</div>
+                    </div>
+                    <div class="project-label">
+                        <span class="project-num">02</span>
+                        <span class="project-title">COMPUTATION</span>
+                    </div>
+                </a>
+
+                <a href="architecture.html" class="project-item">
+                    <div class="project-img-wrap">
+                        <img src="Images - title page/final drawing - transparent.png" alt="Architecture">
+                        <div class="project-overlay">VIEW PROJECTS →</div>
+                    </div>
+                    <div class="project-label">
+                        <span class="project-num">01</span>
+                        <span class="project-title">ARCHITECTURE</span>
+                    </div>
+                </a>
+
+                <a href="urban.html" class="project-item">
+                    <div class="project-img-wrap">
+                        <img src="Images - title page/Urban Tower-cropped.png" alt="Urban & Landscape Design">
+                        <div class="project-overlay">VIEW PROJECTS →</div>
+                    </div>
+                    <div class="project-label">
+                        <span class="project-num">03</span>
+                        <span class="project-title">URBAN & LANDSCAPE DESIGN</span>
+                    </div>
+                </a>
+
+                <a href="photography.html" class="project-item">
+                    <div class="project-img-wrap">
+                        <img src="Images - title page/photography.jpeg" alt="Photography">
+                        <div class="project-overlay">VIEW PROJECTS →</div>
+                    </div>
+                    <div class="project-label">
+                        <span class="project-num">04</span>
+                        <span class="project-title">PHOTOGRAPHY</span>
+                    </div>
+                </a>
+
+                <a href="art.html" class="project-item">
+                    <div class="project-img-wrap">
+                        <img src="Images - title page/Daylily.png" alt="Art">
+                        <div class="project-overlay">VIEW PROJECTS →</div>
+                    </div>
+                    <div class="project-label">
+                        <span class="project-num">05</span>
+                        <span class="project-title">ART</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
     <script src="main.js"></script>
 </body>
 </html>
