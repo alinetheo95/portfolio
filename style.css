@@ -157,8 +157,9 @@ body {
 
 /* Right: headshot */
 .page2-right {
-    height: 55vh;
+    height: 72vh;
     overflow: hidden;
+    margin-left: 60px;
 }
 
 .page2-right img {
@@ -168,6 +169,8 @@ body {
     object-position: center top;
     opacity: 0.85;
     display: block;
+    transform: scale(0.85);
+    transform-origin: top center;
 }
 
 /* Giant name — break out of page-2 side padding to align with page-3 */
