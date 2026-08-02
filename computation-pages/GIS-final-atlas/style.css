@@ -23,6 +23,27 @@ body {
     z-index: 0;
 }
 
+.back-btn {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    background: transparent;
+    color: #cfcfcf;
+    padding: 10px 25px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    z-index: 100;
+}
+
+.back-btn:hover {
+    color: #fff;
+}
+
 .story-container {
     position: relative;
     width: 40%;
